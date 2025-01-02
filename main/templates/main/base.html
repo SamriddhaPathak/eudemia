@@ -10,14 +10,9 @@
 </head>
 <body>
     <div class="topbar">
-        <img src="{% static "images/logo.png" %}" alt="Logo">
-        <div class="navbar">
-            <ul>
-                <li>
-                    <a href="#">Home</a>
-                </li>
-            </ul>
-        </div>
+        <a href="{% url "index" %}"><img class="logo" src="{% static "images/logo.png" %}" alt="Logo"></a>
+        {% block navbar %}
+        {% endblock %}
     </div>
     {% block body %}
     {% endblock %}
