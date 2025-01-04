@@ -1,11 +1,9 @@
 {% extends "main/base.html" %}
 
 {% block navbar %}
-    <div class="navbar">
-        <ul>
-            <a href="{% url "login" %}" class="login-button shadow">LOGIN</a>
-        </ul>
-    </div>
+    <nav class="navbar">
+        <a href="{% url "login" %}" class="login-button shadow">LOGIN</a>
+    </nav>
 {% endblock navbar %}
 
 {% block body %}
