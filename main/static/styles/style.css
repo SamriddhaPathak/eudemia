@@ -2,18 +2,39 @@
     --accent1: #cc6dff;
     --accent2: #52b4f4;
     --grey: #c9c9c9;
+
+    --topbar-height: 100px;
 }
 
 * {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto';
     box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url("../fonts/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url("../fonts/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Tiny5';
+    src: url("../fonts/tiny5/Tiny5-Regular.ttf");
 }
 
 /***** NAVBAR *****/
 .topbar {
-    height: 100px;
+    position: fixed;
+    top: 0;
+
+    height: var(--topbar-height);
+    width: 100%;
     padding: 0 64px;
 
     background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2));
@@ -42,46 +63,48 @@
     color: #000;
 
     /* background-color: #00000000; */
-    box-shadow: 5px 5px #000;
-    border: 2px solid #000;
     padding: 10px 20px;
+    border-radius: 5px;
 }
 
 .login-button {
     text-decoration: none;
-    font-size: 1rem;
+    /* font-size: 1.1rem !important; */
+    font-family: 'Roboto-Bold';
 
-    color: #fff !important;
     background-color: #000;
+    color: #fff !important;
+    /* background-color: #000; */
+    /* background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2)); */
     border: 2px solid #000;
+    border-radius: 8px;
     padding: 10px 20px;
 }
 
 .shadow {
-    box-shadow: 5px 5px;
-}
-
-/* .shadow {
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
-} */
+}
 
 .login-button:hover {
     color: #000 !important;
-    background-color: #fff;
+    background-image: linear-gradient(to bottom left, var(--accent1), var(--accent2));
     border-color: #000;
 }
 
 /***** LOGIN *****/
 .login-form {
     border: 2px solid #000;
+    /* background-color: white; */
+    border-radius: 10px;
     padding: 1.5em;
     width: 400px;
     margin: auto;
-    margin-top: 20vh;
+    /* margin-top: 20vh; */
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
     
     /* display: grid;
     grid-template-rows: 1fr 1fr 1fr; */
@@ -90,12 +113,16 @@
 /* Usertype select */
 .usertype {
     display: flex;
-    border: 1.5px solid #000;
+    border: 2px solid #000;
+    border-radius: 100px;
     justify-content: space-around;
 }
 
 .usertype input[type="radio"] {
-    display: none;
+    /* display: none; */
+    width: 0;
+    height: 0;
+    position: absolute;
 }
 
 .usertype label {
@@ -104,24 +131,108 @@
 
 .label-box {
     padding: 5px 10px;
+    border-radius: 100px;
+}
+
+.label-box:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .usertype > label > .form-select:checked + .label-box {
-    background: black;
-    color: white;
+    /* background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2)); */
+    background-color: #000;
+    color: #fff;
 }
 
 /* Username and Password fields */
 .form-input {
     border: 2px solid #000;
+    border-radius: 8px;
     padding: 15px;
-    width: 70%;
+    width: 80%;
     font-size: 1rem;
 }
 
 .form-control {
     margin: 3%;
     flex-shrink: 1;
+}
+
+/***** HOMEPAGE *****/
+
+.content {
+    margin-top: var(--topbar-height);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.content li {
+    list-style: none;
+}
+
+.content section {
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.content h1 {
+    font-family: 'Roboto-Bold';
+    font-size: 4rem;
+    margin: 40px;
+}
+
+.content h2 {
+    font-family: 'Roboto-Bold';
+    font-size: 3rem;
+    margin: 40px;
+}
+
+.content h3 {
+    font-family: 'Roboto-Bold';
+    font-size: 1.5rem;
+}
+
+.content a {
+    margin: 30px;
+}
+
+.content p {
+    font-size: 1.4rem;
+    width: 70%;
+}
+
+.cta-button {
+    font-size: 2rem;
+    padding: 10px 25px;
+    border-radius: 100em;
+    text-decoration: none;
+    color: black;
+
+    border-width: 3px;
+    border-style: solid;
+    background: linear-gradient(to bottom right, var(--accent1), var(--accent2));
+}
+
+.cta-button:hover {
+    background: linear-gradient(to bottom left, var(--accent1), var(--accent2));
+}
+
+.pixel {
+    font-family: 'Tiny5';
+}
+
+.gradient {
+    background: linear-gradient(to right, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 @media screen and (max-width: 700px) {

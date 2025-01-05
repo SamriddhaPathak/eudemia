@@ -1,4 +1,9 @@
 {% extends "main/base.html" %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static "styles/home.css" %}">
+{% endblock links %}
 
 {% block navbar %}
     <nav class="navbar">
@@ -8,23 +13,43 @@
 
 {% block content %}
     <section class="hero">
-        <h1>Welcome to Eudemia!</h1>
-        <p>Where health meets learning in a fun and interactive way! Empowering students, parents, and teachers to collaborate for better wellness and academic success.</p>
+        <h1>Welcome to <span class="pixel gradient">EUDEMIA!</span></h1>
+        <p>Health and learning, hand in hand, the fun way!</p>
+        <p>Empowering students, parents, and teachers to collaborate for better wellness and academic success.</p>
     </section>
     
     <section class="features">
         <h2>Why Choose Eudemia?</h2>
         <p>Through exciting challenges, personalized rewards, and progress tracking, Eudemia transforms everyday tasks into opportunities for growth and achievement.</p>
-        <ul>
-            <li><strong>Interactive Learning:</strong> Engage in quizzes, streaks, and group projects that make education enjoyable.</li>
-            <li><strong>Health Monitoring:</strong> Track progress with tools like digital profiles, health screenings, and wellness challenges.</li>
-            <li><strong>Gamified Rewards:</strong> Earn coins, customize profiles, and climb the leaderboard for fun and motivation.</li>
-        </ul>
+        <div class="info-cards">
+            <div class="info-card shadow">
+                <div class="card-img"></div>
+                <div class="info-card-content">
+                    <h3>Gamified Rewards</h3>
+                    Earn coins, customize profiles, and climb the leaderboard for fun and motivation.
+                </div>
+            </div>
+            <div class="info-card shadow">
+                <img class="card-img" src="{% static "images/card2.png" %}"></img>
+                <div class="info-card-content">
+                    <h3>Health Monitoring</h3>
+                    Track progress with tools like digital profiles, health screenings, and wellness challenges.
+                </div>
+            </div>
+            <div class="info-card shadow">
+                <div class="card-img"></div>
+                <div class="info-card-content">
+                    <h3>Interactive Learning</h3>
+                    Engage in quizzes, streaks, and group projects that make education enjoyable.
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="call-to-action">
         <h2>Join Us Today!</h2>
         <p>Be a part of a revolutionary approach to education and wellness. Together, let's unlock the full potential of every student.</p>
-        <a href="#" class="cta-button shadow">Get Started</a>
+        <a href="{% url "login" %}" class="cta-button shadow">Get Started</a>
+        {% comment %} TODO: What our users say section {% endcomment %}
     </section>
 {% endblock content %}

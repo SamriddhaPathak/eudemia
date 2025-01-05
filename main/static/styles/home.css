@@ -1,0 +1,51 @@
+.hero {
+    color: #fff;
+    height: 90vh;
+    background-image: url('../images/background-black.png')
+}
+
+.info-cards {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.info-card {
+    /* border: 2px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: linear-gradient(#fff, #fff) padding-box, linear-gradient(to bottom right, var(--accent1), var(--accent2)) border-box;
+    border: 4px solid transparent;
+    border-radius: 15px;
+
+    width: max(300px, 25%);
+    height: 400px;
+    margin: 25px;
+    overflow: hidden;
+    /* padding: 2rem; */
+}
+
+.info-card-content {
+    padding: 2rem;
+    width: 90%
+}
+
+.call-to-action {
+    border-top: 10px solid;
+    border-image: linear-gradient(to bottom right, var(--accent1), var(--accent2)) 1;
+    background-color: #000;
+    color: #fff;
+}
+
+.card-img {
+    background-color: var(--grey);
+    height: 60%;
+    width: 150%;
+    margin: 0px;
+    object-fit: cover;
+}

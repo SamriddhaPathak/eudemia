@@ -1,4 +1,9 @@
 {% extends "main/base.html" %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static "styles/login.css" %}">
+{% endblock links %}
 
 {% block content %}
 <form class="login-form shadow" action="." method="POST">
