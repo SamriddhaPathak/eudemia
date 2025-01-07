@@ -1,8 +1,8 @@
-{% extends "main/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static "styles/home.css" %}">
+    <link rel="stylesheet" href="{% static "main/styles/home.css" %}">
 {% endblock links %}
 
 {% block navbar %}
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="info-card shadow">
-                <img class="card-img" src="{% static "images/card2.png" %}"></img>
+                <img class="card-img" src="{% static "main/images/card2.png" %}"></img>
                 <div class="info-card-content">
                     <h3>Health Monitoring</h3>
                     Track progress with tools like digital profiles, health screenings, and wellness challenges.
