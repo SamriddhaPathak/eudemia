@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -13,8 +14,11 @@ def dashboard_view(request):
         "parent": "main/parent/dashboard.html",
         "teacher": "main/teacher/dashboard.html",
     }
-    print(usertype)
-    return render(request, usertype_template_map.get(usertype))
+    context = {
+        "username": request.user.username,
+    }
+        
+    return render(request, usertype_template_map.get(usertype), context)
 
 
 def dashboard_category_view(request, category):
