@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static "main/styles/dashboard.css" %}">
+{% endblock links %}
+
+{% block homelink %}
+    {% url "dashboard" %}
+{% endblock homelink %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="javascript:void(0)">Notif</a>
+        <a class="profile" href="">Profile</a>
+    </div>
+{% endblock navbar %}
+
+{% block content %}
+    {% if usertype == "student" %}
+        {% include "main/include/student.html" %}
+    {% elif usertype == "teacher" %}
+        {% include "main/include/teacher.html" %}
+    {% else %}
+        {% include "main/include/parent.html" %}
+    {% endif %}
+{% endblock content %}
