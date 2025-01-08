@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # Create your views here.
 def index(request):
     return render(request, "main/index.html")
 
+@login_required
 def dashboard_view(request):
     usertype = request.user.groups.all()[0].name
     usertype_template_map = {
@@ -17,6 +19,7 @@ def dashboard_view(request):
     return render(request, usertype_template_map.get(usertype))
 
 
+@login_required
 def dashboard_category_view(request, category):
     usertype = request.user.groups.all()[0].name
     usertype_template_map = {
