@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static "main/styles/dashboard.css" %}">
+{% endblock links %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="javascript:void(0)">Notif</a>
+        <a class="profile" href="">Profile</a>
+    </div>
+{% endblock navbar %}
+
+{% block sidebar %}
+    <nav class="sidebar shadow">
+        {% block sidebar_list %}
+        {% endblock sidebar_list %}
+    </nav>
+{% endblock sidebar %}

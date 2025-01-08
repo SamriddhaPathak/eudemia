@@ -6,6 +6,7 @@
     --darkblue: #474075;
     --blue: #8098f7;
     --topbar-height: 90px;
+    --sidebar-width: 200px;
 }
 
 * {
@@ -28,6 +29,10 @@
 @font-face {
     font-family: 'Tiny5';
     src: url("../fonts/tiny5/Tiny5-Regular.ttf");
+}
+
+body {
+    margin-top: var(--topbar-height);
 }
 
 /***** NAVBAR *****/
@@ -164,7 +169,6 @@
 /***** HOMEPAGE *****/
 
 .content {
-    margin-top: var(--topbar-height);
     display: flex;
     flex-direction: column;
     gap: 40px;

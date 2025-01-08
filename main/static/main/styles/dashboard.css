@@ -2,8 +2,13 @@
     border: none;
 }
 
+.content {
+    margin-left: var(--sidebar-width);
+}
+
 .sidebar {
-    width: 250px;
+    position: absolute;
+    width: var(--sidebar-width);
     padding-top: 15px;
     height: calc(100vh - var(--topbar-height));
     background-color: black;
@@ -24,5 +29,10 @@
 }
 
 .sidebar a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.selected {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--accent1) !important;
 }
