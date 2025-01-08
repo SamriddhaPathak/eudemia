@@ -11,10 +11,12 @@
 </head>
 <body>
     <div class="topbar shadow">
-        <a href="{% url "index" %}"><img class="logo" src="{% static "images/logo.svg" %}" alt="Logo"></a>
+        <a href={% block homelink %}"{% url "index" %}"{% endblock homelink %}><img class="logo" src="{% static "images/logo.svg" %}" alt="Logo"></a>
         {% block navbar %}
         {% endblock %}
     </div>
+    {% block sidebar %}
+    {% endblock sidebar %}
     <div class="content">
         {% block content %}
         {% endblock content %}

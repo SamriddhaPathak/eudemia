@@ -1,9 +1,11 @@
 :root {
     --accent1: #cc6dff;
     --accent2: #52b4f4;
-    --grey: #c9c9c9;
-
-    --topbar-height: 100px;
+    --dark: #1a192c;
+    --grey: #e7e7e7;
+    --darkblue: #474075;
+    --blue: #8098f7;
+    --topbar-height: 90px;
 }
 
 * {
@@ -43,10 +45,11 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 6px solid #000; }
+    border-bottom: 6px solid #000;
+}
 
 .logo {
-    height: 40px;
+    height: 35px;
     filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.4));
 }
 
