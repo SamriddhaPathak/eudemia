@@ -32,3 +32,10 @@ def dashboard_category_view(request, category):
         "teacher": f"main/teacher/{category}.html",
     }
     return render(request, usertype_template_map.get(usertype))
+
+def error_view(request):
+    context = {
+        "code": 404,
+        "message": "page not found",
+    }
+    return render(request, "error.html", context)
