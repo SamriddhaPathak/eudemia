@@ -1,0 +1,77 @@
+.topbar {
+    border: none;
+}
+
+.content {
+    margin-left: var(--sidebar-width);
+}
+
+.sidebar {
+    position: absolute;
+    width: var(--sidebar-width);
+    padding-top: 15px;
+    height: calc(100vh - var(--topbar-height));
+    background-color: black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar a {
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 15px;
+    width: 85%;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.selected {
+    background: linear-gradient(to bottom right, var(--accent1), var(--accent2));
+    color: #000 !important;
+}
+
+.navbar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.notif img {
+    height: 28px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50% !important;
+    background-color: #fff;
+    overflow: hidden;
+    /* border: 2px solid #000; */
+}
+
+.profile-pic img {
+    width: 96px;
+}
+
+.profile-popup {
+    position: absolute;
+    background-color: #fff;
+    top: calc(var(--topbar-height) - 10px);
+    right: 64px;
+    border-radius: 5px;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+}
+
+.profile-popup a:hover {
+    color: var(--accent2);
+}

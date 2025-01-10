@@ -1,0 +1,258 @@
+:root {
+    --accent1: #cc6dff;
+    --accent2: #52b4f4;
+    --dark: #1a192c;
+    --grey: #e7e7e7;
+    --darkblue: #474075;
+    --blue: #8098f7;
+    --topbar-height: 90px;
+    --sidebar-width: 200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url("../fonts/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url("../fonts/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Tiny5';
+    src: url("../fonts/tiny5/Tiny5-Regular.ttf");
+}
+
+body {
+    margin-top: var(--topbar-height);
+}
+
+/***** NAVBAR *****/
+.topbar {
+    position: fixed;
+    top: 0;
+
+    height: var(--topbar-height);
+    width: 100%;
+    padding: 0 64px;
+
+    background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2));
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 6px solid #000;
+}
+
+.logo {
+    height: 32px;
+    filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.4));
+}
+
+.navbar {
+    display: flex;
+    gap: 10px;
+    align-content: space-around;
+    align-items: center;
+}
+
+.navbar a {
+    text-decoration: none;
+    font-size: 1em;
+    float: left;
+    color: #000;
+
+    /* background-color: #00000000; */
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.login-button {
+    text-decoration: none;
+    /* font-size: 1.1rem !important; */
+    font-family: 'Roboto-Bold';
+
+    background-color: #000;
+    color: #fff !important;
+    /* background-color: #000; */
+    /* background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2)); */
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.shadow {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.login-button:hover {
+    color: #000 !important;
+    background-image: linear-gradient(to bottom left, var(--accent1), var(--accent2));
+    border-color: #000;
+}
+
+/***** LOGIN *****/
+.login-form {
+    border: 2px solid #000;
+    /* background-color: white; */
+    border-radius: 10px;
+    padding: 1.5em;
+    width: 400px;
+    margin: auto;
+    /* margin-top: 20vh; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    
+    /* display: grid;
+    grid-template-rows: 1fr 1fr 1fr; */
+}
+
+/* Usertype select */
+.usertype {
+    display: flex;
+    border: 2px solid #000;
+    border-radius: 100px;
+    justify-content: space-around;
+}
+
+.usertype input[type="radio"] {
+    /* display: none; */
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.usertype label {
+    cursor: pointer;
+}
+
+.label-box {
+    padding: 5px 10px;
+    border-radius: 100px;
+}
+
+.label-box:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.usertype > label > .form-select:checked + .label-box {
+    /* background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2)); */
+    background-color: #000;
+    color: #fff;
+}
+
+/* Username and Password fields */
+.form-input {
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 15px;
+    width: 80%;
+    font-size: 1rem;
+}
+
+.form-control {
+    margin: 3%;
+    flex-shrink: 1;
+}
+
+/***** HOMEPAGE *****/
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.content li {
+    list-style: none;
+}
+
+.content section {
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.content h1 {
+    font-family: 'Roboto-Bold';
+    font-size: 4rem;
+    margin: 40px;
+}
+
+.content h2 {
+    font-family: 'Roboto-Bold';
+    font-size: 3rem;
+    margin: 40px;
+}
+
+.content h3 {
+    font-family: 'Roboto-Bold';
+    font-size: 1.5rem;
+}
+
+.content a {
+    margin: 30px;
+}
+
+.content p {
+    font-size: 1.4rem;
+    width: 70%;
+}
+
+.error {
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.cta-button {
+    font-size: 2rem;
+    padding: 10px 25px;
+    border-radius: 100em;
+    text-decoration: none;
+    color: black;
+
+    border-width: 3px;
+    border-style: solid;
+    background: linear-gradient(to bottom right, var(--accent1), var(--accent2));
+}
+
+.cta-button:hover {
+    background: linear-gradient(to bottom left, var(--accent1), var(--accent2));
+}
+
+.pixel {
+    font-family: 'Tiny5' !important;
+    font-size: 115%;
+}
+
+.gradient {
+    background: linear-gradient(to right, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+@media screen and (max-width: 700px) {
+    .login-form {
+        width: 60%;
+    }
+}
