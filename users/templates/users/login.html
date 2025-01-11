@@ -1,26 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Login{% endblock title %}
+
 {% block links %}
     <link rel="stylesheet" href="{% static "users/styles/login.css" %}">
 {% endblock links %}
 
+{% block topbar %}{% endblock topbar %}
+
 {% block content %}
-<form class="login-form shadow" action="" method="POST">
-    {% csrf_token %}
-    <div class="usertype form-control">
-        {% for radio in form.usertype %}
-            <label for="{{ radio.id_for_label }}">
-                {{ radio.tag }}
-                <div class="label-box">{{ radio.choice_label }}</div>
-            </label>
-        {% endfor %}
-    </div>
-    {% for field in form %}
-        {% if not forloop.first %}
+<div class="login-container shadow">
+    <a href="{% url "index" %}"><img class="logo" src="{% static "images/logo.svg" %}" alt="Home"></a>
+    <form class="login-form" action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
             {{ field }}
-        {% endif %}
-    {% endfor %}
-    <input class="login-button form-control" type="submit" value="LOGIN">
-</form>
+        {% endfor %}
+        <input class="login-button form-control" type="submit" value="LOGIN">
+    </form>
+</div>
 {% endblock content %}

@@ -1,10 +1,72 @@
 body {
+    margin-top: 0;
     background-image: url('../images/background-white.png');
 }
 
+.login-container {
+    border: 2px solid #000;
+    width: 500px;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 1.5em;
+    text-align: center;
+}
+
+.login-container img {
+    margin: 10px;
+}
+
+.login-form {
+    margin: auto;
+
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    overflow: hidden;
+    
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-items: center;
+}
+
+.label-box {
+    padding: 5px 10px;
+    border-radius: 100px;
+}
+
+.label-box:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.usertype > label > .form-select:checked + .label-box {
+    /* background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2)); */
+    background-color: #000;
+    color: #fff;
+}
+
+/* Username and Password fields */
+.form-input {
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 15px;
+    width: 80%;
+    font-size: 1rem;
+}
+
+.form-control {
+    margin: 3%;
+    flex-shrink: 1;
+}
+
 .content {
-    height: 85vh;
+    height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media screen and (max-width: 700px) {
+    .login-container {
+        width: 80%;
+    }
 }
