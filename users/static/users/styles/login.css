@@ -1,19 +1,20 @@
 body {
     margin-top: 0;
-    background-image: url('../images/background-white.png');
+    /* background-image: url('../images/background-white.png'); */
+    background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2));
 }
 
 .login-container {
     border: 2px solid #000;
     width: 500px;
     border-radius: 10px;
-    background-color: #fff;
     padding: 1.5em;
     text-align: center;
 }
 
-.login-container img {
+.logo {
     margin: 10px;
+    height: 50px;
 }
 
 .login-form {
@@ -29,19 +30,8 @@ body {
     justify-items: center;
 }
 
-.label-box {
-    padding: 5px 10px;
-    border-radius: 100px;
-}
-
-.label-box:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-.usertype > label > .form-select:checked + .label-box {
-    /* background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2)); */
-    background-color: #000;
-    color: #fff;
+.login-button {
+    width: 30%;
 }
 
 /* Username and Password fields */
@@ -51,6 +41,7 @@ body {
     padding: 15px;
     width: 80%;
     font-size: 1rem;
+    background: none;
 }
 
 .form-control {

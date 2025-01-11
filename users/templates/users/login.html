@@ -10,7 +10,7 @@
 {% block topbar %}{% endblock topbar %}
 
 {% block content %}
-<div class="login-container shadow">
+<div class="login-container">
     <a href="{% url "index" %}"><img class="logo" src="{% static "images/logo.svg" %}" alt="Home"></a>
     <form class="login-form" action="" method="POST">
         {% csrf_token %}

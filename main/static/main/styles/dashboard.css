@@ -11,7 +11,7 @@
     width: var(--sidebar-width);
     padding-top: 15px;
     height: calc(100vh - var(--topbar-height));
-    background-color: black;
+    background-color: #000;
 
     display: flex;
     flex-direction: column;
@@ -37,15 +37,21 @@
     color: #000 !important;
 }
 
-.navbar a {
+.navbar > a {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 0;
+    margin: 0 15px;
+}
+
+.leaderboard img {
+    height: 27px;
 }
 
 .notif img {
-    height: 28px;
+    height: 27px;
 }
 
 .profile-pic {
