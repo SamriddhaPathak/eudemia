@@ -1,0 +1,11 @@
+{% extends "main/dashboard_base.html" %}
+
+{% block sidebar_list %}
+    <a href="{% url "dashboard" %}">Dashboard</a>
+    <a href="{% url "dashboard_category" "progress" %}">Progress</a>
+    <a href="{% url "dashboard_category" "health" %}">Health</a>
+{% endblock sidebar_list %}
+
+{% block content %}
+    {% include "main/leaderboard_content.html" %}
+{% endblock content %}

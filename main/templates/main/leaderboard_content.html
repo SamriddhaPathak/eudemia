@@ -1,0 +1,15 @@
+<h1>Leaderboard</h1>
+
+<div class="leaderboard-container">
+    {% for entry in leaderboard %}
+        {% if forloop.counter == 1 %}
+            <div class="leaderboard-entry gradient-background">
+        {% elif forloop.counter == 2 or forloop.counter == 3 %}
+            <div class="leaderboard-entry gradient-border">
+        {% else %}
+            <div class="leaderboard-entry">
+        {% endif %}
+                <div class="rank">{{ forloop.counter }}</div><div class="name">{{ entry.name }}</div><div class="points">{{ entry.points }}</div>
+            </div>
+    {% endfor %}
+</div>

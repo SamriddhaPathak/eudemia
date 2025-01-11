@@ -107,55 +107,7 @@ body {
 }
 
 .shadow {
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-/***** HOMEPAGE *****/
-.content {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.content li {
-    list-style: none;
-}
-
-.content section {
-    padding: 20px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
-
-.content h1 {
-    font-family: 'Roboto-Bold';
-    font-size: 4rem;
-    margin: 40px;
-}
-
-.content h2 {
-    font-family: 'Roboto-Bold';
-    font-size: 3rem;
-    margin: 40px;
-}
-
-.content h3 {
-    font-family: 'Roboto-Bold';
-    font-size: 1.5rem;
-}
-
-.content a {
-    margin: 30px;
-}
-
-.content p {
-    font-size: 1.4rem;
-    width: 70%;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .error {
@@ -191,4 +143,15 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+.gradient-border {
+    background: linear-gradient(#fff, #fff) padding-box, linear-gradient(to bottom right, var(--accent1), var(--accent2)) border-box;
+    border: 3px solid transparent !important;
+}
+
+.gradient-background {
+    background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2));
+    color: #fff;
+    border: none !important;
 }

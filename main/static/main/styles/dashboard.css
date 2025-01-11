@@ -1,13 +1,19 @@
+h1 {
+    font-size: 4rem;
+    font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
+}
+
 .topbar {
     border: none;
 }
 
 .content {
     margin-left: var(--sidebar-width);
+    padding: min(5%, 40px);
 }
 
 .sidebar {
-    position: absolute;
+    position: fixed;
     width: var(--sidebar-width);
     padding-top: 15px;
     height: calc(100vh - var(--topbar-height));
@@ -47,7 +53,7 @@
 }
 
 .leaderboard img {
-    height: 27px;
+    height: 21px;
 }
 
 .notif img {
@@ -80,4 +86,44 @@
 
 .profile-popup a:hover {
     color: var(--accent2);
+}
+
+/***** LEADERBAORD *****/
+.leaderboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    width: 100%;
+    margin-top: 50px;
+}
+
+.leaderboard-entry {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 1.2rem;
+    padding: 10px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
+    border: 3px solid transparent;
+    border-radius: 5px;
+}
+
+.leaderboard-entry > div {
+    gap: 0.5em;
+}
+
+.leaderboard-entry .rank {
+    width: 5%;
+}
+
+.leaderboard-entry .name {
+    width: 80%;
+    text-align: left;
+    border-right: none;
+}
+
+.leaderboard-entry .points {
+    flex-grow: 1;
+    text-align: right;
 }
