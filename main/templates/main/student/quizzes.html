@@ -1,13 +1,5 @@
 {% extends "main/dashboard_base.html" %}
 
-{% block sidebar_list %}
-    <a href="{% url "dashboard" %}">Dashboard</a>
-    <a href="{% url "dashboard_category" "health" %}">Health</a>
-    <a href="{% url "dashboard_category" "challenges" %}">Daily Challenges</a>
-    <a href="{% url "dashboard_category" "assignments" %}">Assignments</a>
-    <a class="selected" href="{% url "dashboard_category" "quizzes" %}">Quizzes</a>
-{% endblock sidebar_list %}
-
 {% block content %}
     <h1>Student</h1>
 {% endblock content %}

@@ -1,13 +1,4 @@
 {% extends "main/dashboard_base.html" %}
-{% load static %}
-
-{% block sidebar_list %}
-    <a class="selected" href="{% url "dashboard" %}"><img src={% static "main/images/dashboard.svg" %} alt="">Dashboard</a>
-    <a href="{% url "dashboard_category" "health" %}">Health</a>
-    <a href="{% url "dashboard_category" "challenges" %}">Daily Challenges</a>
-    <a href="{% url "dashboard_category" "assignments" %}">Assignments</a>
-    <a href="{% url "dashboard_category" "quizzes" %}">Quizzes</a>
-{% endblock sidebar_list %}
 
 {% block content %}
     <h1>Hello, <span class="pixel">{{ username.upper }}</span></h1>
