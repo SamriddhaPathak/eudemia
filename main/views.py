@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
+from .config import SIDEBAR_ITEMS
 
 # Create your views here.
 def index(request):
@@ -18,6 +19,8 @@ def dashboard_view(request):
     }
     context = {
         "username": request.user.username,
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype),
+        "selected": "dashboard",
     }
         
     return render(request, usertype_template_map.get(usertype), context)
@@ -31,7 +34,15 @@ def dashboard_category_view(request, category):
         "parent": f"main/parent/{category}.html",
         "teacher": f"main/teacher/{category}.html",
     }
-    context = get_context(request, category)
+
+    context = {}
+    # context.update(get_context(request, category))
+    context.update({
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype),
+        "username": request.user.username,
+        "selected": category,
+    })
+
     return render(request, usertype_template_map.get(usertype), context)
 
 def error_view(request):
@@ -42,6 +53,9 @@ def error_view(request):
     return render(request, "error.html", context)
 
 def get_context(request, category):
+    context = {
+        "category": category,
+    }
     if category == "leaderboard":
         return {
             "leaderboard": [

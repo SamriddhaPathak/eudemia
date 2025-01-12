@@ -21,7 +21,16 @@
 
 {% block sidebar %}
     <nav class="sidebar">
-        {% block sidebar_list %}
-        {% endblock sidebar_list %}
+        {% for item in sidebar_items %}
+            <a class="
+            {% if item.name == selected %}selected{% endif %}"
+            href="
+            {% url "dashboard_category" item.name %}">
+            <img src="{% static item.icon %}" alt="">
+            {{ item.name.capitalize }}
+        </a>
+        {% endfor %}
     </nav>
 {% endblock sidebar %}
+{% block sidebar_list %}
+{% endblock sidebar_list %}
