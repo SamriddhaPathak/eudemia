@@ -36,7 +36,8 @@ def dashboard_category_view(request, category):
     }
 
     context = {}
-    # context.update(get_context(request, category))
+    if get_context(request, category) != None:
+        context.update(get_context(request, category))
     context.update({
         "sidebar_items": SIDEBAR_ITEMS.get(usertype),
         "username": request.user.username,
@@ -53,9 +54,6 @@ def error_view(request):
     return render(request, "error.html", context)
 
 def get_context(request, category):
-    context = {
-        "category": category,
-    }
     if category == "leaderboard":
         return {
             "leaderboard": [
