@@ -27,7 +27,7 @@
 
 .content h2 {
     font-family: 'Roboto-Bold';
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: 40px;
 }
 
@@ -41,16 +41,21 @@
 }
 
 .content p {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    color: var(--dark-grey);
     width: 70%;
 }
 
 .hero {
-    color: #fff;
-    height: 90vh;
-    background-image: url('../images/background-black.png');
-    border-bottom: 10px solid;
-    border-image: linear-gradient(to left, var(--accent1), var(--accent2)) 1;
+    height: calc(100dvh - var(--topbar-height));
+    background-image: url('../images/background-white.png');
+    /* background-image: linear-gradient(to bottom right, #fff, var(--light-blue)); */
+    /* border-bottom: 10px solid; */
+    /* border-image: linear-gradient(to left, var(--accent1), var(--accent2)) 1; */
+}
+
+.hero h1 {
+    color: black;
 }
 
 .info-cards {
@@ -67,34 +72,47 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
-    background: linear-gradient(#fff, #fff) padding-box, linear-gradient(to bottom right, var(--accent1), var(--accent2)) border-box;
-    border: 4px solid transparent;
+    /* background: linear-gradient(#fff, #fff) padding-box, linear-gradient(to bottom, var(--accent1), var(--accent2)) border-box; */
+    /* border: 6px solid transparent; */
     border-radius: 15px;
+    background-color: var(--light-blue);
 
     width: max(300px, 25%);
-    height: 400px;
     margin: 25px;
     overflow: hidden;
-    /* padding: 2rem; */
+    padding: 2rem;
+}
+
+.info-card h3 {
+    margin-bottom: 20px;
 }
 
 .info-card-content {
-    padding: 2rem;
     width: 90%
 }
 
+.card-img img {
+    height: 27px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
 .call-to-action {
-    border-top: 10px solid;
-    border-image: linear-gradient(to left, var(--accent1), var(--accent2)) 1;
-    background-color: #000;
+    /* border-top: 10px solid; */
+    /* border-image: linear-gradient(to left, var(--accent1), var(--accent2)) 1; */
+    /* background-image: linear-gradient(to right, var(--accent1), var(--accent2)); */
+    background-image: linear-gradient(to right, var(--accent1), var(--accent2));
     color: #fff;
 }
 
-.card-img {
-    background-color: var(--grey);
-    height: 60%;
-    width: 150%;
-    margin: 0px;
-    object-fit: cover;
+.call-to-action h2 {
+    color: #fff;
+}
+
+.call-to-action p {
+    color: #fff;
+    margin-bottom: 20px;
+    width: 50%;
 }

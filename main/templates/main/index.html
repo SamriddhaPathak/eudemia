@@ -23,21 +23,21 @@
         <p>Through exciting challenges, personalized rewards, and progress tracking, Eudemia transforms everyday tasks into opportunities for growth and achievement.</p>
         <div class="info-cards">
             <div class="info-card shadow">
-                <div class="card-img"></div>
+                <div class="card-img"><img src="{% static "images/trophy.svg" %}" alt=""></div>
                 <div class="info-card-content">
                     <h3>Gamified Rewards</h3>
                     Earn coins, customize profiles, and climb the leaderboard for fun and motivation.
                 </div>
             </div>
             <div class="info-card shadow">
-                <img class="card-img" src="{% static "main/images/card2.png" %}"></img>
+                <div class="card-img"><img src="{% static "images/heart.svg" %}" alt=""></div>
                 <div class="info-card-content">
                     <h3>Health Monitoring</h3>
                     Track progress with tools like digital profiles, health screenings, and wellness challenges.
                 </div>
             </div>
             <div class="info-card shadow">
-                <div class="card-img"></div>
+                <div class="card-img"><img src="{% static "images/screen.svg" %}" alt=""></div>
                 <div class="info-card-content">
                     <h3>Interactive Learning</h3>
                     Engage in quizzes, streaks, and group projects that make education enjoyable.
@@ -49,7 +49,7 @@
     <section class="call-to-action">
         <h2>Join Us Today!</h2>
         <p>Be a part of a revolutionary approach to education and wellness. Together, let's unlock the full potential of every student.</p>
-        <a href="{% url "login" %}" class="cta-button shadow">Get Started</a>
+        <a href="{% url "login" %}" class="cta-button">Get Started</a>
         {% comment %} TODO: What our users say section {% endcomment %}
     </section>
 {% endblock content %}

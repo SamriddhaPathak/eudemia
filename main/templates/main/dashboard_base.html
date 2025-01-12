@@ -10,7 +10,8 @@
     <div class="navbar">
         <a class="leaderboard" href="{% url "dashboard_category" "leaderboard" %}"><img src="{% static "images/leaderboard.svg" %}" alt="Leaderboard"></a>
         <a class="notif" href="javascript:void(0)"><img src="{% static "images/bell.svg" %}" alt="Notifications"></a>
-        <a class="profile-pic" href="javascript:void(0)"><img src="{% static "images/profile.png" %}" alt="Profile Picture"></a>
+        {% comment %} <a class="profile-pic" href="javascript:void(0)"><img src="{% static "images/profile.png" %}" alt="Profile Picture"></a> {% endcomment %}
+        <a class="profile-pic" href="javascript:void(0)"></a>
         <div class="profile-popup shadow">
             <a href="">Settings</a>
             <a href="{% url "logout" %}">Logout</a>

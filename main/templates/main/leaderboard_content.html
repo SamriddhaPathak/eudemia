@@ -1,11 +1,11 @@
-<h1>Leaderboard</h1>
+<h1>LEADERBOARD</h1>
 
 <div class="leaderboard-container">
     {% for entry in leaderboard %}
         {% if forloop.counter == 1 %}
             <div class="leaderboard-entry gradient-background">
         {% elif forloop.counter == 2 or forloop.counter == 3 %}
-            <div class="leaderboard-entry gradient">
+            <div class="leaderboard-entry">
         {% else %}
             <div class="leaderboard-entry">
         {% endif %}
