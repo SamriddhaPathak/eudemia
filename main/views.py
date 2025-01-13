@@ -10,26 +10,11 @@ def index(request):
     return render(request, "main/index.html")
 
 @login_required
-def dashboard_view(request):
-    usertype = request.user.groups.all()[0].name # FIXME: get from database instead
-    usertype_template_map = {
-        "student": "main/student/dashboard.html",
-        "parent": "main/parent/dashboard.html",
-        "teacher": "main/teacher/dashboard.html",
-    }
-    context = {
-        "username": request.user.username,
-        "sidebar_items": SIDEBAR_ITEMS.get(usertype),
-        "selected": "dashboard",
-        "points": 488, # FIXME: example data
-    }
-        
-    return render(request, usertype_template_map.get(usertype), context)
+def dashboard_view(request, category=None):
+    if category is None:
+        category = "dashboard"
 
-
-@login_required
-def dashboard_category_view(request, category):
-    usertype = request.user.groups.all()[0].name # FIXME: get from database instead
+    usertype = get_user_type(request)
 
     # Map usertype to the corresponding template file for the given category
     usertype_template_map = {
@@ -38,14 +23,14 @@ def dashboard_category_view(request, category):
         "teacher": f"main/teacher/{category}.html",
     }
 
-    context = {}
-    if get_context(request, category) != None:
-        context.update(get_context(request, category))
-    context.update({
+    context = {
         "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
         "username": request.user.username,
         "selected": category, # the currently selected category
-    })
+        "points": 488, # FIXME: example data
+    }
+    if get_context(request, category) != None:
+        context.update(get_context(request, category))
 
     return render(request, usertype_template_map.get(usertype), context)
 
@@ -100,3 +85,14 @@ def get_context(request, category):
                 {'name': 'Michael', 'points': 364},
             ]
         }
+
+def get_user_type(request):
+    user = User.objects.get(id=request.user.id)
+
+    if hasattr(user, "student"):
+        return "student"
+    if hasattr(user, "parent"):
+        return "parent"
+    if hasattr(user, "teacher"):
+        return "teacher"
+    return "unknown"
