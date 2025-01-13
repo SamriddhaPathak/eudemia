@@ -1,5 +1,5 @@
 ICONS_PATH = "main/images/"
-ICONS = {
+ICON_PATH = {
     "dashboard": ICONS_PATH + "dashboard.svg",
     "health": ICONS_PATH + "health.svg",
     "challenges": ICONS_PATH + "challenges.svg",
@@ -10,21 +10,21 @@ ICONS = {
 
 SIDEBAR_ITEMS = {
     "student": [
-        {"name": "dashboard", "icon": ICONS["dashboard"]},
-        {"name": "health", "icon": ICONS["health"]},
-        {"name": "challenges", "icon": ICONS["challenges"]},
-        {"name": "assignments", "icon": ICONS["assignments"]},
-        {"name": "quizzes", "icon": ICONS["quizzes"]},
+        {"name": "dashboard", "icon": ICON_PATH["dashboard"]},
+        {"name": "health", "icon": ICON_PATH["health"]},
+        {"name": "challenges", "icon": ICON_PATH["challenges"]},
+        {"name": "assignments", "icon": ICON_PATH["assignments"]},
+        {"name": "quizzes", "icon": ICON_PATH["quizzes"]},
     ],
     "teacher": [
-        {"name": "dashboard", "icon": ICONS["dashboard"]},
-        {"name": "health", "icon": ICONS["health"]},
-        {"name": "progress", "icon": ICONS["progress"]},
-        {"name": "assignments", "icon": ICONS["assignments"]},
+        {"name": "dashboard", "icon": ICON_PATH["dashboard"]},
+        {"name": "health", "icon": ICON_PATH["health"]},
+        {"name": "progress", "icon": ICON_PATH["progress"]},
+        {"name": "assignments", "icon": ICON_PATH["assignments"]},
     ],
     "parent": [
-        {"name": "dashboard", "icon": ICONS["dashboard"]},
-        {"name": "health", "icon": ICONS["health"]},
-        {"name": "progress", "icon": ICONS["progress"]},
+        {"name": "dashboard", "icon": ICON_PATH["dashboard"]},
+        {"name": "health", "icon": ICON_PATH["health"]},
+        {"name": "progress", "icon": ICON_PATH["progress"]},
     ],
 }
