@@ -21,6 +21,7 @@ def dashboard_view(request):
         "username": request.user.username,
         "sidebar_items": SIDEBAR_ITEMS.get(usertype),
         "selected": "dashboard",
+        "points": 488, # FIXME: example data
     }
         
     return render(request, usertype_template_map.get(usertype), context)
@@ -60,21 +61,21 @@ def error_view(request):
 def get_context(request, category):
     if category == "leaderboard":
         return {
-            # FIXME: example leaderboard data
+            # FIXME: example leaderboard data. HAS to be sorted by points in descending order
             "leaderboard": [
                 {'name': 'Liam', 'points': 500},
                 {'name': 'Olivia', 'points': 496},
                 {'name': 'Noah', 'points': 492},
-                {'name': 'Emma', 'points': 488},
+                {'name': 'Samriddha', 'points': 488},
                 {'name': 'Oliver', 'points': 484},
                 {'name': 'Ava', 'points': 480},
                 {'name': 'Elijah', 'points': 476},
-                {'name': 'Sophia', 'points': 472},
+                {'name': 'Niraj', 'points': 472},
                 {'name': 'James', 'points': 468},
                 {'name': 'Isabella', 'points': 464},
                 {'name': 'William', 'points': 460},
                 {'name': 'Mia', 'points': 456},
-                {'name': 'Benjamin', 'points': 452},
+                {'name': 'Rasum', 'points': 452},
                 {'name': 'Charlotte', 'points': 448},
                 {'name': 'Lucas', 'points': 444},
                 {'name': 'Amelia', 'points': 440},

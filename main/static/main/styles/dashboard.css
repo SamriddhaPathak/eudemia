@@ -115,13 +115,14 @@ h1 {
 .leaderboard-entry {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     background-color: #fff;
 
     font-size: 1.2rem;
     margin: 4px;
     padding: 12px;
-    border: 1px solid var(--light-grey);
+    /* border: 1px solid var(--light-grey); */
     border-radius: 8px;
 }
 
@@ -133,6 +134,17 @@ h1 {
     text-align: right;
     width: 3%;
     margin-right: 2rem;
+    background-color: var(--accent1);
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .leaderboard-entry .name {
@@ -144,4 +156,5 @@ h1 {
 .leaderboard-entry .points {
     flex-grow: 1;
     text-align: right;
+    font-family: 'Roboto-Bold', sans-serif;
 }
