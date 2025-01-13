@@ -11,7 +11,7 @@ def index(request):
 
 @login_required
 def dashboard_view(request):
-    usertype = request.user.groups.all()[0].name
+    usertype = request.user.groups.all()[0].name # FIXME: get from database instead
     usertype_template_map = {
         "student": "main/student/dashboard.html",
         "parent": "main/parent/dashboard.html",
@@ -28,7 +28,9 @@ def dashboard_view(request):
 
 @login_required
 def dashboard_category_view(request, category):
-    usertype = request.user.groups.all()[0].name
+    usertype = request.user.groups.all()[0].name # FIXME: get from database instead
+
+    # Map usertype to the corresponding template file for the given category
     usertype_template_map = {
         "student": f"main/student/{category}.html",
         "parent": f"main/parent/{category}.html",
@@ -39,9 +41,9 @@ def dashboard_category_view(request, category):
     if get_context(request, category) != None:
         context.update(get_context(request, category))
     context.update({
-        "sidebar_items": SIDEBAR_ITEMS.get(usertype),
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
         "username": request.user.username,
-        "selected": category,
+        "selected": category, # the currently selected category
     })
 
     return render(request, usertype_template_map.get(usertype), context)
@@ -51,11 +53,14 @@ def error_view(request):
         "code": 404,
         "message": "page not found",
     }
-    return render(request, "error.html", context)
+    return render(request, "404.html", context)
 
+# Get the context for each category
+# TODO: add all the categories
 def get_context(request, category):
     if category == "leaderboard":
         return {
+            # FIXME: example leaderboard data
             "leaderboard": [
                 {'name': 'Liam', 'points': 500},
                 {'name': 'Olivia', 'points': 496},
