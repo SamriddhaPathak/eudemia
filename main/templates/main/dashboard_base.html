@@ -32,5 +32,10 @@
         {% endfor %}
     </nav>
 {% endblock sidebar %}
-{% block sidebar_list %}
-{% endblock sidebar_list %}
+
+{% block content %}
+    <div class="header">
+        <h1>{{ selected.capitalize }}</h1>
+        <h2>Hello, {{ username.capitalize }}</h2>
+    </div>
+{% endblock content %}

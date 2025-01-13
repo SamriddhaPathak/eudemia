@@ -28,6 +28,8 @@ def dashboard_view(request, category=None):
         "username": request.user.username,
         "selected": category, # the currently selected category
         "points": 488, # FIXME: example data
+        "fname": "First", # FIXME: example data
+        "lname": "Last", # FIXME: example data
     }
     if get_context(request, category) != None:
         context.update(get_context(request, category))
@@ -48,7 +50,7 @@ def get_context(request, category):
         return {
             # FIXME: example leaderboard data. HAS to be sorted by points in descending order
             "leaderboard": [
-                {'name': 'Liam', 'points': 500},
+                {'name': 'Liam', 'points': 500, 'user_id': 1}, # Also add 'user_id' as such
                 {'name': 'Olivia', 'points': 496},
                 {'name': 'Noah', 'points': 492},
                 {'name': 'Samriddha', 'points': 488},
@@ -86,6 +88,7 @@ def get_context(request, category):
             ]
         }
 
+# returns the usertype of the user as a string
 def get_user_type(request):
     user = User.objects.get(id=request.user.id)
 
