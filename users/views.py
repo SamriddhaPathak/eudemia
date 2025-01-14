@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from .forms import LoginForm
 from .decorators import unauthenticated_user
-
+from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 @unauthenticated_user
 def login_view(request):
@@ -30,3 +30,15 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("index")
+
+def change_password(request):
+    if request.method == 'POST':
+        fm  = PasswordChangeForm(user = request.user, data = request.POST)
+        if fm.is_valid():
+            fm.save()
+            update_session_auth_hash(request, fm.user)
+            messages.success(request, "Your password has been changed succeccfully.")
+            return redirect('dashboard')
+    else: 
+        fm = PasswordChangeForm(user = request.user)        
+    return render(request, "change_password.html", {"fm" : fm})
