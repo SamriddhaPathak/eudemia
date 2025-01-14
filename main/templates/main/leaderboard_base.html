@@ -10,13 +10,15 @@
     <h1>LEADERBOARD</h1>
 
     <div class="leaderboard-container">
-        {% for entry in user_data %}
+        {% for entry in leaderboard %}
             {% if entry.user_id == user_id %}
                 <div class="leaderboard-entry gradient-border">
             {% else %}
                 <div class="leaderboard-entry">
             {% endif %}
-                    <div class="rank">{{ forloop.counter }}</div><div class="name">{{ entry.user__first_name }} {{ entry.user__last_name }}</div><div class="points">{{ entry.points }} points</div>
+                    <div class="rank">{{ forloop.counter }}</div>
+                    <div class="name">{{ entry.user__first_name }} {{ entry.user__last_name }} {% if entry.user_id == user_id %} - You{% endif %}</div>
+                    <div class="points">{{ entry.points }} points</div>
                 </div>
         {% endfor %}
     </div>

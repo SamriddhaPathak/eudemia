@@ -52,7 +52,7 @@ def error_view(request):
 def get_context(request, category):
     # Map the category to each of the fields that the page requires
     category_fields_map = {
-        "dashboard": ["points"],
+        "dashboard": ["points", "height", "weight"],
         "leaderboard": ["user_id", "user__first_name", "user__last_name", "points"]
     }
 
@@ -60,12 +60,24 @@ def get_context(request, category):
     fields = {}
     if category in category_fields_map:
         fields = category_fields_map.get(category)
-    user_data_all = get_user_data_all(request, *fields)
+
+    leaderboard = get_user_data_all(request, *category_fields_map["leaderboard"])
+    leaderboard = sorted(leaderboard, key=lambda x: x["points"], reverse=True)
+
     user_data = get_user_data(request, *fields)
+
+    if category == "dashboard" or category == "health":
+        user_data["bmi"] = user_data["weight"] / (user_data["height"] * 0.308 * user_data["height"] * 0.308)
+        user_data["progress"] = 85; # FIXME: this is only example data
+        user_data["attendance"] = 93; # FIXME: example data
+        return {
+            "user_data": user_data,
+            "leaderboard": leaderboard,
+        }
 
     if category == "leaderboard":
         return {
-            "user_data": sorted(user_data_all, key=lambda x: x["points"],  reverse=True), # Sort by points for Leaderboard
+            "leaderboard": leaderboard,
         }
 
     # Default: return user data only

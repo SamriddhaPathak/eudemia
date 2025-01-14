@@ -149,30 +149,90 @@ label img {
 .dashboard-content {
     margin-top: 24px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 1fr 1fr auto;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     gap: min(5%, 40px);
     grid-auto-flow: row;
 }
 
-.dashboard-content > div:not(.header) {
+.dashboard-content > div {
     padding: 20px;
     border: 1px solid var(--light-grey);
     background-color: #fff;
     border-radius: 8px;
 }
 
-.points-dashboard {
-    background-color: #fff;
+.dashboard-content h3 {
+    margin-bottom: 10px;
 }
 
-.points-dashboard h2 {
-    margin-top: 10px;
+.dashboard-content h2 {
     font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
     font-size: 2.2rem;
 }
 
+.dashboard-content p {
+    color: var(--text);
+    margin: 0.5em 0;
+}
+
+.points-dashboard {
+    grid-column: span 2;
+    background-color: #fff;
+}
+
 .health-dashboard {
-    grid-column: 2 / span 2;
-    grid-row: 1 / span 2;
+    grid-column: 5 / span 2;
+    grid-row: 2 / span 1;
+}
+
+.progress-dashboard {
+    grid-column: span 2;
+}
+
+.progress-bar {
+    height: 10px;
+    width: 100%;
+    margin-top: 1.25em;
+    background-color: var(--light-grey);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar::after {
+    display: block;
+    content: "";
+    height: 100%;
+    width: 0%;
+    border-radius: 10px;
+    background-color: var(--accent1);
+    transition: width 0.5s ease;
+}
+
+.attendance-dashboard {
+    grid-column: span 2;
+}
+
+.challenges-dashboard {
+    grid-column: span 4;
+    grid-row: span 2;
+}
+
+.quotes-dashboard {
+    grid-row: 3 / span 1;
+    grid-column: 5 / span 2;
+}
+
+.leaderboard-dashboard {
+    grid-column: span 4;
+    grid-row: span 2;
+}
+
+.quote {
+    font-style: italic;
+    color: var(--grey);
+}
+
+.quote-by {
+    text-align: right;
 }
