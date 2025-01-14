@@ -135,40 +135,49 @@ label img {
     font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
 }
 
-.content > .header > h1 {
+.content > h1 {
+    font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
+    font-size: 1.75rem;
+}
+
+.content > h2 {
+    font-size: 1.2rem;
+    color: var(--grey);
+}
+
+.content > p {
+    color: var(--grey)
+}
+
+.content > div {
+    margin-top: 24px;
+}
+
+.content > div > div > h3 {
+    font-family: "Roboto";
+    margin-bottom: 10px;
+}
+
+.content > div > div > h2 {
     font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
     font-size: 2.2rem;
 }
 
-.content > .header > h2 {
-    font-size: 1.2rem;
-    color: var(--dark-grey);
-}
-
-/***** DASHBOARD *****/
-.dashboard-content {
-    margin-top: 24px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    gap: min(5%, 40px);
-    grid-auto-flow: row;
-}
-
-.dashboard-content > div {
+.content > div > div {
     padding: 20px;
     border: 1px solid var(--light-grey);
+    /* box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1); */
     background-color: #fff;
     border-radius: 8px;
 }
 
-.dashboard-content h3 {
-    margin-bottom: 10px;
-}
-
-.dashboard-content h2 {
-    font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
-    font-size: 2.2rem;
+/***** DASHBOARD *****/
+.dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(auto-fill, minmax(min(100px,100%), 1fr));
+    gap: 40px;
+    grid-auto-flow: row;
 }
 
 .dashboard-content p {
@@ -177,7 +186,7 @@ label img {
 }
 
 .points-dashboard {
-    grid-column: span 2;
+    grid-column: span 1;
     background-color: #fff;
 }
 
@@ -187,10 +196,10 @@ label img {
 }
 
 .progress-dashboard {
-    grid-column: span 2;
+    grid-column: span 3;
 }
 
-.progress-bar {
+.level-progress-bar {
     height: 10px;
     width: 100%;
     margin-top: 1.25em;
@@ -199,14 +208,13 @@ label img {
     overflow: hidden;
 }
 
-.progress-bar::after {
+.level-progress-bar::after {
     display: block;
     content: "";
     height: 100%;
     width: 0%;
     border-radius: 10px;
     background-color: var(--accent1);
-    transition: width 0.5s ease;
 }
 
 .attendance-dashboard {
@@ -235,4 +243,52 @@ label img {
 
 .quote-by {
     text-align: right;
+}
+
+/***** CHALLENGES *****/
+.challenges-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill, minmax(min(100px,100%), 1fr));
+    gap: 40px;
+}
+
+.todays-challenges {
+    grid-column: span 3;
+}
+
+.challenge {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid var(--light-grey);
+    border-radius: 8px;
+}
+
+.challenge h4 {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.challenge-progress {
+    height: 10px;
+    width: 100%;
+    margin: 1.25em 0;
+    background-color: var(--light-grey);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.challenge-progress::after {
+    display: block;
+    content: "";
+    height: 100%;
+    width: 1%;
+    border-radius: 10px;
+    background-color: var(--accent1);
+}
+
+.challenge-completed {
+    font-size: 0.9rem;
+    color: var(--grey);
 }

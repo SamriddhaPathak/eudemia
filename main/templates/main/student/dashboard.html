@@ -5,7 +5,7 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static "main/styles/leaderboard.css" %}">
     <style>
-        .progress-bar::after {
+        .level-progress-bar::after {
             width: {{ user_data.progress }}% !important;
         }
     </style>
@@ -20,9 +20,10 @@
             <h2>{{ user_data.points }}</h2>
         </div>
         <div class="progress-dashboard">
-            <h3>Progress</h3>
-            <div class="progress-bar"></div>
-            <p>{{ user_data.progress }}% completed</p>
+            <h3>Level</h3>
+            <h2>5 lvl</h2>
+            <div class="level-progress-bar"></div>
+            <p>{{ user_data.progress }} xp</p>
         </div>
         <div class="attendance-dashboard">
             <h3>Attendance</h3>
