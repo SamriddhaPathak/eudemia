@@ -3,7 +3,7 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static "main/styles/dashboard.css" %}">
-    <script src="{% static "main/js/script.js" %}"></script>
+    {% comment %} <script src="{% static "main/js/script.js" %}"></script> {% endcomment %}
 {% endblock links %}
 
 {% block navbar %}
@@ -11,8 +11,13 @@
         <a class="leaderboard" href="{% url "dashboard_category" "leaderboard" %}"><img src="{% static "images/leaderboard.svg" %}" alt="Leaderboard"></a>
         <a class="notif" href="javascript:void(0)"><img src="{% static "images/bell.svg" %}" alt="Notifications"></a>
         {% comment %} <a class="profile-pic" href="javascript:void(0)"><img src="{% static "images/profile.png" %}" alt="Profile Picture"></a> {% endcomment %}
-        <a class="profile-pic" href="javascript:void(0)"></a>
+        <input id="popup-toggle" type="checkbox">
+        <label class="profile-pic" for="popup-toggle">
+            <img src="{% static "images/profile.png" %}" alt="">
+        </label>
+        <label id="popup-overlay" for="popup-toggle"></label>
         <div class="profile-popup shadow">
+            <h4>{{ fname }} {{ lname }}</h4>
             <a href="">Settings</a>
             <a href="{% url "logout" %}">Logout</a>
         </div>
