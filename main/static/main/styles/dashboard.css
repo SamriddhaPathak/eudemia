@@ -292,3 +292,25 @@ label img {
     font-size: 0.9rem;
     color: var(--grey);
 }
+
+/***** SETTINGS *****/
+.settings-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid var(--light-grey);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.settings-container a {
+    display: block;
+    color: var(--text);
+    padding: 1em 1.5em;
+    text-decoration: none;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.settings-container a:hover {
+    background: var(--light-blue);
+}

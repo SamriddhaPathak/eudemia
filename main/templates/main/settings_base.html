@@ -2,5 +2,8 @@
 
 {% block content %}
     {{ block.super }}
-    <a href="{% url "change_password" %}">Change your password</a>
+    <div class="settings-container">
+        <a href="">Change Username</a>
+        <a href="{% url "change_password" %}">Change your password</a>
+    </div>
 {% endblock content %}
