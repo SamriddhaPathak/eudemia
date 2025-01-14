@@ -16,16 +16,18 @@ class Command(BaseCommand):
                 count = 0
 
                 for row in reader:
+                    grade = row.get('grade')
                     question = row.get('question')
                     option1 = row.get('option1')
                     option2 = row.get('option2')
                     option3 = row.get('option3')
                     option4 = row.get('option4')
-                    correct = row.get('check')
+                    correct = row.get('correct')
 
                     # Ensure all fields are valid and not empty
                     if all([question, option1, option2, option3, option4, correct]):
                         Quiz.objects.create(
+                            grade=grade,
                             question=question,
                             option1=option1,
                             option2=option2,

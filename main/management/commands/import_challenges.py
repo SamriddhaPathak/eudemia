@@ -14,11 +14,12 @@ class Command(BaseCommand):
                 count = 0
 
                 for row in reader:
+                    grade = row.get('grade')
                     question = row.get("question")
                     answer = row.get("answer")
 
-                    if question and answer:
-                        Challenge.objects.create(question=question, answer=answer)
+                    if all([grade, question, answer]):
+                        Challenge.objects.create(grade=grade, question=question, answer=answer)
                         count += 1
 
                 self.stdout.write(
