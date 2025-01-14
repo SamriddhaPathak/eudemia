@@ -6,6 +6,7 @@ ICON_PATH = {
     "assignments": ICONS_PATH + "assignments.svg",
     "quizzes": ICONS_PATH + "quizzes.svg",
     "progress": ICONS_PATH + "progress.svg",
+    "settings": ICONS_PATH + "settings.svg",
 }
 
 SIDEBAR_ITEMS = {
@@ -15,16 +16,19 @@ SIDEBAR_ITEMS = {
         {"name": "challenges", "icon": ICON_PATH["challenges"]},
         {"name": "assignments", "icon": ICON_PATH["assignments"]},
         {"name": "quizzes", "icon": ICON_PATH["quizzes"]},
+        {"name": "settings", "icon": ICON_PATH["settings"]},
     ],
     "teacher": [
         {"name": "dashboard", "icon": ICON_PATH["dashboard"]},
         {"name": "health", "icon": ICON_PATH["health"]},
         {"name": "progress", "icon": ICON_PATH["progress"]},
         {"name": "assignments", "icon": ICON_PATH["assignments"]},
+        {"name": "settings", "icon": ICON_PATH["settings"]},
     ],
     "parent": [
         {"name": "dashboard", "icon": ICON_PATH["dashboard"]},
         {"name": "health", "icon": ICON_PATH["health"]},
         {"name": "progress", "icon": ICON_PATH["progress"]},
+        {"name": "settings", "icon": ICON_PATH["settings"]},
     ],
 }

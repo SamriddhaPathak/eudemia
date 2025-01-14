@@ -18,7 +18,7 @@
         <label id="popup-overlay" for="popup-toggle"></label>
         <div class="profile-popup shadow">
             <h4>{{ fname }} {{ lname }}</h4>
-            <a href="">Settings</a>
+            <a href="{% url "dashboard_category" "settings" %}">Settings</a>
             <a href="{% url "logout" %}">Logout</a>
         </div>
     </div>
@@ -41,6 +41,5 @@
 {% block content %}
     <div class="header">
         <h1>{{ selected.capitalize }}</h1>
-        <h2>Hello, {{ fname.capitalize }}</h2>
     </div>
 {% endblock content %}
