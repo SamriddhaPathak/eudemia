@@ -1,5 +1,15 @@
 from django.db import models
 
+choices = (
+    ("1", "1"),
+    ("2", "2"),
+    ("3", "3"),
+    ("4", "4"),
+)
+
+
+
+
 class Challenge(models.Model):
     grade = models.IntegerField(default=4)
     question = models.TextField(max_length = 400)
@@ -23,7 +33,7 @@ class Quiz(models.Model):
     option2 = models.CharField(max_length = 100)
     option3 = models.CharField(max_length = 100)
     option4 = models.CharField(max_length = 100)
-    correct = models.PositiveIntegerField()
+    correct = models.PositiveIntegerField(choices = choices)
 
     def __str__(self):
         return f"Quiz {self.id}"
