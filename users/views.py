@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import password_validators_help_texts
+from math import floor
+
 # Create your views here.
 @unauthenticated_user
 def login_view(request):
