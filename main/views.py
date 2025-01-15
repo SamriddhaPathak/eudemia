@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent
+from .models import Attendence
 from .config import SIDEBAR_ITEMS
 from .utils import *
 
@@ -51,36 +52,29 @@ def error_view(request):
 # Get the context for each category
 # TODO: add all the categories
 def get_context(request, category):
-    # Map the category to each of the fields that the page requires
-    category_fields_map = {
-        "dashboard": ["points", "height", "weight"],
-        "health": ["height", "weight"],
-        "leaderboard": ["user_id", "user__first_name", "user__last_name", "points"]
-    }
+    leaderboard = get_leaderboard()
 
-    # Get the user data for specified category
-    fields = {}
-    if category in category_fields_map:
-        fields = category_fields_map.get(category)
+    user_data = get_user_data(request)
+    user_type = get_user_type(request)
 
-    leaderboard = get_user_data_all(request, *category_fields_map["leaderboard"])
-    leaderboard = sorted(leaderboard, key=lambda x: x["points"], reverse=True)
-
-    user_data = get_user_data(request, *fields)
-
-    if category == "dashboard" or category == "health":
-        user_data["bmi"] = user_data["weight"] / (user_data["height"] * 0.308 * user_data["height"] * 0.308)
-        user_data["progress"] = 85; # FIXME: this is only example data
-        user_data["attendance"] = 93; # FIXME: example data
-        return {
-            "user_data": user_data,
-            "leaderboard": leaderboard,
-        }
-    if category == "health":
-        user_data["bmi"] = user_data["weight"] / (user_data["height"] * 0.308 * user_data["height"] * 0.308)
-        return {
-            "user_data": user_data,
-        }
+    if user_type == "student":
+        if category == "dashboard":
+            user_data["bmi"] = user_data["weight"] / (user_data["height"] * 0.308 * user_data["height"] * 0.308)
+            user_data["required_xp"] = next_level(user_data["level"])
+            user_data["xp_progress"] = (user_data["xp"] / user_data["required_xp"]) * 100;
+            if user_type == "student":
+                context = {
+                    "user_data": user_data,
+                    "leaderboard": leaderboard,
+                }
+                context["attendance"] = Attendence.objects.filter(student_id=request.user.id).values()[0]
+            return context
+        if category == "health":
+            user_data["bmi"] = user_data["weight"] / (user_data["height"] * 0.308 * user_data["height"] * 0.308)
+            return {
+                "user_data": user_data,
+                "weight_health": get_health_from_bmi(user_data["bmi"])
+            }
     if category == "leaderboard":
         return {
             "leaderboard": leaderboard,

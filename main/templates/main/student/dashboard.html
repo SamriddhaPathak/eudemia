@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static "main/styles/leaderboard.css" %}">
     <style>
         .level-progress-bar::after {
-            width: {{ user_data.progress }}% !important;
+            width: {{ user_data.xp_progress }}% !important;
         }
     </style>
 {% endblock links %}
@@ -17,9 +17,9 @@
     <div class="dashboard-content">
         <div class="progress-dashboard">
             {% comment %} <h3>Level</h3> {% endcomment %}
-            <h2>Level 5</h2>
+            <h2>Level {{ user_data.level }}</h2>
             <div class="level-progress-bar"></div>
-            <p>{{ user_data.progress }} xp</p>
+            <p>{{ user_data.xp }} / {{ user_data.required_xp }} xp</p>
         </div>
         <div class="points-dashboard">
             <h3>Points</h3>
@@ -27,7 +27,7 @@
         </div>
         <div class="attendance-dashboard">
             <h3>Attendance</h3>
-            <h2>{{ user_data.attendance }}%</h2>
+            <h2>{{ attendance.days_attended }} / {{ attendance.days_passed }}</h2>
         </div>
         <div class="challenges-dashboard">
             <h3>Ongoing Challenges</h3>
@@ -49,7 +49,7 @@
                     {% endif %}
                             <div class="rank">{{ forloop.counter }}</div>
                             <div class="name">{{ entry.user__first_name }} {{ entry.user__last_name }} {% if entry.user_id == user_id %} - You{% endif %}</div>
-                            <div class="points">{{ entry.points }} points</div>
+                            <div class="points">Level {{ entry.level }}</div>
                         </div>
                 {% endfor %}
             </div>

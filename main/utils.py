@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent
+from .models import Attendence
+from math import floor
 
 def get_user_data(request, *args):
     usertype = get_user_type(request)
@@ -30,7 +32,7 @@ def get_user_data(request, *args):
 
     return user_profile
 
-def get_user_data_all(request, *args):
+def get_user_data_all(*args):
     usertype = get_user_type(request)
     usertype_model_map = {
         "student": Student,
@@ -58,6 +60,11 @@ def get_user_data_all(request, *args):
 
     return user_profiles
 
+def get_leaderboard():
+    leaderboard = Student.objects.select_related("user").values("user_id", "user__first_name", "user__last_name", "points", "level", "xp")
+    leaderboard = sorted(leaderboard, key=lambda x: x["level"]+x["xp"], reverse=True)
+    return leaderboard
+
 # returns the usertype of the user as a string
 def get_user_type(request):
     user = User.objects.get(id=request.user.id)
@@ -74,3 +81,13 @@ def next_level(level):
     base_xp = 20
     exponent = 1.5
     return floor(base_xp * (level ** exponent))
+
+def get_health_from_bmi(bmi):
+    if bmi < 18.5:
+        return "Underweight"
+    elif 18.5 <= bmi < 25:
+        return "Normal"
+    elif 25 <= bmi < 30:
+        return "Overweight"
+    else:
+        return "Obese"
