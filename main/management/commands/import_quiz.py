@@ -1,6 +1,6 @@
 import csv
 from django.core.management.base import BaseCommand
-from main.models import Quiz  # Replace 'main' with your app name
+from main.models import Quiz, Class  # Replace 'main' with your app name
 
 
 class Command(BaseCommand):
@@ -16,7 +16,7 @@ class Command(BaseCommand):
                 count = 0
 
                 for row in reader:
-                    grade = row.get('grade')
+                    grade = row.get('grade')  # Grade should match an existing Class instance
                     question = row.get('question')
                     option1 = row.get('option1')
                     option2 = row.get('option2')
@@ -24,16 +24,23 @@ class Command(BaseCommand):
                     option4 = row.get('option4')
                     correct = row.get('correct')
 
+                    # Fetch the Class instance
+                    try:
+                        grade_instance = Class.objects.get(name=grade)  # Adjust field if necessary
+                    except Class.DoesNotExist:
+                        self.stdout.write(self.style.ERROR(f"Grade '{grade}' does not exist. Row skipped."))
+                        continue
+
                     # Ensure all fields are valid and not empty
                     if all([question, option1, option2, option3, option4, correct]):
                         Quiz.objects.create(
-                            grade=grade,
+                            grade=grade_instance,  # Use the Class instance
                             question=question,
                             option1=option1,
                             option2=option2,
                             option3=option3,
                             option4=option4,
-                            correct=int(correct),  # Convert check to integer
+                            correct=int(correct),  # Convert to integer
                         )
                         count += 1
 
