@@ -10,7 +10,7 @@ quiz_choices = (
 )
 
 challenge_type_choices = (
-    ("monthly", "Monthly"),
+    ("Weekly", "Weekly"),
     ("daily", "Daily"),
 )
 
