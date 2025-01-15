@@ -3,7 +3,8 @@
 {% block content %}
     {{ block.super }}
     <div class="settings-container">
-        <a href="">Change Username</a>
+        <a href="{% url "profile" %}">Profile Settings</a>
         <a href="{% url "change_password" %}">Change your password</a>
+        <a class="logout" href="{% url "logout" %}">Logout</a>
     </div>
 {% endblock content %}

@@ -87,6 +87,15 @@ label img {
     display: none;
 }
 
+.popup-user-info {
+    text-align: center !important;
+}
+
+.popup-username {
+    font-size: 0.8rem;
+    color: var(--grey);
+}
+
 .profile-popup {
     display: none;
     flex-direction: column;
@@ -98,18 +107,21 @@ label img {
     right: 64px;
     border-radius: 5px;
     border: 1px solid var(--light-grey);
-    padding: 16px !important;
+    padding: 16px 0 !important;
     z-index: 10;
 }
 
-.profile-popup * {
+.profile-popup > * {
     color: var(--text);
     text-decoration: none;
-    margin: 10px;
+    width: 100%;
+    padding: 0.5em 1.5em;
+    text-align: left;
 }
 
 .profile-popup a:hover {
     color: var(--accent2);
+    background-color: var(--light-blue);
 }
 
 #popup-toggle:checked ~ .profile-popup {
@@ -153,12 +165,12 @@ label img {
     margin-top: 24px;
 }
 
-.content > div > div > h3 {
+.content > div > div h3 {
     font-family: "Roboto";
     margin-bottom: 10px;
 }
 
-.content > div > div > h2 {
+.content > div > div h2 {
     font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
     font-size: 2.2rem;
 }
@@ -291,6 +303,38 @@ label img {
 .challenge-completed {
     font-size: 0.9rem;
     color: var(--grey);
+}
+
+/***** HEALTH *****/
+.health-content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(auto-fill, minmax(min(100px,100%), 1fr));
+    gap: 40px;
+    grid-auto-flow: row;
+}
+
+.weight-health {
+    grid-row : 2 / span 1;
+}
+
+.bmi-health {
+    grid-row: span 2;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.bmi-health-img {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 12px;
+}
+
+.bmi-health img {
+    height: 150px;
 }
 
 /***** SETTINGS *****/

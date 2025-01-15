@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}{{ selected.capitalize }} | {{ block.super }}{% endblock title %}
+
 {% block links %}
     <link rel="stylesheet" href="{% static "main/styles/dashboard.css" %}">
     {% comment %} <script src="{% static "main/js/script.js" %}"></script> {% endcomment %}
@@ -17,9 +19,12 @@
         </label>
         <label id="popup-overlay" for="popup-toggle"></label>
         <div class="profile-popup shadow">
-            <h4>{{ fname }} {{ lname }}</h4>
+            <div class="popup-user-info">
+                <h4>{{ fname }} {{ lname }}</h4>
+                <p class="popup-username">@{{ username }}</p>
+            </div>
             <a href="{% url "dashboard_category" "settings" %}">Settings</a>
-            <a href="{% url "logout" %}">Logout</a>
+            <a class="logout" href="{% url "logout" %}">Logout</a>
         </div>
     </div>
 {% endblock navbar %}

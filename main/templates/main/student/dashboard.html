@@ -15,15 +15,15 @@
     {{ block.super }}
     <h2>Hello, {{ fname.capitalize }}</h2>
     <div class="dashboard-content">
+        <div class="progress-dashboard">
+            {% comment %} <h3>Level</h3> {% endcomment %}
+            <h2>Level 5</h2>
+            <div class="level-progress-bar"></div>
+            <p>{{ user_data.progress }} xp</p>
+        </div>
         <div class="points-dashboard">
             <h3>Points</h3>
             <h2>{{ user_data.points }}</h2>
-        </div>
-        <div class="progress-dashboard">
-            <h3>Level</h3>
-            <h2>5 lvl</h2>
-            <div class="level-progress-bar"></div>
-            <p>{{ user_data.progress }} xp</p>
         </div>
         <div class="attendance-dashboard">
             <h3>Attendance</h3>

@@ -53,6 +53,7 @@ def get_context(request, category):
     # Map the category to each of the fields that the page requires
     category_fields_map = {
         "dashboard": ["points", "height", "weight"],
+        "health": ["height", "weight"],
         "leaderboard": ["user_id", "user__first_name", "user__last_name", "points"]
     }
 
@@ -74,7 +75,11 @@ def get_context(request, category):
             "user_data": user_data,
             "leaderboard": leaderboard,
         }
-
+    if category == "health":
+        user_data["bmi"] = user_data["weight"] / (user_data["height"] * 0.308 * user_data["height"] * 0.308)
+        return {
+            "user_data": user_data,
+        }
     if category == "leaderboard":
         return {
             "leaderboard": leaderboard,

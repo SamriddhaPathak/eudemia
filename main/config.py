@@ -15,7 +15,6 @@ SIDEBAR_ITEMS = {
         {"name": "health", "icon": ICON_PATH["health"]},
         {"name": "challenges", "icon": ICON_PATH["challenges"]},
         {"name": "quizzes", "icon": ICON_PATH["quizzes"]},
-        {"name": "assignments", "icon": ICON_PATH["assignments"]},
         {"name": "settings", "icon": ICON_PATH["settings"]},
     ],
     "teacher": [

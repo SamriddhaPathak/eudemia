@@ -13,6 +13,7 @@
     --blue: #8098f7;
     --light-purple: #cc6dff34;
     --light-blue: #1082f321;
+    --red: #f24949;
 
     --background: #f9f9f9;
     --text: var(--dark-grey);
@@ -172,4 +173,8 @@ body {
     background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2));
     color: #fff;
     border: none !important;
+}
+
+.logout {
+    color: var(--red) !important;
 }

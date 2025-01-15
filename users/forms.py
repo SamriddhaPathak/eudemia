@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 class LoginForm(forms.Form):
     username = forms.CharField(

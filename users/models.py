@@ -1,6 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+
+choices = (
+    ("A+", "A-"),
+    ("B+", "B-"),
+    ("AB+", "AB-"),
+    ("O+", "O-"),
+)
+
 class Class(models.Model):
     grade  = models.IntegerField(primary_key=True)
     name = models.CharField(max_length= 10)
@@ -16,6 +24,9 @@ class Student(models.Model):
     height = models.FloatField()
     weight = models.IntegerField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    level = models.PositiveIntegerField(default = 0)
+    xp = models.PositiveIntegerField(default = 0)
+    blood_group = models.CharField(max_length = 10,choices = choices, default = " ")
 
     def __str__(self):
         # Use the related User's first and last name
@@ -38,3 +49,7 @@ class Parent(models.Model):
 
     def __str__(self):
         return f"{self.user.first_name}_{self.user.last_name}"
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(upload_to = "profile_pictures/", blank = False, null = False, default = "media/profile_pictures/profile.png")

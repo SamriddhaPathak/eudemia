@@ -5,6 +5,7 @@ from .forms import LoginForm
 from .decorators import unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import password_validators_help_texts
 # Create your views here.
 @unauthenticated_user
@@ -32,6 +33,12 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("index")
+
+@login_required
+def profile_view(request):
+    return render(request, 'users/profile.html', {
+        "form": "",
+    })
 
 @login_required
 def change_password(request):

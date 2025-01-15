@@ -1,5 +1,29 @@
 {% extends "main/dashboard_base.html" %}
+{% load static %}
 
 {% block content %}
     {{ block.super }}
+    <div class="health-content">
+        <div class="height-health">
+            <h3>Height</h3>
+            <h2>{{ user_data.height }} ft</h2>
+        </div>
+        <div class="weight-health">
+            <h3>Weight</h3>
+            <h2>{{ user_data.weight }} kg</h2>
+        </div>
+        <div class="bmi-health">
+            <div>
+                <h3>BMI</h3>
+                <h2>{{ user_data.bmi|floatformat:2 }}</h2>
+            </div>
+            <div class="bmi-health-img">
+                <img src="{% static "main/images/body.svg" %}" alt="">
+            </div>
+        </div>
+        <div class="blood-group-health">
+            <h3>Blood Group</h3>
+            <h2>O+</h2>
+        </div>
+    </div>
 {% endblock content %}
