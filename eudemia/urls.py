@@ -26,6 +26,7 @@ urlpatterns = [
     path("", include("main.urls")),
     path("users/", include("users.urls")),
     path("users/", include("django.contrib.auth.urls")),
+    path("api/", include("api.urls")),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]

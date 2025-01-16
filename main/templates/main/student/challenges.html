@@ -4,7 +4,7 @@
     {{ block.super }}
     <p>Complete challenges to earn rewards</p>
     <div class="challenges-content">
-        <div class="completed-challenges">
+        {% comment %} <div class="completed-challenges">
             <h3>Completed Today</h3>
             <h2>2</h2>
         </div>
@@ -15,21 +15,21 @@
         <div class="points-today-challenges">
             <h3>Points Collected Today</h3>
             <h2>5</h2>
-        </div>
+        </div> {% endcomment %}
         <div class="todays-challenges">
             <h3>Today's Challenges</h3>
-            <div class="challenge">
+            <a class="challenge" href="">
                 <h4>Algebra Master</h4>
                 <p>Solve 10 algebra problems</p>
                 <div class="challenge-progress"></div>
                 <p class="challenge-completed">0/10 completed</p>
-            </div>
-            <div class="challenge">
+            </a>
+            <a class="challenge" href="">
                 <h4>Physicist</h4>
                 <p>Solve 15 physics problems</p>
                 <div class="challenge-progress"></div>
                 <p class="challenge-completed">0/15 completed</p>
-            </div>
+            </a>
         </div>
     </div>
 {% endblock content %}

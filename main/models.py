@@ -3,15 +3,15 @@ from users.models import Student, Class
 from django.contrib.auth.models import User
 
 quiz_choices = (
-    ("1", "1"),
-    ("2", "2"),
-    ("3", "3"),
-    ("4", "4"),
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
 )
 
 challenge_type_choices = [
-    ("Weekly", "Weekly"),
-    ("Daily", "Daily"),  # Fixed capitalization
+    ("weekly", "Weekly"),
+    ("daily", "Daily"),
 ]
 
 class Subject(models.Model):
@@ -45,6 +45,9 @@ class Question(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     question = models.TextField(max_length=200)
     answer = models.CharField(max_length=50)
+    unit = models.CharField(max_length=50)
+    question_type = models.CharField(max_length=50, choices=challenge_type_choices, default="daily")
+    grade = models.ForeignKey(Class, default=4, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Question {self.id}"

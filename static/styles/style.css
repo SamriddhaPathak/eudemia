@@ -20,6 +20,11 @@
 
     --topbar-height: 90px;
     --sidebar-width: 250px;
+
+    /* gradients */
+    --gradient-right: linear-gradient(to right, var(--accent1), var(--accent2));
+    --gradient-left: linear-gradient(to left, var(--accent1), var(--accent2));
+    --gradient-bottom-right: linear-gradient(to bottom right, var(--accent1), var(--accent2));
 }
 
 * {
@@ -58,7 +63,7 @@ body {
     width: 100%;
     padding: 0 64px;
 
-    background-image: linear-gradient(to bottom right, var(--accent1), var(--accent2));
+    background-image: var(--gradient-bottom-right);
 
     display: flex;
     flex-direction: row;
