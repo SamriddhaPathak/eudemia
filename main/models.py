@@ -68,3 +68,10 @@ class Attendence(models.Model):
 
     def __str__(self):
         return f"Attendence for {self.student.user.username}"
+
+class Quote(models.Model):
+    quote = models.TextField(max_length=1000)
+    by = models.TextField(max_length=50)
+
+    def __str__(self):
+        return f"Quote by {by}"
