@@ -84,3 +84,17 @@ def get_challenge_questions(challenge_id):
     challenge = Challenge.objects.get(id=challenge_id)
     question_list = Question.objects.filter(challenge=challenge)
     return question_list
+
+def grant_xp(student_id, xp):
+    student = Student.objects.get(id=student_id)
+    required_xp = next_level(student.level)
+    student.xp += xp
+    if student.xp >= required_xp:
+        student.level += 1
+        student.xp = 0
+    student.save()
+
+def grant_points(student_id, points):
+    student = Student.objects.get(id=student_id)
+    student.points += points
+    student.save()
