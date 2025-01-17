@@ -41,12 +41,22 @@ class Question(models.Model):
     def __str__(self):
         return f"Subject: {self.subject}, Grade: {self.grade}, Type: {self.question_type}"
 
+class ChallengeTracker(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
+    current_question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
 class Quiz(models.Model):
     name = models.CharField(max_length=50)
     num_of_questions = models.PositiveIntegerField(default=10)
 
     def __str__(self):
         return self.name
+
+class QuizTracker(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
+    current_question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
 class QuizQuestion(models.Model):
     grade = models.ForeignKey(Class, default=4, on_delete=models.CASCADE)

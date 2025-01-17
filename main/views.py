@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent
 from django.http import HttpResponse
-from .models import Attendence, Quiz, Challenge
+from .models import Attendence, Quiz, Challenge, QuizTracker, ChallengeTracker
 from .config import SIDEBAR_ITEMS
 from .utils import *
 
@@ -19,12 +19,7 @@ def dashboard_view(request, category=None):
         category = "dashboard"
 
     usertype = get_user_type(request)
-    # Map usertype to the corresponding template file for the given category
-    usertype_template_map = {
-        "student": f"main/student/{category}.html",
-        "parent": f"main/parent/{category}.html",
-        "teacher": f"main/teacher/{category}.html",
-    }
+    template = f"main/{usertype}/{category}.html"
 
     context = {
         "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
@@ -43,12 +38,32 @@ def dashboard_view(request, category=None):
     if get_context(request, category) != None:
         context.update(get_context(request, category))
 
-    return render(request, usertype_template_map.get(usertype), context)
+    return render(request, template, context)
 
 @login_required
 def challenge_view(request, id):
     question_list = get_challenge_questions(id)
-    return HttpResponse(question_list[0].question)
+
+    usertype = "student"
+    context = {
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
+
+        "user": request.user,
+        "username": request.user.username,
+        "usertype": usertype,
+        "selected": "challenges", # the currently selected category
+        "fname": request.user.first_name,
+        "lname": request.user.last_name,
+        "email": request.user.email,
+        "user_id": request.user.id,
+        "profile_pic": request.user.userprofile.profile_pic.url,
+        "challenge_list": get_challenge_questions(id),
+        "question_id": question_id,
+    }
+    return render(request, "main/student/challenge.html", context)
+
+def challenge_question_view(request, id):
+    return HttpResponseRedirect("TODO")
 
 def error_view(request):
     context = {

@@ -39,7 +39,7 @@
                         background: var(--gradient-right);
                     }
                 </style>
-                <a class="challenge" href="{% url "challenge" challenge.id %}">
+                <a class="challenge" href="{% url "challenge" challenge.id current_question_id %}">
                     <h4>{{ challenge.name }}</h4>
                     <p>Solve {{ challenges_count|index:forloop.counter0 }} {{ challenge.subject.name }} problems</p>
                     <div class="challenge-type">{{ challenge.challenge_type.capitalize }}</div>

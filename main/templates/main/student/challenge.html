@@ -1,0 +1,14 @@
+{% extends "main/dashboard_base.html" %}
+
+{% block content %}
+    {% for question in challenge_list %}
+        <form action="" method="post">
+            <div class="question">
+                {{ question.question }}
+            </div>
+            <input type="text" name="answer" id="answer">
+            <div class="unit">{{ question.unit }}</div>
+            <input type="submit" value="Submit">
+        </form>
+    {% endfor %}
+{% endblock content %}
