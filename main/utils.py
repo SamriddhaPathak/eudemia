@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent
-from .models import Attendence, QuizQuestion, Question, Challenge, Subject
+from .models import Attendence, QuizQuestion, Question, Challenge, Subject, Quote
 from math import floor
 
 import random
@@ -98,3 +98,7 @@ def grant_points(student_id, points):
     student = Student.objects.get(id=student_id)
     student.points += points
     student.save()
+
+def get_random_quote():
+    quotes = Quote.objects.all()
+    return random.choice(quotes)

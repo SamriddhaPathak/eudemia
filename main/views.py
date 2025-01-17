@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent
 from django.http import HttpResponse
-from .models import Attendence, Quiz, Challenge, QuizTracker, ChallengeTracker
+from .models import Attendence, Quiz, Challenge, QuizTracker, ChallengeTracker, Quote
 from .config import SIDEBAR_ITEMS
 from .utils import *
 
@@ -27,8 +27,8 @@ def dashboard_view(request, category=None):
         "user": request.user,
         "usertype": usertype,
         "selected": category, # the currently selected category
-        "email": request.user.email,
         "profile_pic": request.user.userprofile.profile_pic.url,
+        "quote": get_random_quote(),
     }
 
     if get_context(request, category) != None:
@@ -48,6 +48,7 @@ def challenge_view(request, id):
         "usertype": usertype,
         "selected": "challenges", # the currently selected category
         "profile_pic": request.user.userprofile.profile_pic.url,
+
         "challenge_list": get_challenge_questions(id),
         "question_id": question_id,
     }
