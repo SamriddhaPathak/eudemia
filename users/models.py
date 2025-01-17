@@ -31,8 +31,10 @@ class Student(models.Model):
     level = models.PositiveIntegerField(default = 0)
     xp = models.PositiveIntegerField(default = 0)
     blood_group = models.CharField(max_length = 10,choices = choices, default = " ")
-    completed_challenge_questions = models.ManyToManyField("main.Question")
-    completed_quiz_questions = models.ManyToManyField("main.QuizQuestion")
+    completed_challenge_questions = models.ManyToManyField("main.Question", blank=True, null=True, related_name="completed_challenge_questions")
+    correct_challenge_questions = models.ManyToManyField("main.Question", blank=True, null=True, related_name="correct_challenge_questions")
+    completed_quiz_questions = models.ManyToManyField("main.QuizQuestion", blank=True, null=True, related_name="completed_quiz_questions")
+    correct_quiz_questions = models.ManyToManyField("main.QuizQuestion", blank=True, null=True, related_name="correct_quiz_questions")
 
     def __str__(self):
         # Use the related User's first and last name

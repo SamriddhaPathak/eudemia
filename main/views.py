@@ -29,6 +29,7 @@ def dashboard_view(request, category=None):
     context = {
         "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
 
+        "user": request.user,
         "username": request.user.username,
         "usertype": usertype,
         "selected": category, # the currently selected category
@@ -89,6 +90,15 @@ def get_context(request, category):
             context["quiz_list"] = get_quiz(user_data.grade)
         if category == "challenges":
             context["challenges"] = get_challenges(user_data.grade)
+            context["completed_challenges"] = []
+            context["challenges_count"] = []
+            context["completed_challenges_percentage"] = []
+            for challenge in context["challenges"]:
+                completed_challenges = request.user.student.completed_challenge_questions.filter(challenge=challenge).count()
+                challenges_count = challenge.question_set.count()
+                context["completed_challenges"].append(completed_challenges)
+                context["challenges_count"].append(challenges_count)
+                context["completed_challenges_percentage"].append(int(completed_challenges / challenges_count) * 100)
     elif user_type == "parent":
         user_data = request.user.parent.students.all()
         children_data = []

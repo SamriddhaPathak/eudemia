@@ -74,4 +74,4 @@ class Quote(models.Model):
     by = models.TextField(max_length=50)
 
     def __str__(self):
-        return f"Quote by {by}"
+        return f"Quote by {self.by}"

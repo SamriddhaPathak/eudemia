@@ -1,4 +1,5 @@
 {% extends "main/dashboard_base.html" %}
+{% load custom_filters %}
 
 {% block content %}
     {{ block.super }}
@@ -19,12 +20,31 @@
         <div class="todays-challenges">
             <h3>Ongoing Challenges</h3>
             {% for challenge in challenges %}
+                <style>
+                    .challenge-progress-{{ forloop.counter }} {
+                        height: 10px;
+                        width: 100%;
+                        margin: 1.25em 0;
+                        background: var(--light-grey);
+                        border-radius: 10px;
+                        overflow: hidden;
+                    }
+
+                    .challenge-progress-{{ forloop.counter }}::after {
+                        display: block;
+                        content: "";
+                        height: 100%;
+                        width: {{ completed_challenges_percentage|index:forloop.counter0 }}%;
+                        border-radius: 10px;
+                        background: var(--gradient-right);
+                    }
+                </style>
                 <a class="challenge" href="{% url "challenge" challenge.id %}">
                     <h4>{{ challenge.name }}</h4>
-                    <p>Solve 10 {{ challenge.subject.name }} problems</p>
+                    <p>Solve {{ challenges_count|index:forloop.counter0 }} {{ challenge.subject.name }} problems</p>
                     <div class="challenge-type">{{ challenge.challenge_type.capitalize }}</div>
-                    <div class="challenge-progress"></div>
-                    <p class="challenge-completed">0/15 completed</p>
+                    <div class="challenge-progress-{{ forloop.counter }}"></div>
+                    <p class="challenge-completed">{{ completed_challenges|index:forloop.counter0 }}/{{ challenges_count|index:forloop.counter0 }} completed</p>
                 </a>
             {% endfor %}
         </div>
