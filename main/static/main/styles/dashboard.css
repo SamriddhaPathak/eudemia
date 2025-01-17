@@ -175,14 +175,20 @@ label img {
     font-size: 2.2rem;
 }
 
-.content > div > div {
+.content > div > div, .content > div > a {
     padding: 20px;
     border: 1px solid var(--light-grey);
+    display: block;
     text-decoration: none;
+    color: #000;
     /* box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1); */
     background-color: #fff;
     border-radius: 8px;
 }
+
+/*******************/
+/***** STUDENT *****/
+/*******************/
 
 /***** DASHBOARD *****/
 .dashboard-content {
@@ -350,6 +356,22 @@ label img {
     height: 150px;
 }
 
+/***** QUIZZES *****/
+.quizzes-content {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px,100%), 1fr));
+}
+
+.quiz:hover {
+    background-color: var(--background);
+}
+
+.quiz p {
+    color: var(--grey);
+    font-size: 0.85rem;
+}
+
 /***** SETTINGS *****/
 .settings-container {
     margin-top: 20px;
@@ -364,6 +386,7 @@ label img {
     color: var(--text);
     padding: 1em 1.5em;
     text-decoration: none;
+    border: none !important;
     border-radius: 8px;
     width: 100%;
 }

@@ -27,19 +27,7 @@ class Challenge(models.Model):
     challenge_type = models.CharField(max_length=50, choices=challenge_type_choices)
 
     def __str__(self):
-        return f"Challenge for {self.name}"
-
-class Quiz(models.Model):
-    grade = models.ForeignKey(Class, default=4, on_delete=models.CASCADE)
-    question = models.TextField(max_length=150)
-    option1 = models.CharField(max_length=100)
-    option2 = models.CharField(max_length=100)
-    option3 = models.CharField(max_length=100)
-    option4 = models.CharField(max_length=100)
-    correct = models.PositiveIntegerField(choices=quiz_choices)
-
-    def __str__(self):
-        return f"Quiz {self.grade}"
+        return f"Challenge for {self.grade}: {self.name}"
 
 class Question(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
@@ -48,9 +36,30 @@ class Question(models.Model):
     unit = models.CharField(max_length=50)
     question_type = models.CharField(max_length=50, choices=challenge_type_choices, default="daily")
     grade = models.ForeignKey(Class, default=4, on_delete=models.CASCADE)
+    challenge = models.ForeignKey(Challenge, blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Question {self.id}"
+        return f"Subject: {self.subject}, Grade: {self.grade}, Type: {self.question_type}"
+
+class Quiz(models.Model):
+    name = models.CharField(max_length=50)
+    num_of_questions = models.PositiveIntegerField(default=10)
+
+    def __str__(self):
+        return self.name
+
+class QuizQuestion(models.Model):
+    grade = models.ForeignKey(Class, default=4, on_delete=models.CASCADE)
+    question = models.TextField(max_length=150)
+    option1 = models.CharField(max_length=100)
+    option2 = models.CharField(max_length=100)
+    option3 = models.CharField(max_length=100)
+    option4 = models.CharField(max_length=100)
+    correct = models.PositiveIntegerField(choices=quiz_choices)
+    quiz = models.ForeignKey(Quiz, blank=True, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Question for grade {self.grade}"
 
 class Attendence(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -58,4 +67,4 @@ class Attendence(models.Model):
     days_passed = models.PositiveIntegerField(default=60)
 
     def __str__(self):
-        return f"Attendence {self.id}"
+        return f"Attendence for {self.student.user.username}"

@@ -17,19 +17,16 @@
             <h2>5</h2>
         </div> {% endcomment %}
         <div class="todays-challenges">
-            <h3>Today's Challenges</h3>
-            <a class="challenge" href="">
-                <h4>Algebra Master</h4>
-                <p>Solve 10 algebra problems</p>
-                <div class="challenge-progress"></div>
-                <p class="challenge-completed">0/10 completed</p>
-            </a>
-            <a class="challenge" href="">
-                <h4>Physicist</h4>
-                <p>Solve 15 physics problems</p>
-                <div class="challenge-progress"></div>
-                <p class="challenge-completed">0/15 completed</p>
-            </a>
+            <h3>Ongoing Challenges</h3>
+            {% for challenge in challenges %}
+                <a class="challenge" href="{% url "challenge" challenge.id %}">
+                    <h4>{{ challenge.name }}</h4>
+                    <p>Solve 10 {{ challenge.subject.name }} problems</p>
+                    <div class="challenge-type">{{ challenge.challenge_type.capitalize }}</div>
+                    <div class="challenge-progress"></div>
+                    <p class="challenge-completed">0/15 completed</p>
+                </a>
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}

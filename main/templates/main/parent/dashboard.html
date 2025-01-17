@@ -1,6 +1,77 @@
 {% extends "main/dashboard_base.html" %}
+{% load static %}
+
+{% block links %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "main/styles/leaderboard.css" %}">
+    <link rel="stylesheet" href="{% static "main/styles/dashboard_parent.css" %}">
+{% endblock links %}
 
 {% block content %}
     {{ block.super }}
     <h2>Hello, {{ fname.capitalize }}</h2>
+    {% for child_data in children_data %}
+    <style>
+        .level-progress-bar-{{ forloop.counter }} {
+            height: 10px;
+            width: 100%;
+            margin-top: 1.25em;
+            background-color: var(--light-grey);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .level-progress-bar-{{ forloop.counter }}::after {
+            display: block;
+            content: "";
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            background: var(--gradient-left);
+            /* background: var(--accent1); */
+        }
+        .level-progress-bar-{{ forloop.counter }}::after {
+            width: {{ child_data.xp_progress }}% !important;
+        }
+    </style>
+        <h2 class="child-name">{{ child_data.user_data.user.first_name }}:</h2>
+        <div class="dashboard-content">
+            <div class="progress-dashboard">
+                {% comment %} <h3>Level</h3> {% endcomment %}
+                <h2>Level {{ child_data.user_data.level }}</h2>
+                <div class="level-progress-bar-{{ forloop.counter }}"></div>
+                <p>{{ child_data.user_data.xp }} / {{ child_data.required_xp }} xp</p>
+            </div>
+            <div class="points-dashboard">
+                <h3>Points</h3>
+                <h2>{{ child_data.user_data.points }}</h2>
+            </div>
+            <div class="attendance-dashboard">
+                <h3>Attendance</h3>
+                <h2>{{ child_data.attendance.days_attended }} / {{ child_data.attendance.days_passed }}</h2>
+            </div>
+            <div class="health-dashboard">
+                <h3>Health</h3>
+                <p>Height: {{ child_data.user_data.height }} ft</p>
+                <p>Weight: {{ child_data.user_data.weight }} kg</p>
+                <p>BMI: {{ child_data.bmi|floatformat:2 }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="leaderboard-dashboard">
+        <h3>Top 3 right now</h3>
+        <div class="leaderboard-container">
+            {% for entry in leaderboard|slice:3 %}
+                {% if entry.user_id == user_id %}
+                    <div class="leaderboard-entry gradient-border">
+                {% else %}
+                    <div class="leaderboard-entry">
+                {% endif %}
+                        <div class="rank">{{ forloop.counter }}</div>
+                        <div class="name">{{ entry.user__first_name }} {{ entry.user__last_name }} {% if entry.user_id == user_id %} - You{% endif %}</div>
+                        <div class="points">Level {{ entry.level }}</div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}

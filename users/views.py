@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
-from .forms import LoginForm
+from .forms import LoginForm, UserProfileForm
+from users.models import UserProfile
 from .decorators import unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
@@ -38,9 +39,17 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'users/profile.html', {
-        "form": "",
-    })
+    # Try to get the existing user profile for the logged-in user
+    if request.method == "POST":
+        profile = UserProfile.objects.get(user_id=request.user.id)
+        profile.profile_pic = request.POST.get('profile_pic')
+
+        if len(request.FILES) != 0:
+            profile.profile_pic = request.FILES['profile_pic']
+        profile.save()
+        messages.success(request, "Profile updated successfully")
+        return redirect("dashboard")
+    return render(request, 'users/profile.html')
 
 @login_required
 def change_password(request):

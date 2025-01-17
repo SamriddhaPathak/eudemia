@@ -11,17 +11,20 @@
 {% block navbar %}
     <div class="navbar">
         <a class="leaderboard" href="{% url "dashboard_category" "leaderboard" %}"><img src="{% static "images/leaderboard.svg" %}" alt="Leaderboard"></a>
-        <a class="notif" href="javascript:void(0)"><img src="{% static "images/bell.svg" %}" alt="Notifications"></a>
+        {% comment %} <a class="notif" href="javascript:void(0)"><img src="{% static "images/bell.svg" %}" alt="Notifications"></a> {% endcomment %}
         {% comment %} <a class="profile-pic" href="javascript:void(0)"><img src="{% static "images/profile.png" %}" alt="Profile Picture"></a> {% endcomment %}
         <input id="popup-toggle" type="checkbox">
         <label class="profile-pic" for="popup-toggle">
-            <img src="{% static "images/profile.png" %}" alt="">
+            <img src="{{ profile_pic }}" alt="">
         </label>
         <label id="popup-overlay" for="popup-toggle"></label>
         <div class="profile-popup shadow">
             <div class="popup-user-info">
                 <h4>{{ fname }} {{ lname }}</h4>
                 <p class="popup-username">@{{ username }}</p>
+                {% if usertype == "student" %}
+                    <p class="popup-username">Grade: {{ user_data.grade }}</p>
+                {% endif %}
             </div>
             <a href="{% url "dashboard_category" "settings" %}">Settings</a>
             <a class="logout" href="{% url "logout" %}">Logout</a>
