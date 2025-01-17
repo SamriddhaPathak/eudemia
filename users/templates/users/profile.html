@@ -4,15 +4,38 @@
 {% block title %}Profile | {{ block.super }}{% endblock title %}
 
 {% block links %}
+    {{ block.super }}
     <link rel="stylesheet" href="{% static "users/styles/change_password.css" %}">
 {% endblock links %}
 
 {% block content %}
-<div class="container">
+<div class="container profile-container">
+    <h2>Change Your Profile</h2>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="profile_pic" id="profile-pic">
-        <button type="submit">Save Changes</button>
+        <label for="profile-pic" class="profile-pic">
+            <img id="preview-img" src="{{ profile_pic }}" alt="Profile Picture">
+        </label>
+        <input type="file" name="profile_pic" id="profile-pic" accept="image/*">
+        <button type="submit" class="login-button profile-button">Save Changes</button>
     </form>
 </div>
+
+<script>
+    // JavaScript to preview image on file selection
+    document.getElementById("profile-pic").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        const previewImg = document.getElementById("preview-img");
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;  // Update the src with the image data
+            };
+
+            reader.readAsDataURL(file);  // Read the file as a data URL
+        }
+    });
+</script>
 {% endblock content %}

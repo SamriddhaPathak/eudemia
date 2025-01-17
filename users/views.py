@@ -49,7 +49,9 @@ def profile_view(request):
         profile.save()
         messages.success(request, "Profile updated successfully")
         return redirect("dashboard")
-    return render(request, 'users/profile.html')
+    return render(request, 'users/profile.html', {
+        "profile_pic": request.user.userprofile.profile_pic.url,
+    })
 
 @login_required
 def change_password(request):

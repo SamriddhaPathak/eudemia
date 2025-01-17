@@ -20,8 +20,8 @@
         <label id="popup-overlay" for="popup-toggle"></label>
         <div class="profile-popup shadow">
             <div class="popup-user-info">
-                <h4>{{ fname }} {{ lname }}</h4>
-                <p class="popup-username">@{{ username }}</p>
+                <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                <p class="popup-username">@{{ user.username }}</p>
                 {% if usertype == "student" %}
                     <p class="popup-username">Grade: {{ user_data.grade }}</p>
                 {% endif %}

@@ -25,13 +25,9 @@ def dashboard_view(request, category=None):
         "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
 
         "user": request.user,
-        "username": request.user.username,
         "usertype": usertype,
         "selected": category, # the currently selected category
-        "fname": request.user.first_name,
-        "lname": request.user.last_name,
         "email": request.user.email,
-        "user_id": request.user.id,
         "profile_pic": request.user.userprofile.profile_pic.url,
     }
 
@@ -49,13 +45,8 @@ def challenge_view(request, id):
         "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
 
         "user": request.user,
-        "username": request.user.username,
         "usertype": usertype,
         "selected": "challenges", # the currently selected category
-        "fname": request.user.first_name,
-        "lname": request.user.last_name,
-        "email": request.user.email,
-        "user_id": request.user.id,
         "profile_pic": request.user.userprofile.profile_pic.url,
         "challenge_list": get_challenge_questions(id),
         "question_id": question_id,
@@ -96,6 +87,16 @@ def get_context(request, category):
             context["required_xp"] = next_level(user_data.level)
             context["xp_progress"] = (int(user_data.xp) / context["required_xp"]) * 100;
             context["attendance"] = Attendence.objects.filter(student_id=request.user.student.id).values()[0]
+            context["challenges"] = get_challenges(user_data.grade)
+            context["completed_challenges"] = []
+            context["challenges_count"] = []
+            context["completed_challenges_percentage"] = []
+            for challenge in context["challenges"]:
+                completed_challenges = request.user.student.completed_challenge_questions.filter(challenge=challenge).count()
+                challenges_count = challenge.question_set.count()
+                context["completed_challenges"].append(completed_challenges)
+                context["challenges_count"].append(challenges_count)
+                context["completed_challenges_percentage"].append(int(completed_challenges / challenges_count) * 100)
             return context
         if category == "health":
             context["bmi"] = user_data.weight / (user_data.height * 0.308 * user_data.height * 0.308)
@@ -144,6 +145,17 @@ def get_context(request, category):
             for student in user_data:
                 child_data = {}
                 child_data["user_data"] = student
+                child_data["challenges"] = get_challenges(student.grade)
+                child_data["completed_challenges"] = []
+                child_data["challenges_count"] = []
+                child_data["completed_challenges_percentage"] = []
+                for challenge in child_data["challenges"]:
+                    completed_challenges = student.completed_challenge_questions.filter(challenge=challenge).count()
+                    challenges_count = challenge.question_set.count()
+                    child_data["completed_challenges"].append(completed_challenges)
+                    child_data["challenges_count"].append(challenges_count)
+                    child_data["completed_challenges_percentage"].append(int(completed_challenges / challenges_count) * 100)
+                children_data.append(child_data)
             context = {
                 "children_data": children_data,
             }

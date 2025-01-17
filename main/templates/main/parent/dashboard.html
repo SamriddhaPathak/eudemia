@@ -11,29 +11,29 @@
     {{ block.super }}
     <h2>Hello, {{ fname.capitalize }}</h2>
     {% for child_data in children_data %}
-    <style>
-        .level-progress-bar-{{ forloop.counter }} {
-            height: 10px;
-            width: 100%;
-            margin-top: 1.25em;
-            background-color: var(--light-grey);
-            border-radius: 10px;
-            overflow: hidden;
-        }
+        <style>
+            .level-progress-bar-{{ forloop.counter }} {
+                height: 10px;
+                width: 100%;
+                margin-top: 1.25em;
+                background-color: var(--light-grey);
+                border-radius: 10px;
+                overflow: hidden;
+            }
 
-        .level-progress-bar-{{ forloop.counter }}::after {
-            display: block;
-            content: "";
-            height: 100%;
-            width: 0%;
-            border-radius: 10px;
-            background: var(--gradient-left);
-            /* background: var(--accent1); */
-        }
-        .level-progress-bar-{{ forloop.counter }}::after {
-            width: {{ child_data.xp_progress }}% !important;
-        }
-    </style>
+            .level-progress-bar-{{ forloop.counter }}::after {
+                display: block;
+                content: "";
+                height: 100%;
+                width: 0%;
+                border-radius: 10px;
+                background: var(--gradient-left);
+                /* background: var(--accent1); */
+            }
+            .level-progress-bar-{{ forloop.counter }}::after {
+                width: {{ child_data.xp_progress }}% !important;
+            }
+        </style>
         <h2 class="child-name">{{ child_data.user_data.user.first_name }}:</h2>
         <div class="dashboard-content">
             <div class="progress-dashboard">

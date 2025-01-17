@@ -284,6 +284,7 @@ label img {
     border: 1px solid var(--light-grey);
     border-radius: 8px;
     text-decoration: none;
+    background-color: #fff;
 }
 
 .challenge:hover {
@@ -298,13 +299,20 @@ label img {
 .challenge h4 {
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
     font-size: 1rem;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.challenge-type {
+    display: inline-block;
+    padding: 0.25em 1em;
+    border-radius: 100px;
+    margin-top: 1em;
+    background-color: var(--light-grey);
 }
 
 .challenge-progress {
     height: 10px;
     width: 100%;
-    margin: 1.25em 0;
     background-color: var(--light-grey);
     border-radius: 10px;
     overflow: hidden;
