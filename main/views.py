@@ -103,19 +103,11 @@ def get_context(request, category):
             context["bmi"] = user_data.weight / (user_data.height * 0.308 * user_data.height * 0.308)
             context["weight_health"] = get_health_from_bmi(context["bmi"])
             return context
-        if category == "quizzes":
-            context["quiz_list"] = get_quiz(user_data.grade)
+        # if category == "quizzes":
+        #     context["quiz_list"] = get_quiz(user_data.grade)
         if category == "challenges":
             context["challenges"] = get_challenges(user_data.grade)
-            context["completed_challenges"] = []
-            context["challenges_count"] = []
-            context["completed_challenges_percentage"] = []
-            for challenge in context["challenges"]:
-                completed_challenges = request.user.student.completed_challenge_questions.filter(challenge=challenge).count()
-                challenges_count = challenge.question_set.count()
-                context["completed_challenges"].append(completed_challenges)
-                context["challenges_count"].append(challenges_count)
-                context["completed_challenges_percentage"].append(int(completed_challenges / challenges_count) * 100)
+            context["progress_list"] = ChallengeTracker.objects.filter(student=request.user.student)
     elif user_type == "parent":
         user_data = request.user.parent.students.all()
         children_data = []

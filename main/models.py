@@ -45,6 +45,20 @@ class ChallengeTracker(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     current_question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    completed_questions = models.ManyToManyField(Question, blank=True, related_name="completed_by")
+
+    def progress_percentage(self):
+        completed = self.completed_questions.count()
+        total = self.challenge.question_set.count()
+        if total == 0:
+            return 0
+        return (completed / total) * 100
+    
+    def is_complete(self):
+        return self.completed_questions.count() == self.challenge.question_set.count()
+
+    def __str__(self):
+        return f"{self.student.user.username} - {self.challenge.name}"
 
 class Quiz(models.Model):
     name = models.CharField(max_length=50)

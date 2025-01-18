@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from main.models import Challenge, Question, Class
+from main.models import Challenge, Question, Class, ChallengeTracker
 
 class Command(BaseCommand):
     help = 'Assign questions to existing challenges (daily and weekly) for grades 4 to 8'
@@ -47,5 +47,16 @@ class Command(BaseCommand):
                         f"Assigned {questions.count()} questions to weekly challenge: {challenge.name} (Grade {grade.grade})."
                     )
                 )
+        # Iterate over all challenges
+        for challenge in Challenge.objects.all():
+            # Iterate over all students in the grade of the challenge
+            for student in challenge.grade.student_set.all():
+                # Check if a record already exists to avoid duplicates
+                if not ChallengeTracker.objects.filter(student=student, challenge=challenge).exists():
+                    ChallengeTracker.objects.create(student=student, challenge=challenge, current_question=challenge.question_set.all()[0])
+                    print(f"Created ChallengeTracker for {challenge.name} and {student.user.username}.")
+                else:
+                    print(f"ChallengeTracker already exists for {challenge.name} and {student.user.username}.")
+
 
         self.stdout.write(self.style.SUCCESS("Challenges updated successfully!"))

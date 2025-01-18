@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent
-from .models import Attendence, QuizQuestion, Question, Challenge, Subject, Quote
+from .models import Attendence, QuizQuestion, Question, Challenge, Subject, Quote, Quiz
 from math import floor
 
 import random
@@ -65,16 +65,12 @@ def get_health_from_bmi(bmi):
     else:
         return "Obese"
 
-def get_quiz(grade):
-    quiz_num_list = [5, 10, 15]
-    quiz_all = list(QuizQuestion.objects.filter(grade=grade))
-    quiz_dict = {}
-    counter = 0
-    for i in range(3):
-        quiz_dict["quiz" + str(i+1)] = quiz_all[counter:counter + quiz_num_list[i]]
-        counter += quiz_num_list[i]
-    
-    return quiz_dict
+# def get_quiz(grade):
+#     quizzes = list(Quiz.objects.all())
+#     for quiz in quizzes:
+#         if not quiz.quizquestion_set.filter(grade=grade).exists():
+#             quizzes.remove(quiz)
+#     return quizzes
 
 def get_challenges(grade):
     challenge_list = Challenge.objects.filter(grade=grade)
