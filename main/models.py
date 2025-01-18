@@ -103,7 +103,7 @@ class QuizQuestion(models.Model):
 
     def __str__(self):
         return f"Question for grade {self.grade}"
-
+  
 class Attendence(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     days_attended = models.PositiveIntegerField(default=0)
