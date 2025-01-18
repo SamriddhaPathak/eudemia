@@ -40,7 +40,7 @@
                     }
                 </style>
                 {% comment %} <a class="challenge" href="{% url "challenge" challenge.id current_question_id %}"> {% endcomment %}
-                <a class="challenge" href="">
+                <a class="challenge" href="{% url "challenge" challenge_tracker.challenge.id %}">
                     <h4>{{ challenge_tracker.challenge.name }}</h4>
                     <p>Solve {{ challenge_tracker.challenge.question_set.count }} {{ challenge_tracker.challenge.subject.name }} problems</p>
                     <div class="challenge-progress-{{ forloop.counter }}"></div>

@@ -5,12 +5,12 @@
     {{ block.super }}
     {% for child_data in children_data %}
         <h2 class="child-name">{{ child_data.user_data.user.first_name }}:</h2>
-        {% for challenge in child_data.challenges %}
+        {% for challenge_tracker in child_data.progress_list %}
             <style>
                 .challenge-progress-{{ forloop.counter }} {
                     height: 10px;
                     width: 100%;
-                    margin: 1.25em 0;
+                    margin: 0.75em 0;
                     background: var(--light-grey);
                     border-radius: 10px;
                     overflow: hidden;
@@ -20,18 +20,18 @@
                     display: block;
                     content: "";
                     height: 100%;
-                    width: {{ child_data.completed_challenges_percentage|index:forloop.counter0 }}%;
+                    width: {{ challenge_tracker.progress_percentage }}%;
                     border-radius: 10px;
                     background: var(--gradient-right);
                 }
             </style>
             {% comment %} <a class="challenge" href="{% url "challenge" challenge.id current_question_id %}"> {% endcomment %}
             <a class="challenge">
-                <h4>{{ challenge.name }}</h4>
-                <p>Solve {{ child_data.challenges_count|index:forloop.counter0 }} {{ challenge.subject.name }} problems</p>
+                <h4>{{ challenge_tracker.challenge.name }}</h4>
+                <p>Solve {{ challenge_tracker.challenge.question_set.count }} {{ challenge_tracker.challenge.subject.name }} problems</p>
                 <div class="challenge-progress-{{ forloop.counter }}"></div>
-                <p class="challenge-completed">{{ child_data.completed_challenges|index:forloop.counter0 }}/{{ child_data.challenges_count|index:forloop.counter0 }} completed</p>
-                <div class="challenge-type">{{ challenge.challenge_type.capitalize }}</div>
+                <p class="challenge-completed">{{ challenge_tracker.completed_questions.count }}/{{ challenge_tracker.challenge.question_set.count }} completed</p>
+                <div class="challenge-type">{{ challenge_tracker.challenge.challenge_type.capitalize }}</div>
             </a>
         {% endfor %}
     {% endfor %}

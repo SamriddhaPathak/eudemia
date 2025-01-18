@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -38,7 +38,26 @@ def dashboard_view(request, category=None):
 
 @login_required
 def challenge_view(request, id):
-    question_list = get_challenge_questions(id)
+    student = request.user.student
+    progress = get_object_or_404(ChallengeTracker, student=student, challenge_id=id)
+
+    # Get uncompleted questions
+    all_questions = progress.challenge.question_set.all()
+    completed_questions = progress.completed_questions.all()
+    uncompleted_questions = all_questions.difference(completed_questions)
+
+    if uncompleted_questions.exists():
+        next_question = uncompleted_questions.first()
+        return redirect("challenge_question", id=next_question.id)
+    else:
+        return HttpResponse("Challenge Complete!")
+        # return render(request, "main/challenge_complete.html", {"challenge": progress.challenge})
+
+@login_required
+def challenge_question_view(request, id):
+    question = get_object_or_404(Question, id=id)
+    student = request.user.student
+    progress = ChallengeTracker.objects.filter(student=student, challenge=question.challenge).first()
 
     usertype = "student"
     context = {
@@ -49,13 +68,14 @@ def challenge_view(request, id):
         "selected": "challenges", # the currently selected category
         "profile_pic": request.user.userprofile.profile_pic.url,
 
-        "challenge_list": get_challenge_questions(id),
-        "question_id": question_id,
+        "question": question,
     }
-    return render(request, "main/student/challenge.html", context)
 
-def challenge_question_view(request, id):
-    return HttpResponseRedirect("TODO")
+    if request.method == "POST":
+        progress.completed_questions.add(question)
+        progress.save()
+        return redirect("challenge", id=progress.challenge.id)
+    return render(request, "main/student/challenge.html", context)
 
 def error_view(request):
     context = {
@@ -142,12 +162,7 @@ def get_context(request, category):
                 child_data["completed_challenges"] = []
                 child_data["challenges_count"] = []
                 child_data["completed_challenges_percentage"] = []
-                for challenge in child_data["challenges"]:
-                    completed_challenges = student.completed_challenge_questions.filter(challenge=challenge).count()
-                    challenges_count = challenge.question_set.count()
-                    child_data["completed_challenges"].append(completed_challenges)
-                    child_data["challenges_count"].append(challenges_count)
-                    child_data["completed_challenges_percentage"].append(int(completed_challenges / challenges_count) * 100)
+                child_data["progress_list"] = ChallengeTracker.objects.filter(student=student)
                 children_data.append(child_data)
             context = {
                 "children_data": children_data,

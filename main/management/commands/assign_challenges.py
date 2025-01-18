@@ -53,7 +53,7 @@ class Command(BaseCommand):
             for student in challenge.grade.student_set.all():
                 # Check if a record already exists to avoid duplicates
                 if not ChallengeTracker.objects.filter(student=student, challenge=challenge).exists():
-                    ChallengeTracker.objects.create(student=student, challenge=challenge, current_question=challenge.question_set.all()[0])
+                    ChallengeTracker.objects.create(student=student, challenge=challenge)
                     print(f"Created ChallengeTracker for {challenge.name} and {student.user.username}.")
                 else:
                     print(f"ChallengeTracker already exists for {challenge.name} and {student.user.username}.")
