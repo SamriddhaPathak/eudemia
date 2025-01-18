@@ -40,6 +40,7 @@ def dashboard_view(request, category=None):
 def challenge_view(request, id):
     student = request.user.student
     progress = get_object_or_404(ChallengeTracker, student=student, challenge_id=id)
+    usertype = "student"
 
     # Get uncompleted questions
     all_questions = progress.challenge.question_set.all()
@@ -52,9 +53,18 @@ def challenge_view(request, id):
         next_question = uncompleted_questions.first()
         return redirect("challenge_question", id=next_question.id)
     else:
+        context = {
+            "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
+
+            "user": request.user,
+            "usertype": usertype,
+            "selected": "challenges", # the currently selected category
+            "profile_pic": request.user.userprofile.profile_pic.url,
+            "quote": get_random_quote(),
+            "challenge_tracker": progress,
+        }
         progress.grant_rewards()
-        return HttpResponse("Challenge Complete!")
-        # return render(request, "main/challenge_complete.html", {"challenge": progress.challenge})
+        return render(request, "main/student/challenge_complete.html", context)
 
 @login_required
 def challenge_question_view(request, id):
