@@ -5,6 +5,7 @@ from .models import Question
 from .models import Attendence
 from .models import Quiz
 from .models import Quote
+from .models import ChallengeTracker
 from django.contrib import admin
 
 admin.site.register(Challenge)
@@ -14,3 +15,4 @@ admin.site.register(QuizQuestion)
 admin.site.register(Subject)
 admin.site.register(Attendence)
 admin.site.register(Quote)
+admin.site.register(ChallengeTracker)

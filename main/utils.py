@@ -34,8 +34,7 @@ def get_user_data_all(*args):
     return user_profiles
 
 def get_leaderboard():
-    leaderboard = Student.objects.select_related("user").values("user_id", "user__first_name", "user__last_name", "points", "level", "xp")
-    leaderboard = sorted(leaderboard, key=lambda x: x["level"]+x["xp"], reverse=True)
+    leaderboard = Student.objects.select_related("user").values("user_id", "user__first_name", "user__last_name", "points", "level", "xp").order_by("-level", "-xp")
     return leaderboard
 
 # returns the usertype of the user as a string
@@ -81,19 +80,6 @@ def get_challenge_questions(challenge_id):
     question_list = Question.objects.filter(challenge=challenge)
     return question_list
 
-def grant_xp(student_id, xp):
-    student = Student.objects.get(id=student_id)
-    required_xp = next_level(student.level)
-    student.xp += xp
-    if student.xp >= required_xp:
-        student.level += 1
-        student.xp = 0
-    student.save()
-
-def grant_points(student_id, points):
-    student = Student.objects.get(id=student_id)
-    student.points += points
-    student.save()
 
 def get_random_quote():
     quotes = Quote.objects.all()

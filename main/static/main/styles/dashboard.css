@@ -244,7 +244,7 @@ label img {
 
 .challenges-dashboard {
     grid-column: span 4;
-    grid-row: span 2;
+    grid-row: span 3;
 }
 
 .quotes-dashboard {
@@ -319,6 +319,14 @@ label img {
     overflow: hidden;
 }
 
+.correct-incorrect {
+    display: inline-block;
+    background-color: var(--light-blue);
+    padding: 0.5em 1em;
+    margin: 0.5em 0;
+    border-radius: 5px;
+}
+
 .challenge-progress::after {
     display: block;
     content: "";
@@ -357,7 +365,6 @@ label img {
     border: 1px solid var(--light-grey);
     padding: 1em 2em;
     border-radius: 8px;
-    margin-bottom: 1em;
 }
 
 .question-submit-button {
@@ -367,6 +374,7 @@ label img {
     background-color: var(--accent1);
     color: #fff;
     cursor: pointer;
+    margin-top: 1em;
 }
 
 /***** HEALTH *****/

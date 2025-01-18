@@ -14,10 +14,9 @@
 
 {% block content %}
     {{ block.super }}
-    <h2>Hello, {{ fname.capitalize }}</h2>
+    <h2>Hello, {{ user.first_name.capitalize }}</h2>
     <div class="dashboard-content">
         <div class="progress-dashboard">
-            {% comment %} <h3>Level</h3> {% endcomment %}
             <h2>Level {{ user_data.level }}</h2>
             <div class="level-progress-bar"></div>
             <p>{{ user_data.xp }} / {{ required_xp }} xp</p>
@@ -32,7 +31,7 @@
         </div>
         <div class="challenges-dashboard">
             <h3>Ongoing Challenges</h3>
-            {% for challenge in challenges %}
+            {% for challenge_tracker in progress_list %}
                 <style>
                     .challenge-progress-{{ forloop.counter }} {
                         height: 10px;
@@ -47,16 +46,16 @@
                         display: block;
                         content: "";
                         height: 100%;
-                        width: {{ completed_challenges_percentage|index:forloop.counter0 }}%;
+                        width: {{ challenge_tracker.progress_percentage }}%;
                         border-radius: 10px;
                         background: var(--gradient-right);
                     }
                 </style>
                 {% comment %} <a class="challenge" href="{% url "challenge" challenge.id current_question_id %}"> {% endcomment %}
                 <a class="challenge" href="{% url "dashboard_category" "challenges" %}">
-                    <h4>{{ challenge.name }}</h4>
+                    <h4>{{ challenge_tracker.challenge.name }}</h4>
                     <div class="challenge-progress-{{ forloop.counter }}"></div>
-                    <p class="challenge-completed">{{ completed_challenges|index:forloop.counter0 }}/{{ challenges_count|index:forloop.counter0 }} completed</p>
+                    <p class="challenge-completed">{{ challenge_tracker.completed_questions.count }}/{{ challenge_tracker.challenge.question_set.count }} completed</p>
                 </a>
             {% endfor %}
         </div>

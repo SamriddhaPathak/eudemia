@@ -1,6 +1,8 @@
 from django.db import models
 from users.models import Student, Class
 from django.contrib.auth.models import User
+from math import floor
+from django.utils.timezone import now
 
 quiz_choices = (
     (1, 1),
@@ -45,17 +47,34 @@ class ChallengeTracker(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     current_question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    completed_questions = models.ManyToManyField(Question, blank=True, related_name="completed_by")
+    correct_questions = models.ManyToManyField(Question, blank=True, related_name="completed_by_correct")
+    incorrect_questions = models.ManyToManyField(Question, blank=True, related_name="completed_by_incorrect")
+    answer = models.CharField(max_length=50, blank=True, null=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
 
     def progress_percentage(self):
-        completed = self.completed_questions.count()
+        completed = self.correct_questions.count() + self.incorrect_questions.count()
         total = self.challenge.question_set.count()
         if total == 0:
             return 0
         return (completed / total) * 100
     
+    def completed_questions(self):
+        completed_list = self.correct_questions.all().union(self.incorrect_questions.all())
+        return completed_list
+    
     def is_complete(self):
-        return self.completed_questions.count() == self.challenge.question_set.count()
+        return self.completed_questions().count() == self.challenge.question_set.count()
+    
+    def grant_rewards(self):
+        if self.is_complete() and not self.completed_at:
+            points = 50 if self.challenge.challenge_type == "weekly" else 25
+            xp = self.completed_questions().count() * ( 5 if self.challenge.challenge_type == "daily" else 10) # 5 XP per question
+            grant_points(self.student.id, points)
+            grant_xp(self.student.id, xp)
+
+            self.completed_at = now()
+            self.save()
 
     def __str__(self):
         return f"{self.student.user.username} - {self.challenge.name}"
@@ -99,3 +118,22 @@ class Quote(models.Model):
 
     def __str__(self):
         return f"Quote by {self.by}"
+
+def next_level(level):
+    base_xp = 20
+    exponent = 1.5
+    return floor(base_xp * (level ** exponent))
+
+def grant_xp(student_id, xp):
+    student = Student.objects.get(id=student_id)
+    required_xp = next_level(student.level)
+    student.xp += xp
+    if student.xp >= required_xp:
+        student.level += 1
+        student.xp -= required_xp
+    student.save()
+
+def grant_points(student_id, points):
+    student = Student.objects.get(id=student_id)
+    student.points += points
+    student.save()

@@ -43,6 +43,12 @@
                 <a class="challenge" href="{% url "challenge" challenge_tracker.challenge.id %}">
                     <h4>{{ challenge_tracker.challenge.name }}</h4>
                     <p>Solve {{ challenge_tracker.challenge.question_set.count }} {{ challenge_tracker.challenge.subject.name }} problems</p>
+                    {% if challenge_tracker.completed_questions.count %}
+                        <div class="correct-incorrect">
+                            <p>Correct: {{ challenge_tracker.correct_questions.count }}</p>
+                            <p>Incorrect: {{ challenge_tracker.incorrect_questions.count }}</p>
+                        </div>
+                    {% endif %}
                     <div class="challenge-progress-{{ forloop.counter }}"></div>
                     <p class="challenge-completed">{{ challenge_tracker.completed_questions.count }}/{{ challenge_tracker.challenge.question_set.count }} completed</p>
                     <div class="challenge-type">{{ challenge_tracker.challenge.challenge_type.capitalize }}</div>

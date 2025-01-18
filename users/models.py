@@ -60,6 +60,6 @@ class Parent(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = models.ImageField(upload_to = "profile_pictures/", blank = False, null = False, default = "media/profile_pictures/profile.png")
+    profile_pic = models.ImageField(upload_to = "profile_pictures/", blank = False, null = False, default = "profile_pictures/profile.png")
     def __str__(self):
         return f"User_Profile of {self.user.first_name}_{self.user.last_name}"

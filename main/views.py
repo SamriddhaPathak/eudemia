@@ -43,13 +43,16 @@ def challenge_view(request, id):
 
     # Get uncompleted questions
     all_questions = progress.challenge.question_set.all()
-    completed_questions = progress.completed_questions.all()
+    correct_questions = progress.correct_questions.all()
+    incorrect_questions = progress.incorrect_questions.all()
+    completed_questions = progress.completed_questions()
     uncompleted_questions = all_questions.difference(completed_questions)
 
     if uncompleted_questions.exists():
         next_question = uncompleted_questions.first()
         return redirect("challenge_question", id=next_question.id)
     else:
+        progress.grant_rewards()
         return HttpResponse("Challenge Complete!")
         # return render(request, "main/challenge_complete.html", {"challenge": progress.challenge})
 
@@ -72,7 +75,12 @@ def challenge_question_view(request, id):
     }
 
     if request.method == "POST":
-        progress.completed_questions.add(question)
+        answer = request.POST.get("answer")
+        progress.answer = answer
+        if answer == question.answer:
+            progress.correct_questions.add(question)
+        else:
+            progress.incorrect_questions.add(question)
         progress.save()
         return redirect("challenge", id=progress.challenge.id)
     return render(request, "main/student/challenge.html", context)
@@ -112,6 +120,7 @@ def get_context(request, category):
             context["completed_challenges"] = []
             context["challenges_count"] = []
             context["completed_challenges_percentage"] = []
+            context["progress_list"] = ChallengeTracker.objects.filter(student=request.user.student)
             for challenge in context["challenges"]:
                 completed_challenges = request.user.student.completed_challenge_questions.filter(challenge=challenge).count()
                 challenges_count = challenge.question_set.count()

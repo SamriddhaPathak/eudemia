@@ -6,30 +6,26 @@
     {% for child_data in children_data %}
         <h2 class="child-name">{{ child_data.user_data.user.first_name }}:</h2>
         {% for challenge_tracker in child_data.progress_list %}
-            <style>
-                .challenge-progress-{{ forloop.counter }} {
+            {% comment %} <a class="challenge" href="{% url "challenge" challenge.id current_question_id %}"> {% endcomment %}
+            <a class="challenge">
+                <h4>{{ challenge_tracker.challenge.name }}</h4>
+                <p>Solve {{ challenge_tracker.challenge.question_set.count }} {{ challenge_tracker.challenge.subject.name }} problems</p>
+                <div class="challenge-progress-{{ forloop.counter }}" style="
                     height: 10px;
                     width: 100%;
                     margin: 0.75em 0;
                     background: var(--light-grey);
                     border-radius: 10px;
                     overflow: hidden;
-                }
-
-                .challenge-progress-{{ forloop.counter }}::after {
-                    display: block;
-                    content: "";
-                    height: 100%;
-                    width: {{ challenge_tracker.progress_percentage }}%;
-                    border-radius: 10px;
-                    background: var(--gradient-right);
-                }
-            </style>
-            {% comment %} <a class="challenge" href="{% url "challenge" challenge.id current_question_id %}"> {% endcomment %}
-            <a class="challenge">
-                <h4>{{ challenge_tracker.challenge.name }}</h4>
-                <p>Solve {{ challenge_tracker.challenge.question_set.count }} {{ challenge_tracker.challenge.subject.name }} problems</p>
-                <div class="challenge-progress-{{ forloop.counter }}"></div>
+                ">
+                    <div class="challenge-progress-bar" style="
+                        display: block;
+                        height: 100%;
+                        width: {{ challenge_tracker.progress_percentage }}%;
+                        border-radius: 10px;
+                        background: var(--gradient-right);
+                    "></div>
+                </div>
                 <p class="challenge-completed">{{ challenge_tracker.completed_questions.count }}/{{ challenge_tracker.challenge.question_set.count }} completed</p>
                 <div class="challenge-type">{{ challenge_tracker.challenge.challenge_type.capitalize }}</div>
             </a>
