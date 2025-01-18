@@ -1,6 +1,97 @@
 {% extends "main/dashboard_base.html" %}
+{% load static %}
+
+{% block links %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "main/styles/leaderboard.css" %}">
+    <link rel="stylesheet" href="{% static "main/styles/dashboard_parent.css" %}">
+{% endblock links %}
 
 {% block content %}
     {{ block.super }}
     <h2>Hello, {{ user.first_name.capitalize }}</h2>
+    <p>{{ student.grade }}</p>
+    {% for student_data in students_data %}
+        <h2 class="child-name">{{ student_data.user_data.user.first_name }} {{ student_data.user_data.user.last_name }}</h2>
+        <div class="dashboard-content">
+            <div class="progress-dashboard">
+                <h2>Level {{ student_data.user_data.level }}</h2>
+            </div>
+            <div class="points-dashboard">
+                <h3>Points</h3>
+                <h2>{{ student_data.user_data.points }}</h2>
+            </div>
+            <div class="attendance-dashboard">
+                <h3>Attendance</h3>
+                <h2>{{ student_data.attendance.days_attended }} / {{ student_data.attendance.days_passed }}</h2>
+            </div>
+            <div class="challenges-dashboard">
+                <h3>Ongoing Challenges</h3>
+                {% for challenge_tracker in student_data.progress_list %}
+                    <style>
+                        .challenge-progress-{{ forloop.counter }} {
+                            height: 10px;
+                            width: 100%;
+                            margin: 1.25em 0;
+                            background: var(--light-grey);
+                            border-radius: 10px;
+                            overflow: hidden;
+                        }
+
+                        .challenge-progress-{{ forloop.counter }}::after {
+                            display: block;
+                            content: "";
+                            height: 100%;
+                            width: {{ challenge_tracker.progress_percentage }}%;
+                            border-radius: 10px;
+                            background: var(--gradient-right);
+                        }
+                    </style>
+                    {% comment %} <a class="challenge" href="{% url "challenge" challenge.id current_question_id %}"> {% endcomment %}
+                    <a class="challenge">
+                        <h4>{{ challenge_tracker.challenge.name }}</h4>
+                        <div class="challenge-progress-{{ forloop.counter }}" style="
+                            height: 10px;
+                            width: 100%;
+                            margin: 0.75em 0;
+                            background: var(--light-grey);
+                            border-radius: 10px;
+                            overflow: hidden;
+                        ">
+                            <div class="challenge-progress-bar" style="
+                                display: block;
+                                height: 100%;
+                                width: {{ challenge_tracker.progress_percentage }}%;
+                                border-radius: 10px;
+                                background: var(--gradient-right);
+                            "></div>
+                        </div>
+                        <p class="challenge-completed">{{ challenge_tracker.completed_questions.count }}/{{ challenge_tracker.challenge.question_set.count }} completed</p>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="health-dashboard">
+                <h3>Health</h3>
+                <p>Height: {{ student_data.user_data.height }} ft</p>
+                <p>Weight: {{ student_data.user_data.weight }} kg</p>
+                <p>BMI: {{ student_data.user_data.bmi|floatformat:2 }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="leaderboard-dashboard">
+        <h3>Top 3 right now</h3>
+        <div class="leaderboard-container">
+            {% for entry in leaderboard|slice:3 %}
+                {% if entry.user_id == user_id %}
+                    <div class="leaderboard-entry gradient-border">
+                {% else %}
+                    <div class="leaderboard-entry">
+                {% endif %}
+                        <div class="rank">{{ forloop.counter }}</div>
+                        <div class="name">{{ entry.user__first_name }} {{ entry.user__last_name }} {% if entry.user_id == user_id %} - You{% endif %}</div>
+                        <div class="points">Level {{ entry.level }}</div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}

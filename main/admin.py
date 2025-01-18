@@ -16,7 +16,4 @@ admin.site.register(QuizQuestion)
 admin.site.register(Subject)
 admin.site.register(Attendence)
 admin.site.register(Quote)
-<<<<<<< HEAD
 admin.site.register(ChallengeTracker)
-=======
->>>>>>> 0e18fc2270c0e11ce39e817f9a0bdf7e98d8b42d

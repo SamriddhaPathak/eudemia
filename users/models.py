@@ -36,6 +36,10 @@ class Student(models.Model):
     completed_quiz_questions = models.ManyToManyField("main.QuizQuestion", blank=True, related_name="completed_quiz_questions")
     correct_quiz_questions = models.ManyToManyField("main.QuizQuestion", blank=True, related_name="correct_quiz_questions")
 
+    def bmi(self):
+        return self.weight / ((self.height * 0.308) ** 2)
+    
+
     def __str__(self):
         # Use the related User's first and last name
         return f"{self.user.first_name}_{self.user.last_name}"

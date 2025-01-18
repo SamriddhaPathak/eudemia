@@ -186,12 +186,23 @@ def get_context(request, category):
             context = {
                 "children_data": children_data,
             }
-
-    if category == "leaderboard":
-        return {
-            "leaderboard": leaderboard,
+    elif user_type == "teacher":
+        user_data = request.user.teacher.grade.student_set.all()
+        students_data = []
+        for student in user_data:
+            student_data = {}
+            student_data["user_data"] = student
+            student_data["weight_health"] = get_health_from_bmi(student.bmi())
+            student_data["attendance"] = Attendence.objects.get(student_id=student.id)
+            student_data["required_xp"] = next_level(student.level)
+            student_data["xp_progress"] = (int(student.xp) / student_data["required_xp"]) * 100;
+            student_data["progress_list"] = ChallengeTracker.objects.filter(student=student)
+            students_data.append(student_data)
+        context = {
+            "students_data": students_data,
         }
 
+    if category == "leaderboard" or "dashboard":
+        context["leaderboard"] = leaderboard
 
-    # Default: return empty context
     return context
