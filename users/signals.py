@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, Student
 from main.models import ChallengeTracker, Challenge
 
 @receiver(post_save, sender=User)
@@ -21,4 +21,14 @@ def create_challenge_trackers(sender, instance, created, **kwargs):
             ChallengeTracker.objects.create(
                 student=student,
                 challenge=instance,
+            )
+
+@receiver(post_save, sender=Student)
+def create_challenge_trackers(sender, instance, created, **kwargs):
+    if created:  # Check if this is a new challenge
+        challenges = Challenge.objects.filter(grade=instance.grade)
+        for challenge in challenges:
+            ChallengeTracker.objects.create(
+                student=instance,
+                challenge=challenge,
             )
