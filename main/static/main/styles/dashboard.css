@@ -234,7 +234,7 @@ label img {
     height: 100%;
     width: 0%;
     border-radius: 10px;
-    background: var(--gradient-left);
+    background: var(--gradient-right);
     /* background: var(--accent1); */
 }
 
@@ -480,6 +480,7 @@ label img {
 
 .edit-button {
     display: inline-block !important;
+    grid-column: 1 / 2;
     margin: 20px;
     padding: 0.5em 1em !important;
     width: auto;
