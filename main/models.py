@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import Student, Class
+from users.models import Student, Class, Teacher
 from django.contrib.auth.models import User
 from math import floor
 from django.utils.timezone import now
@@ -27,6 +27,7 @@ class Challenge(models.Model):
     grade = models.ForeignKey(Class, default=4, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     challenge_type = models.CharField(max_length=50, choices=challenge_type_choices)
+    created_by = models.ForeignKey(Teacher, blank=True, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"Challenge for {self.grade}: {self.name}"
@@ -35,8 +36,8 @@ class Question(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     question = models.TextField(max_length=200)
     answer = models.CharField(max_length=50)
-    unit = models.CharField(max_length=50)
-    question_type = models.CharField(max_length=50, choices=challenge_type_choices, default="daily")
+    unit = models.CharField(max_length=50, blank=True)
+    question_type = models.CharField(max_length=50, blank=True, null=True, choices=challenge_type_choices, default="daily")
     grade = models.ForeignKey(Class, default=4, on_delete=models.CASCADE)
     challenge = models.ForeignKey(Challenge, blank=True, null=True, on_delete=models.CASCADE)
 
@@ -46,7 +47,7 @@ class Question(models.Model):
 class ChallengeTracker(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
-    current_question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    current_question = models.ForeignKey(Question, blank=True, null=True, on_delete=models.CASCADE)
     correct_questions = models.ManyToManyField(Question, blank=True, related_name="completed_by_correct")
     incorrect_questions = models.ManyToManyField(Question, blank=True, related_name="completed_by_incorrect")
     answer = models.CharField(max_length=50, blank=True, null=True)

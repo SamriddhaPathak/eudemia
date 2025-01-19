@@ -421,14 +421,14 @@ label img {
     flex-direction: column;
 }
 
-.health-edit-form .form-control {
+.edit-form .form-control {
     border: 1px solid var(--light-grey);
     padding: 0.5em 1em;
     border-radius: 5px;
     margin: 0.5em 0;
 }
 
-.health-edit-form .save-button {
+.edit-form .save-button {
     padding: 0.5em 1em;
     border: none;
     border-radius: 100px;

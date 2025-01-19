@@ -9,7 +9,7 @@ from .models import Attendence, Quiz, Challenge, QuizTracker, ChallengeTracker, 
 from .config import SIDEBAR_ITEMS
 from .utils import *
 from .decorators import teacher_only
-from .forms import HealthEditForm
+from .forms import HealthEditForm, ChallengeCreateForm, ChallengeQuestionCreateForm
 
 # Create your views here.
 def index(request):
@@ -124,6 +124,70 @@ def health_edit_view(request, id):
     }
     return render(request, "main/teacher/health_edit.html", context)
 
+@login_required
+@teacher_only
+def challenge_create_view(request):
+    usertype = "teacher"
+
+    if request.method == "POST":
+        form = ChallengeCreateForm(request.POST)
+        if form.is_valid():
+            challenge = form.save(commit=False)
+            challenge.created_by = request.user.teacher
+            challenge.grade = request.user.teacher.grade
+            challenge.save()
+            messages.success(request, "Challenge created successfully")
+            return redirect("challenge_question_create", challenge_id=challenge.id)
+    else:
+        form = ChallengeCreateForm()
+
+    context = {
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
+
+        "user": request.user,
+        "usertype": usertype,
+        "selected": "challenges", # the currently selected category
+        "profile_pic": request.user.userprofile.profile_pic.url,
+        "form": form,
+    }
+    return render(request, "main/teacher/create_challenge.html", context)
+
+@login_required
+@teacher_only
+def challenge_question_create_view(request, challenge_id):
+    usertype = "teacher"
+    challenge = get_object_or_404(Challenge, id=challenge_id)
+
+    if request.method == "POST":
+        form = ChallengeQuestionCreateForm(request.POST)
+        if form.is_valid():
+            action = request.POST.get("action")
+            question = form.save(commit=False)
+            question.challenge = challenge
+            question.question_type = challenge.challenge_type
+            question.grade = challenge.grade
+            question.subject = challenge.subject
+            question.save()
+            messages.success(request, "Question created")
+            if action == "create":
+                return redirect("challenge_question_create", challenge_id)
+            else:
+                return redirect("dashboard_category", "challenges")
+    else:
+        form = ChallengeQuestionCreateForm()
+
+    context = {
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
+
+        "user": request.user,
+        "usertype": usertype,
+        "selected": "challenges", # the currently selected category
+        "profile_pic": request.user.userprofile.profile_pic.url,
+        "challenge_id": challenge.id,
+        "form": form,
+    }
+    return render(request, "main/teacher/create_question.html", context)
+
 def error_view(request):
     context = {
         "code": 404,
@@ -165,7 +229,7 @@ def get_context(request, category):
                 challenges_count = challenge.question_set.count()
                 context["completed_challenges"].append(completed_challenges)
                 context["challenges_count"].append(challenges_count)
-                context["completed_challenges_percentage"].append(int(completed_challenges / challenges_count) * 100)
+                context["completed_challenges_percentage"].append(ChallengeTracker.objects.get(challenge=challenge, student=request.user.student))
             return context
         if category == "health":
             context["bmi"] = user_data.weight / (user_data.height * 0.308 * user_data.height * 0.308)

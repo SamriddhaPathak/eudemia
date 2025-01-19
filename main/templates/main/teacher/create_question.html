@@ -1,0 +1,10 @@
+{% extends "main/dashboard_base.html" %}
+
+{% block content %}
+    <form action="" method="post" class="edit-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="save-button" type="submit" value="create" name="action">Save and Add Another</button>
+        <button class="save-button" type="submit" value="save" name="action">Done</button>
+    </form>
+{% endblock content %}

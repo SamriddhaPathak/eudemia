@@ -2,4 +2,20 @@
 
 {% block content %}
     {{ block.super }}
+    {% for challenge in user.teacher.grade.challenge_set.all %}
+    <div>
+        <a class="challenge">
+            <h4>{{ challenge.name }}</h4>
+            <p>Solve {{ challenge.question_set.count }} {{ challenge.subject.name }} problems</p>
+            {% if completed_questions.count %}
+                <div class="correct-incorrect">
+                    <p>Correct: {{ correct_questions.count }}</p>
+                    <p>Incorrect: {{ incorrect_questions.count }}</p>
+                </div>
+            {% endif %}
+            <div class="challenge-type">{{ challenge.challenge_type.capitalize }}</div>
+        </a>
+    </div>
+    {% endfor %}
+    <a href="{% url "challenge_create" %}" class="challenge create-challenge">Create Challenge</a>
 {% endblock content %}
