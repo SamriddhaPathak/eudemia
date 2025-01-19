@@ -11,6 +11,7 @@
     {{ block.super }}
     <h2>Hello, {{ user_data.first_name.capitalize }}</h2>
     {% for child_data in children_data %}
+    <div class="student-container">
         <style>
             .level-progress-bar-{{ forloop.counter }} {
                 height: 10px;
@@ -57,6 +58,7 @@
                 <p>BMI: {{ child_data.bmi|floatformat:2 }}</p>
             </div>
         </div>
+    </div>
     {% endfor %}
     <div class="leaderboard-dashboard">
         <h3>Top 3 right now</h3>

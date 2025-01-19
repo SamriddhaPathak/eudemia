@@ -1,5 +1,41 @@
 {% extends "main/dashboard_base.html" %}
+{% load static %}
+
+{% block links %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "main/styles/dashboard_parent.css" %}">
+{% endblock links %}
 
 {% block content %}
     {{ block.super }}
+    {% for child_data in students_data %}
+        <div class="student-container">
+            <h2 class="child-name">{{ child_data.user_data.user.first_name }}:</h2>
+            <div class="health-content">
+                <div class="height-health">
+                    <h3>Height</h3>
+                    <h2>{{ child_data.user_data.height }} ft</h2>
+                </div>
+                <div class="weight-health">
+                    <h3>Weight</h3>
+                    <h2>{{ child_data.user_data.weight }} kg</h2>
+                </div>
+                <div class="bmi-health">
+                    <div>
+                        <h3>BMI</h3>
+                        <h2>{{ child_data.user_data.bmi|floatformat:2 }}</h2>
+                        <p>{{ child_data.weight_health }}</p>
+                    </div>
+                    <div class="bmi-health-img">
+                        <img src="{% static "main/images/body.svg" %}" alt="">
+                    </div>
+                </div>
+                <div class="blood-group-health">
+                    <h3>Blood Group</h3>
+                    <h2>{{ child_data.user_data.blood_group }}</h2>
+                </div>
+            </div>
+            <a href="" class="button edit-button">Edit</a>
+        </div>
+    {% endfor %}
 {% endblock content %}

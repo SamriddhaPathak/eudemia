@@ -145,11 +145,11 @@ label img {
 
 /***** DEFAULTS *****/
 .content > .header {
-    font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
+    font-family: var(--font-bold);
 }
 
 .content > h1 {
-    font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
+    font-family: var(--font-bold);
     font-size: 1.75rem;
 }
 
@@ -167,12 +167,12 @@ label img {
 }
 
 .content > div > div h3 {
-    font-family: "Roboto";
+    font-family: var(--font);
     margin-bottom: 10px;
 }
 
 .content > div > div h2 {
-    font-family: 'Roboto-Bold', Arial, Helvetica, sans-serif;
+    font-family: var(--font-bold);
     font-size: 2.2rem;
 }
 
@@ -298,7 +298,7 @@ label img {
 }
 
 .challenge h4 {
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-family: var(--font);
     font-size: 1rem;
     margin-bottom: 20px;
 }
@@ -446,4 +446,10 @@ label img {
 
 .settings-container a:hover {
     background: var(--light-blue);
+}
+
+
+.edit-button {
+    display: block;
+    margin: 1em;
 }
