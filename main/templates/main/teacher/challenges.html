@@ -4,7 +4,7 @@
     {{ block.super }}
     {% for challenge in user.teacher.grade.challenge_set.all %}
     <div>
-        <a class="challenge">
+        <a class="challenge" href="{% url "challenge_question_create" challenge.id %}">
             <h4>{{ challenge.name }}</h4>
             <p>Solve {{ challenge.question_set.count }} {{ challenge.subject.name }} problems</p>
             {% if completed_questions.count %}

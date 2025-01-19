@@ -1,6 +1,7 @@
 {% extends "main/dashboard_base.html" %}
 
 {% block content %}
+    <h1>{{ challenge.name }}</h1>
     <form action="" method="post" class="edit-form">
         {% csrf_token %}
         {{ form.as_p }}

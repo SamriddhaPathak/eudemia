@@ -184,6 +184,7 @@ def challenge_question_create_view(request, challenge_id):
         "selected": "challenges", # the currently selected category
         "profile_pic": request.user.userprofile.profile_pic.url,
         "challenge_id": challenge.id,
+        "challenge": challenge,
         "form": form,
     }
     return render(request, "main/teacher/create_question.html", context)
