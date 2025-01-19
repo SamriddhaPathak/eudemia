@@ -409,6 +409,35 @@ label img {
     height: 150px;
 }
 
+/***** Health Editor *****/
+.content:has(.health-edit-form) {
+    height: 50dvh;
+}
+
+.content:has(.health-edit-form), .health-edit-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.health-edit-form .form-control {
+    border: 1px solid var(--light-grey);
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    margin: 0.5em 0;
+}
+
+.health-edit-form .save-button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 100px;
+    background-color: var(--accent1);
+    color: #fff;
+    cursor: pointer;
+    margin-top: 0.5em;
+}    
+
 /***** QUIZZES *****/
 .quizzes-content {
     display: grid;
@@ -450,6 +479,14 @@ label img {
 
 
 .edit-button {
-    display: block;
-    margin: 1em;
+    display: inline-block !important;
+    margin: 20px;
+    padding: 0.5em 1em !important;
+    width: auto;
+    background-color: var(--light-blue) !important;
+}
+
+.edit-button:hover {
+    background: var(--accent1) !important;
+    color: #fff !important;
 }

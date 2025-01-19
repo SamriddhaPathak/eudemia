@@ -7,5 +7,6 @@ urlpatterns = [
     path("<str:category>/", views.dashboard_view, name="dashboard_category"),
     path("challenges/<int:id>", views.challenge_view, name="challenge"),
     path("challenge-questions/<int:id>", views.challenge_question_view, name="challenge_question"),
+    path("health/<int:id>", views.health_edit_view, name="health-edit"),
     path("error", views.error_view, name="error"),
 ]

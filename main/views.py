@@ -8,6 +8,8 @@ from django.http import HttpResponse
 from .models import Attendence, Quiz, Challenge, QuizTracker, ChallengeTracker, Quote
 from .config import SIDEBAR_ITEMS
 from .utils import *
+from .decorators import teacher_only
+from .forms import HealthEditForm
 
 # Create your views here.
 def index(request):
@@ -94,6 +96,33 @@ def challenge_question_view(request, id):
         progress.save()
         return redirect("challenge", id=progress.challenge.id)
     return render(request, "main/student/challenge.html", context)
+
+@login_required
+@teacher_only
+def health_edit_view(request, id):
+    student = get_object_or_404(Student, id=id)
+    usertype = "teacher"
+
+    if request.method == "POST":
+        form = HealthEditForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Health details updated successfully")
+            return redirect("dashboard_category", category="health")
+    else:
+        form = HealthEditForm(instance=student)
+
+    context = {
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
+
+        "user": request.user,
+        "student": student,
+        "usertype": usertype,
+        "selected": "health", # the currently selected category
+        "profile_pic": request.user.userprofile.profile_pic.url,
+        "form": form,
+    }
+    return render(request, "main/teacher/health_edit.html", context)
 
 def error_view(request):
     context = {

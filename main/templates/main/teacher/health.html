@@ -35,7 +35,7 @@
                     <h2>{{ child_data.user_data.blood_group }}</h2>
                 </div>
             </div>
-            <a href="" class="button edit-button">Edit</a>
+            <a href="{% url "health-edit" child_data.user_data.id %}" class="button edit-button">Edit</a>
         </div>
     {% endfor %}
 {% endblock content %}
