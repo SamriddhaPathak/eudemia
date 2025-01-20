@@ -35,7 +35,7 @@
 {% block sidebar %}
     <nav class="sidebar">
         {% for item in sidebar_items %}
-            <a class="
+            <a class=" sidebar-{{ item.name }}
             {% if item.name == selected %}selected{% endif %}"
             href="
             {% url "dashboard_category" item.name %}">
