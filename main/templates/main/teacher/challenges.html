@@ -1,10 +1,11 @@
 {% extends "main/dashboard_base.html" %}
+{% load static %}
 
 {% block content %}
     {{ block.super }}
     {% for challenge in user.teacher.grade.challenge_set.all %}
     <div>
-        <a class="challenge" href="{% url "challenge_question_create" challenge.id %}">
+        <div class="challenge" href="{% url "challenge_question_create" challenge.id %}">
             <h4>{{ challenge.name }}</h4>
             <p>Solve {{ challenge.question_set.count }} {{ challenge.subject.name }} problems</p>
             {% if completed_questions.count %}
@@ -14,7 +15,11 @@
                 </div>
             {% endif %}
             <div class="challenge-type">{{ challenge.challenge_type.capitalize }}</div>
-        </a>
+            <div class="challenge-edit-buttons">
+                <a href="{% url "challenge_question_create" challenge.id %}" class="save-button">Add Questions</a>
+                <a class="save-button danger-button" href={% url "challenge_delete" challenge.id %}>Delete</a>
+            </div>
+        </div>
     </div>
     {% endfor %}
     <a href="{% url "challenge_create" %}" class="challenge create-challenge">Create Challenge</a>

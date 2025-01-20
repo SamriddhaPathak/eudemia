@@ -1,0 +1,10 @@
+{% extends "main/dashboard_base.html" %}
+
+{% block content %}
+    <h1>Do you want to delete the challenge: {{ challenge.name }}</h1>
+    <form class="challenge-delete-form" action="" method="post">
+        {% csrf_token %}
+        <input class="save-button danger-button" type="submit" value="Delete">
+        <a class="save-button" href="{% url "dashboard_category" "challenges" %}">Go Back</a>
+    </form>
+{% endblock content %}

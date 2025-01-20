@@ -397,6 +397,11 @@ label img {
     margin-top: 1em;
 }
 
+.challenge-edit-buttons {
+    margin-top: 1em !important;
+    text-align: right;
+}
+
 /***** HEALTH *****/
 .health-content {
     display: grid;
@@ -510,4 +515,39 @@ label img {
 .edit-button:hover {
     background: var(--accent1) !important;
     color: #fff !important;
+}
+
+.save-button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 100px;
+    background-color: var(--accent1);
+    color: #fff;
+    cursor: pointer;
+    margin-top: 0.5em;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.save-button:hover {
+    background-color: #fff !important;
+    color: var(--accent1);
+}
+
+.danger-button {
+    background-color: var(--red);
+}
+
+.danger-button:hover {
+    background-color: #fff !important;
+    color: var(--red);
+}
+
+.challenge-delete-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    height: 50dvh;
 }

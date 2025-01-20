@@ -154,6 +154,28 @@ def challenge_create_view(request):
 
 @login_required
 @teacher_only
+def challenge_delete_view(request, id):
+    usertype = "teacher"
+
+    challenge = get_object_or_404(Challenge, id=id)
+    if request.method == "POST":
+        challenge.delete()
+        messages.success(request, "Challenge deleted successfully")
+        return redirect("dashboard_category", category="challenges")
+
+    context = {
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
+
+        "user": request.user,
+        "usertype": usertype,
+        "selected": "challenges", # the currently selected category
+        "profile_pic": request.user.userprofile.profile_pic.url,
+        "challenge": challenge,
+    }
+    return render(request, "main/teacher/delete_challenge.html", context)
+
+@login_required
+@teacher_only
 def challenge_question_create_view(request, challenge_id):
     usertype = "teacher"
     challenge = get_object_or_404(Challenge, id=challenge_id)

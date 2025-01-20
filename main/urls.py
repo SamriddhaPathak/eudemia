@@ -10,5 +10,6 @@ urlpatterns = [
     path("health/<int:id>", views.health_edit_view, name="health-edit"),
     path("challenges/create/", views.challenge_create_view, name="challenge_create"),
     path("challenges/create/<int:challenge_id>/question", views.challenge_question_create_view, name="challenge_question_create"),
+    path("challenges/delete/<int:id>", views.challenge_delete_view, name="challenge_delete"),
     path("error", views.error_view, name="error"),
 ]
