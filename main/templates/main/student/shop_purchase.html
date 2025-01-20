@@ -1,0 +1,10 @@
+{% extends "main/dashboard_base.html" %}
+
+{% block content %}
+    <form class="shop-purchase-form" action="" method="post">
+        <h3>Do you want to buy {{ shop_item.name }}?</h3>
+        <img src="{{ shop_item.image.url }}" alt="">
+        {% csrf_token %}
+        <input class="save-button" type="submit" value="Buy">
+    </form>
+{% endblock content %}

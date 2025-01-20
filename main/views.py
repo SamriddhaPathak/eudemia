@@ -3,9 +3,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from users.models import Class, Teacher, Student, Parent
+from users.models import Class, Teacher, Student, Parent, UserProfile
 from django.http import HttpResponse
-from .models import Attendence, Quiz, Challenge, QuizTracker, ChallengeTracker, Quote
+from .models import Attendence, Quiz, Challenge, QuizTracker, ChallengeTracker, Quote, ShopItem, Purchase
 from .config import SIDEBAR_ITEMS, BMI_ICONS
 from .utils import *
 from .decorators import teacher_only
@@ -37,6 +37,35 @@ def dashboard_view(request, category=None):
         context.update(get_context(request, category))
 
     return render(request, template, context)
+
+@login_required
+def purchase_view(request, id):
+    usertype = get_user_type(request)
+    shop_item = get_object_or_404(ShopItem, id=id)
+
+    if request.user.student.points < shop_item.cost:
+        messages.error(request, "Insufficient points")
+        return redirect("dashboard_category", category="shop")
+
+    if request.method == "POST":
+        if request.user.student.points >= shop_item.cost:
+            request.user.student.points -= shop_item.cost
+            request.user.student.save()
+            Purchase.objects.create(student=request.user.student, shop_item=shop_item)
+        else:
+            messages.error(request, "Insufficient points to purchase this item.")
+        return redirect("dashboard")
+
+    context = {
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
+
+        "user": request.user,
+        "usertype": usertype,
+        "selected": "shop", # the currently selected category
+        "profile_pic": request.user.userprofile.profile_pic.url,
+        "shop_item": ShopItem.objects.get(id=id),
+    }
+    return render(request, "main/student/shop_purchase.html", context)
 
 @login_required
 def challenge_view(request, id):
@@ -211,6 +240,32 @@ def challenge_question_create_view(request, challenge_id):
     }
     return render(request, "main/teacher/create_question.html", context)
 
+@login_required
+def change_profile_border_view(request):
+    usertype = "student"
+    profile = request.user.userprofile
+    purchases = Purchase.objects.filter(student_id=request.user.student.id)
+
+    if request.method == "POST":
+        item_id = request.POST.get("profile-border-id")
+        item = ShopItem.objects.get(id=item_id) 
+        user_profile = request.user.userprofile
+        user_profile.profile_border = item
+        user_profile.save()
+        return redirect("dashboard")
+
+    context = {
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
+
+        "user": request.user,
+        "usertype": usertype,
+        "selected": "settings", # the currently selected category
+        "profile_pic": request.user.userprofile.profile_pic.url,
+        "profile": profile,
+        "purchases": purchases,
+    }
+    return render(request, "main/student/change_profile_border.html", context)
+
 def error_view(request):
     context = {
         "code": 404,
@@ -264,6 +319,10 @@ def get_context(request, category):
         if category == "challenges":
             context["challenges"] = get_challenges(user_data.grade)
             context["progress_list"] = ChallengeTracker.objects.filter(student=request.user.student)
+        if category == "shop":
+            context["shop_items_avatars"] = ShopItem.objects.filter(item_type="avatar").order_by("-date_created")
+            context["shop_items_borders"] = ShopItem.objects.filter(item_type="avatar_border").order_by("-date_created")
+            context["purchases"] = Purchase.objects.filter(student=request.user.student).values_list("shop_item_id", flat=True)
     elif user_type == "parent":
         user_data = request.user.parent.students.all()
         children_data = []

@@ -11,5 +11,7 @@ urlpatterns = [
     path("challenges/create/", views.challenge_create_view, name="challenge_create"),
     path("challenges/create/<int:challenge_id>/question", views.challenge_question_create_view, name="challenge_question_create"),
     path("challenges/delete/<int:id>", views.challenge_delete_view, name="challenge_delete"),
+    path("shop/purchase/<int:id>", views.purchase_view, name="purchase"),
+    path("settings/change-profile-border", views.change_profile_border_view, name="change_profile_border"),
     path("error", views.error_view, name="error"),
 ]

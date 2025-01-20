@@ -1,0 +1,18 @@
+{% extends "main/dashboard_base.html" %}
+{% load static %}
+
+{% block content %}
+    <form class="border-change-form" action="" method="post">
+        <h1>Change Profile Border</h1>
+        {% csrf_token %}
+        {% for purchase in purchases %}
+            {% if purchase.shop_item.item_type == "avatar_border" %}
+                <div>
+                    <input type="radio" name="profile-border-id" value="{{ purchase.shop_item.id }}" id="border-{{ forloop.counter }}">
+                    <label for="border-{{ forloop.counter }}">{{ purchase.shop_item.name }}<img src="{{ purchase.shop_item.image.url }}"></label>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <input class="save-button" type="submit" value="Save">
+    </form>
+{% endblock content %}

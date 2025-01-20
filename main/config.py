@@ -7,6 +7,7 @@ ICON_PATH = {
     "quizzes": ICONS_PATH + "quizzes.svg",
     "progress": ICONS_PATH + "progress.svg",
     "settings": ICONS_PATH + "settings.svg",
+    "shop": ICONS_PATH + "shop.svg",
 }
 
 SIDEBAR_ITEMS = {
@@ -14,6 +15,7 @@ SIDEBAR_ITEMS = {
         {"name": "dashboard", "icon": ICON_PATH["dashboard"]},
         {"name": "health", "icon": ICON_PATH["health"]},
         {"name": "challenges", "icon": ICON_PATH["challenges"]},
+        {"name": "shop", "icon": ICON_PATH["shop"]},
         {"name": "settings", "icon": ICON_PATH["settings"]},
     ],
     "teacher": [

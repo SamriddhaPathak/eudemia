@@ -6,8 +6,10 @@ from .models import Attendence
 from .models import Quiz
 from .models import Quote
 from .models import ChallengeTracker
-from django.contrib import admin
 from .models import Quote
+from .models import ShopItem
+from .models import Purchase
+from django.contrib import admin
 
 admin.site.register(Challenge)
 admin.site.register(Question)
@@ -17,3 +19,5 @@ admin.site.register(Subject)
 admin.site.register(Attendence)
 admin.site.register(Quote)
 admin.site.register(ChallengeTracker)
+admin.site.register(ShopItem)
+admin.site.register(Purchase)

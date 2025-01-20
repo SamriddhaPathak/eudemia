@@ -1,0 +1,43 @@
+{% extends "main/dashboard_base.html" %}
+{% load static %}
+
+{% block links %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "main/styles/shop.css" %}">
+{% endblock links %}
+
+{% block content %}
+    {% if messages %}
+    <div class="alert">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="shop-container">
+        <div class="shop-category-container">
+            <h2>Avatar Borders</h2>
+            <div class="shop-category avatar-borders" href="">
+                {% for item in shop_items_borders %}
+                    {% if item.id not in purchases %}
+                        <a href="{% url "purchase" item.id %}" class="shop-item gradient-background">
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" alt="">
+                            {% endif %}
+                            <h4>{{ item.name }}</h4>
+                            <h3>{{ item.cost }} points</h3>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+                </div>
+        </div>
+        {% comment %} <div class="shop-category-container">
+            <h2>Custom Avatars</h2>
+            <div class="shop-category avatars">
+                {% for item in shop_items_avatars %}
+                    <a class="shop-item gradient-background">{{ item.name }}</div>
+                {% endfor %}
+            </div>
+        </div> {% endcomment %}
+    </div>
+{% endblock content %}

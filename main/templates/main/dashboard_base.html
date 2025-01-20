@@ -10,12 +10,17 @@
 
 {% block navbar %}
     <div class="navbar">
-        <a href="" class="shop-icon"><img src="{% static "main/images/shop.svg" %}" alt=""></a>
+        {% if usertype == "student" %}
+            <a href="{% url "dashboard_category" "shop" %}" class="shop-icon"><img src="{% static "main/images/shop.svg" %}" alt=""></a>
+        {% endif %}
         <a class="leaderboard" href="{% url "dashboard_category" "leaderboard" %}"><img src="{% static "images/leaderboard.svg" %}" alt="Leaderboard"></a>
         {% comment %} <a class="notif" href="javascript:void(0)"><img src="{% static "images/bell.svg" %}" alt="Notifications"></a> {% endcomment %}
         {% comment %} <a class="profile-pic" href="javascript:void(0)"><img src="{% static "images/profile.png" %}" alt="Profile Picture"></a> {% endcomment %}
         <input id="popup-toggle" type="checkbox">
         <label class="profile-pic shadow-light" for="popup-toggle">
+            {% if usertype == "student" and user.userprofile.profile_border %}
+                <img class="profile-border" src="{{ user.userprofile.profile_border.image.url }}" alt="">
+            {% endif %}
             <img src="{{ profile_pic }}" alt="">
         </label>
         <label id="popup-overlay" for="popup-toggle"></label>
@@ -25,7 +30,7 @@
                 <p class="popup-username">@{{ user.username }}</p>
                 <p class="popup-username">{{ usertype.capitalize }}</p>
                 {% if usertype == "student" %}
-                    <p class="popup-username">Grade: {{ user_data.grade }}</p>
+                    <p class="popup-username">Grade: {{ user.student.grade }}</p>
                 {% elif usertype == "teacher" %}
                     <p class="popup-username">Grade: {{ user.teacher.grade }}</p>
                 {% endif %}

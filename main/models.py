@@ -16,6 +16,11 @@ challenge_type_choices = [
     ("daily", "Daily"),
 ]
 
+item_type_choices = [
+    ("avatar_border", "Avatar Border"),
+    ("avatar", "Avatar"),
+]
+
 class Subject(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
@@ -119,6 +124,35 @@ class Quote(models.Model):
 
     def __str__(self):
         return f"Quote by {self.by}"
+
+class ShopItem(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to="reward_images", blank=True, null=True)
+    cost = models.PositiveIntegerField()
+    item_type = models.CharField(max_length=100, choices=item_type_choices)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def purchase(self, student):
+        if student.points >= self.cost:
+            student.points -= self.cost
+            student.save()
+            self.save()
+            Purchase.objects.create(student=student, shop_item=self)
+            return True
+        return False
+
+    def __str__(self):
+        return f"{self.name} ({self.item_type})"
+
+class Purchase(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="purchases")
+    shop_item = models.ForeignKey(ShopItem, on_delete=models.CASCADE, related_name="purchases")
+    purchased_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.student.user.username} - {self.shop_item.name}"
+    
 
 def next_level(level):
     base_xp = 20

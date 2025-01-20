@@ -98,6 +98,13 @@
     /* border: 2px solid #000; */
 }
 
+.profile-border {
+    position: fixed;
+    width: 84px;
+    height: 84px;
+    border: none;
+}
+
 /***** Profile Popup *****/
 label img {
     height: 100%;
@@ -572,4 +579,36 @@ label img {
     margin-top: 20px;
     width: 100%;
     height: 50dvh;
+}
+
+.shop-purchase-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50dvh;
+}
+
+.border-change-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 50dvh;
+}
+
+.border-change-form img {
+    height: 2rem;
+}
+
+.border-change-form label {
+    display: inline-flex;
+    align-items: center;
+}
+
+.alert {
+    width: 100%;
+    color: var(--red);
+    text-align: center;
+    z-index: 100;
 }

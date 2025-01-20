@@ -29,7 +29,7 @@ def validate_image_size(value):
 
 class UserProfileForm(forms.Form):
     profile_picture = forms.ImageField(
-        required=False,
+        required=True,
         label="Profile Picture",
         validators=[validate_image_size]  # Add the validator here
     )
