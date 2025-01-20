@@ -40,7 +40,7 @@
 }
 
 .sidebar-settings img, svg {
-    filter: invert(61%) sepia(54%) saturate(7395%) hue-rotate(192deg) brightness(93%) contrast(106%);
+    filter: var(--accent2-filter);
 }
 
 .sidebar a {
@@ -76,6 +76,11 @@
 
 .leaderboard img {
     height: 21px;
+}
+
+.shop-icon img {
+    height: 21px;
+    filter: invert(1);
 }
 
 .notif img {
@@ -402,6 +407,22 @@ label img {
     text-align: right;
 }
 
+.create-challenge {
+    display: inline-flex;
+    color: #000;
+    align-items: center;
+    width: auto;
+}
+
+.create-challenge .icon {
+    height: 1rem;
+    margin-left: 1rem;
+    filter: invert(1);
+}
+
+.create-challenge:hover .icon {
+    filter: var(--accent1-filter);
+}
 /***** HEALTH *****/
 .health-content {
     display: grid;
@@ -527,6 +548,7 @@ label img {
     margin-top: 0.5em;
     text-decoration: none;
     font-size: 1rem;
+    transition: background-color 0.05s ease;
 }
 
 .save-button:hover {

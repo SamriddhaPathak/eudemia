@@ -3,6 +3,8 @@
     --accent2: #52b4f4; */
     --accent1: #21caf9;
     --accent2: #1082f3;
+    --accent1-filter: invert(75%) sepia(16%) saturate(7500%) hue-rotate(155deg) brightness(99%) contrast(97%);
+    --accent2-filter: invert(42%) sepia(43%) saturate(1983%) hue-rotate(187deg) brightness(91%) contrast(110%);
     
     --light-grey: #e8e8e8;
     --grey: #8e8e8e;
@@ -12,6 +14,8 @@
     --blue: #8098f7;
     --light-blue: #1082f321;
     --red: #f24949;
+    --green: #96ff3b;
+    --yellow: #f3ff50;
 
     --background: #f5f6f9;
     --text: var(--dark-grey);

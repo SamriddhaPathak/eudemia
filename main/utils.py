@@ -56,13 +56,13 @@ def next_level(level):
 
 def get_health_from_bmi(bmi):
     if bmi < 18.5:
-        return "Underweight"
+        return "underweight"
     elif 18.5 <= bmi < 25:
-        return "Normal"
+        return "normal"
     elif 25 <= bmi < 30:
-        return "Overweight"
+        return "overweight"
     else:
-        return "Obese"
+        return "obese"
 
 # def get_quiz(grade):
 #     quizzes = list(Quiz.objects.all())

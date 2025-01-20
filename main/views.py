@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent
 from django.http import HttpResponse
 from .models import Attendence, Quiz, Challenge, QuizTracker, ChallengeTracker, Quote
-from .config import SIDEBAR_ITEMS
+from .config import SIDEBAR_ITEMS, BMI_ICONS
 from .utils import *
 from .decorators import teacher_only
 from .forms import HealthEditForm, ChallengeCreateForm, ChallengeQuestionCreateForm
@@ -257,6 +257,7 @@ def get_context(request, category):
         if category == "health":
             context["bmi"] = user_data.weight / (user_data.height * 0.308 * user_data.height * 0.308)
             context["weight_health"] = get_health_from_bmi(context["bmi"])
+            context["bmi_icon"] = BMI_ICONS.get(context["weight_health"])
             return context
         # if category == "quizzes":
         #     context["quiz_list"] = get_quiz(user_data.grade)
@@ -285,6 +286,7 @@ def get_context(request, category):
                 child_data["user_data"] = student
                 child_data["bmi"] = student.weight / (student.height * 0.308 * student.height * 0.308)
                 child_data["weight_health"] = get_health_from_bmi(child_data["bmi"])
+                child_data["bmi_icon"] = BMI_ICONS.get(child_data["weight_health"])
                 children_data.append(child_data)
             context = {
                 "children_data": children_data,
@@ -309,6 +311,7 @@ def get_context(request, category):
             student_data = {}
             student_data["user_data"] = student
             student_data["weight_health"] = get_health_from_bmi(student.bmi())
+            student_data["bmi_icon"] = BMI_ICONS.get(student_data["weight_health"])
             student_data["attendance"] = Attendence.objects.get(student_id=student.id)
             student_data["required_xp"] = next_level(student.level)
             student_data["xp_progress"] = (int(student.xp) / student_data["required_xp"]) * 100;

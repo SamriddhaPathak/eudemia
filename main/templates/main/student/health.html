@@ -16,10 +16,10 @@
             <div>
                 <h3>BMI</h3>
                 <h2>{{ bmi|floatformat:2 }}</h2>
-                <p>{{ weight_health }}</p>
+                <p>{{ weight_health.capitalize }}</p>
             </div>
             <div class="bmi-health-img">
-                <img src="{% static "main/images/body.svg" %}" alt="">
+                <img src="{% static bmi_icon %}" alt="">
             </div>
         </div>
         <div class="blood-group-health">

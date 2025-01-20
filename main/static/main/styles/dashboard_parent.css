@@ -49,13 +49,18 @@
 
 .content > div > div > div:not(.leaderboard-entry), .content > div > div > a {
     padding: 20px;
-    /* border: 1px solid var(--light-grey); */
+    border: 1px solid var(--light-grey);
     display: block;
     text-decoration: none;
     color: #000;
-    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.05); */
     background-color: #fff;
     border-radius: 8px;
+    transition: box-shadow 0.2s ease;
+}
+
+.content > div > div > div:not(.leaderboard-entry):hover, .content > div > div > a:hover {
+    box-shadow: 2px 2px 16px 0px rgba(0, 0, 0, 0.05);
 }
 
 .content > div > div:hover, .content > div > a:hover {

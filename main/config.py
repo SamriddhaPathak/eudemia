@@ -31,3 +31,10 @@ SIDEBAR_ITEMS = {
         {"name": "settings", "icon": ICON_PATH["settings"]},
     ],
 }
+
+BMI_ICONS = {
+    "underweight": ICONS_PATH + "body-underweight.svg",
+    "normal": ICONS_PATH + "body-normal.svg",
+    "overweight": ICONS_PATH + "body-overweight.svg",
+    "obese": ICONS_PATH + "body-obese.svg",
+}

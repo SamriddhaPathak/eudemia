@@ -10,6 +10,7 @@
 
 {% block navbar %}
     <div class="navbar">
+        <a href="" class="shop-icon"><img src="{% static "main/images/shop.svg" %}" alt=""></a>
         <a class="leaderboard" href="{% url "dashboard_category" "leaderboard" %}"><img src="{% static "images/leaderboard.svg" %}" alt="Leaderboard"></a>
         {% comment %} <a class="notif" href="javascript:void(0)"><img src="{% static "images/bell.svg" %}" alt="Notifications"></a> {% endcomment %}
         {% comment %} <a class="profile-pic" href="javascript:void(0)"><img src="{% static "images/profile.png" %}" alt="Profile Picture"></a> {% endcomment %}
@@ -22,8 +23,11 @@
             <div class="popup-user-info">
                 <h4>{{ user.first_name }} {{ user.last_name }}</h4>
                 <p class="popup-username">@{{ user.username }}</p>
+                <p class="popup-username">{{ usertype.capitalize }}</p>
                 {% if usertype == "student" %}
                     <p class="popup-username">Grade: {{ user_data.grade }}</p>
+                {% elif usertype == "teacher" %}
+                    <p class="popup-username">Grade: {{ user.teacher.grade }}</p>
                 {% endif %}
             </div>
             <a href="{% url "dashboard_category" "settings" %}">Settings</a>
