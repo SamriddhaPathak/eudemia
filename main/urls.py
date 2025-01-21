@@ -9,6 +9,7 @@ urlpatterns = [
     path("challenge-questions/<int:id>", views.challenge_question_view, name="challenge_question"),
     path("health/<int:id>", views.health_edit_view, name="health-edit"),
     path("challenges/create/", views.challenge_create_view, name="challenge_create"),
+    path("challenge/edit/<int:id>", views.challenge_edit_view, name="challenge_edit"),
     path("challenges/create/<int:challenge_id>/question", views.challenge_question_create_view, name="challenge_question_create"),
     path("challenges/delete/<int:id>", views.challenge_delete_view, name="challenge_delete"),
     path("shop/purchase/<int:id>", views.purchase_view, name="purchase"),

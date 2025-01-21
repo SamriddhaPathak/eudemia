@@ -183,6 +183,33 @@ def challenge_create_view(request):
 
 @login_required
 @teacher_only
+def challenge_edit_view(request, id):
+    usertype = "teacher"
+
+    challenge = get_object_or_404(Challenge, id=id)
+    if request.method == "POST":
+        form = ChallengeCreateForm(request.POST, instance=challenge)
+        if form.is_valid():
+            challenge = form.save()
+            messages.success(request, "Challenge changed successfully")
+            return redirect("dashboard_category", category="challenges")
+    else:
+        form = ChallengeCreateForm(instance=challenge)
+
+    context = {
+        "sidebar_items": SIDEBAR_ITEMS.get(usertype), # list of sidebar categories + the path to the icons
+
+        "user": request.user,
+        "usertype": usertype,
+        "selected": "challenges", # the currently selected category
+        "profile_pic": request.user.userprofile.profile_pic.url,
+        "challenge": challenge,
+        "form": form,
+    }
+    return render(request, "main/teacher/edit_challenge.html", context)
+
+@login_required
+@teacher_only
 def challenge_delete_view(request, id):
     usertype = "teacher"
 

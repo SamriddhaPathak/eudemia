@@ -16,6 +16,7 @@
             {% endif %}
             <div class="challenge-type">{{ challenge.challenge_type.capitalize }}</div>
             <div class="challenge-edit-buttons">
+                <a href="{% url "challenge_edit" challenge.id %}" class="save-button">Edit Challenge</a>
                 <a href="{% url "challenge_question_create" challenge.id %}" class="save-button">Add Questions</a>
                 <a class="save-button danger-button" href={% url "challenge_delete" challenge.id %}>Delete</a>
             </div>

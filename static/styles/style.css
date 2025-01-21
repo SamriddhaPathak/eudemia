@@ -132,6 +132,8 @@ body {
     border: none;
     border-radius: 8px !important;
     padding: 10px 20px;
+    transition: background-color 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .login-button:hover {
@@ -165,6 +167,8 @@ body {
     /* background: linear-gradient(to bottom right, var(--accent1), var(--accent2)); */
     color: var(--accent1);
     background-color: #fff;
+    transition: background-color 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .cta-button:hover {
