@@ -61,8 +61,8 @@
     </div>
     {% endfor %}
     <div class="leaderboard-dashboard">
-        <h3>Top 3 right now</h3>
         <div class="leaderboard-container">
+            <h3>Top 3 right now</h3>
             {% for entry in leaderboard|slice:3 %}
                 {% if entry.user_id == user_id %}
                     <div class="leaderboard-entry gradient-border">
