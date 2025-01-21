@@ -9,17 +9,20 @@
 .child-name {
     font-size: 1.5rem !important;
     color: #000 !important;
-    margin-bottom: 12px;
     padding: 10px 20px;
     cursor: pointer;
+    transition: background-color 0.1s ease;
+    border-radius: 8px;
 }
 
 .student-container {
     overflow: hidden;
+    border: none !important;
 }
 
-.student-container {
-    border: none !important;
+.dashboard-content, .student-container {
+    background-color: transparent !important;
+    box-shadow: none !important;
 }
 
 .child-name:hover {
@@ -57,7 +60,6 @@
 
 .content > div > div > div:not(.leaderboard-entry), .content > div > div > a {
     padding: 20px;
-    border: 1px solid var(--light-grey);
     display: block;
     text-decoration: none;
     color: #000;
@@ -68,7 +70,7 @@
 }
 
 .content > div > div > div:not(.leaderboard-entry):hover, .content > div > div > a:hover {
-    box-shadow: 2px 2px 16px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 10px 10px 16px 4px rgba(0, 0, 0, 0.05), -8px -8px 16px #fff;
 }
 
 .content > div > div:hover, .content > div > a:hover {
@@ -81,4 +83,8 @@
 
 .content > div:hover, .content > a:hover {
     box-shadow: 10px 10px 16px 4px rgba(0, 0, 0, 0.05), -8px -8px 16px #fff;
+}
+
+.health-content {
+    background-color: transparent !important;
 }

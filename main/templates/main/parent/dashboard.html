@@ -9,7 +9,7 @@
 
 {% block content %}
     {{ block.super }}
-    <h2>Your Children's Progress</h2>
+    <p>Your Children's Progress</p>
     {% for child_data in children_data %}
     <div class="student-container">
         <style>
@@ -35,7 +35,7 @@
                 width: {{ child_data.xp_progress }}% !important;
             }
         </style>
-        <h2 class="child-name">{{ child_data.user_data.user.first_name }}:</h2>
+        <h2 class="child-name">{{ child_data.user_data.user.first_name }}</h2>
         <div class="dashboard-content">
             <div class="progress-dashboard">
                 {% comment %} <h3>Level</h3> {% endcomment %}

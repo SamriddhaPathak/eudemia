@@ -1,10 +1,16 @@
 {% extends "main/dashboard_base.html" %}
+{% load static %}
 {% load custom_filters %}
+
+{% block links %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "main/styles/dashboard_parent.css" %}">
+{% endblock links %}
 
 {% block content %}
     {{ block.super }}
     {% for child_data in children_data %}
-        <h2 class="child-name">{{ child_data.user_data.user.first_name }}:</h2>
+        <h2 class="child-name">{{ child_data.user_data.user.first_name }}</h2>
         {% for challenge_tracker in child_data.progress_list %}
             {% comment %} <a class="challenge" href="{% url "challenge" challenge.id current_question_id %}"> {% endcomment %}
             <a class="challenge">
