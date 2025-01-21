@@ -2,17 +2,22 @@
 {% load static %}
 
 {% block content %}
+    <h1>Change Profile Border</h1>
     <form class="border-change-form" action="" method="post">
-        <h1>Change Profile Border</h1>
         {% csrf_token %}
-        {% for purchase in purchases %}
-            {% if purchase.shop_item.item_type == "avatar_border" %}
-                <div>
-                    <input type="radio" name="profile-border-id" value="{{ purchase.shop_item.id }}" id="border-{{ forloop.counter }}">
-                    <label for="border-{{ forloop.counter }}">{{ purchase.shop_item.name }}<img src="{{ purchase.shop_item.image.url }}"></label>
-                </div>
-            {% endif %}
-        {% endfor %}
+        <div class="border-change-container">
+            {% for purchase in purchases %}
+                {% if purchase.shop_item.item_type == "avatar_border" %}
+                    <div>
+                        <input type="radio" name="profile-border-id" value="{{ purchase.shop_item.id }}" id="border-{{ forloop.counter }}" {% if purchase.shop_item.id == user.userprofile.profile_border.id %}checked{% endif %}>
+                        <label for="border-{{ forloop.counter }}">
+                            <img src="{{ purchase.shop_item.image.url }}">
+                            {{ purchase.shop_item.name }}
+                        </label>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
         <input class="save-button" type="submit" value="Save">
     </form>
 {% endblock content %}

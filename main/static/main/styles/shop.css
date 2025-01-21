@@ -34,16 +34,20 @@
     border-radius: 8px;
     background-color: #fff;
     margin: 2em;
+    padding: 2em;
+    text-decoration: none !important;
+    color: var(--text);
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2em;
-    text-decoration: none !important;
 }
 
 .shop-item img {
     margin: 1em 0;
+    background-color: var(--light-blue) !important;
+    padding: 1em;
+    border-radius: 8px;
 }
 
 .shop-item:hover {

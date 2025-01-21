@@ -78,9 +78,7 @@ class ChallengeTracker(models.Model):
             xp = self.completed_questions().count() * ( 5 if self.challenge.challenge_type == "daily" else 10) # 5 XP per question
             grant_points(self.student.id, points)
             grant_xp(self.student.id, xp)
-
             self.completed_at = now()
-            self.save()
 
     def __str__(self):
         return f"{self.student.user.username} - {self.challenge.name}"

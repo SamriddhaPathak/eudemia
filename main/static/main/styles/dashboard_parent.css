@@ -9,13 +9,21 @@
 .child-name {
     font-size: 1.5rem !important;
     color: #000 !important;
-    margin: 12px 0;
+    margin-bottom: 12px;
     padding: 10px 20px;
     cursor: pointer;
 }
 
+.student-container {
+    overflow: hidden;
+}
+
+.student-container {
+    border: none !important;
+}
+
 .child-name:hover {
-    background-color: var(--light-blue);
+    background-color: var(--light-grey);
 }
 
 .progress-dashboard {

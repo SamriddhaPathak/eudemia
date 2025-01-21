@@ -20,11 +20,11 @@
             <div class="shop-category avatar-borders" href="">
                 {% for item in shop_items_borders %}
                     {% if item.id not in purchases %}
-                        <a href="{% url "purchase" item.id %}" class="shop-item gradient-background">
+                        <a href="{% url "purchase" item.id %}" class="shop-item">
+                            <h4>{{ item.name }}</h4>
                             {% if item.image %}
                                 <img src="{{ item.image.url }}" alt="">
                             {% endif %}
-                            <h4>{{ item.name }}</h4>
                             <h3>{{ item.cost }} points</h3>
                         </a>
                     {% endif %}
