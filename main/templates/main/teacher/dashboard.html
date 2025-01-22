@@ -14,7 +14,7 @@
     <p>{{ student.grade }}</p>
     {% for student_data in students_data %}
         <div class="student-container">
-            <h2 class="child-name">{{ student_data.user_data.user.first_name }} {{ student_data.user_data.user.last_name }}</h2>
+            <h2 class="child-name">{{ student_data.user_data.user.first_name }} {{ student_data.user_data.user.last_name }}<img class="dropdown-icon" src="{% static "main/images/dropdown.svg" %}" alt=""></h2>
             <div class="dashboard-content">
                 <div class="progress-dashboard">
                     <h2>Level {{ student_data.user_data.level }}</h2>

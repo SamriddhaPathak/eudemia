@@ -15,11 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 element.addEventListener("click", function (e) {
                     const content = e.target.nextElementSibling;
                     const content_next = e.target.nextElementSibling.nextElementSibling;
+                    const dropdown_icon = e.target.querySelector(".dropdown-icon");
                     if (content.style.display === "none") {
+                        dropdown_icon.classList.add("dropdown-flip")
                         content.style.setProperty("display", initial_display, "important");
                         content_next.style.setProperty("display", initial_display_next, "important");
                     }
                     else {
+                        dropdown_icon.classList.remove("dropdown-flip")
                         content.style.setProperty("display", "none", "important");
                         content_next.style.setProperty("display", "none", "important");
                     }
@@ -34,11 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
             element.addEventListener("click", function (e) {
                 const content = e.target.nextElementSibling;
                 const content_next = e.target.nextElementSibling.nextElementSibling;
+                const dropdown_icon = e.target.querySelector(".dropdown-icon");
                 if (content.style.display === "none") {
+                    dropdown_icon.classList.add("dropdown-flip")
                     content.style.display = initial_display;
                     content_next.style.display = initial_display_next
                 }
                 else {
+                    dropdown_icon.classList.remove("dropdown-flip")
                     content.style.setProperty("display", "none", "important");
                     content_next.style.setProperty("display", "none", "important");
                 }
@@ -47,23 +53,17 @@ document.addEventListener('DOMContentLoaded', function () {
         element.addEventListener("click", function (e) {
             const content = e.target.nextElementSibling;
             const content_next = e.target.nextElementSibling.nextElementSibling;
+            const dropdown_icon = e.target.querySelector(".dropdown-icon");
             if (content.style.display === "none") {
+                dropdown_icon.classList.add("dropdown-flip")
                 content.style.display = initial_display;
                 content_next.style.display = initial_display_next
             }
             else {
+                dropdown_icon.classList.remove("dropdown-flip")
                 content.style.setProperty("display", "none", "important");
                 content_next.style.setProperty("display", "none", "important");
             }
         });
     });
-    // document.querySelector(".child-name").addEventListener("click", function (e) {
-    //     const content = e.target.nextElementSibling.style;
-    //     if (content.display === "grid") {
-    //         content.display = "none";
-    //     }
-    //     else {
-    //         content.display = "grid";
-    //     }
-    // });
 });

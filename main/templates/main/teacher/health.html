@@ -12,7 +12,7 @@
     {{ block.super }}
     {% for child_data in students_data %}
         <div class="student-container">
-            <h2 class="child-name">{{ child_data.user_data.user.first_name }} {{ child_data.user_data.user.last_name }}</h2>
+            <h2 class="child-name">{{ child_data.user_data.user.first_name }} {{ child_data.user_data.user.last_name }}<img class="dropdown-icon" src="{% static "main/images/dropdown.svg" %}" alt=""></h2>
             <div class="health-content">
                 <div class="height-health">
                     <h3>Height</h3>
