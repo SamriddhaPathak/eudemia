@@ -1,12 +1,13 @@
 {% extends "main/dashboard_base.html" %}
 {% load static %}
+{% load custom_filters %}
 
 {% block content %}
     {{ block.super }}
     <div class="health-content">
         <div class="height-health">
             <h3>Height</h3>
-            <h2>{{ user_data.height }} ft</h2>
+            <h2>{{ user_data.height|to_feet }}</h2>
         </div>
         <div class="weight-health">
             <h3>Weight</h3>

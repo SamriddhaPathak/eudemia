@@ -1,5 +1,6 @@
 {% extends "main/dashboard_base.html" %}
 {% load static %}
+{% load custom_filters %}
 
 {% block links %}
     {{ block.super }}
@@ -74,7 +75,7 @@
                 </div>
                 <div class="health-dashboard">
                     <h3>Health</h3>
-                    <p>Height: {{ student_data.user_data.height }} ft</p>
+                    <p>Height: {{ student_data.user_data.height|to_feet }}</p>
                     <p>Weight: {{ student_data.user_data.weight }} kg</p>
                     <p>BMI: {{ student_data.user_data.bmi|floatformat:2 }}</p>
                 </div>

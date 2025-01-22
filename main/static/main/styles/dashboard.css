@@ -545,9 +545,10 @@ label img {
     display: inline-block !important;
     /* grid-column: 1 / 2; */
     margin: 20px;
-    padding: 0.5em 1em !important;
+    padding: 0.5em 2em !important;
     width: auto;
     background-color: var(--light-blue) !important;
+    border-radius: 100px !important;
 }
 
 .edit-button:hover {

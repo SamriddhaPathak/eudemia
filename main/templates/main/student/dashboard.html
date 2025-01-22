@@ -31,7 +31,7 @@
         </div>
         <div class="health-dashboard">
             <h3>Health</h3>
-            <p>Height: {{ user_data.height }} ft</p>
+            <p>Height: {{ user_data.height|to_feet }}</p>
             <p>Weight: {{ user_data.weight }} kg</p>
             <p>BMI: {{ bmi|floatformat:2 }}</p>
         </div>
