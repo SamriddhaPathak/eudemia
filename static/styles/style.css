@@ -209,3 +209,9 @@ body {
     border-radius: 5px;
     text-decoration: none;
 }
+
+@media screen and (max-width: 768px) {
+    .topbar {
+        padding: 0 2rem;
+    }
+}

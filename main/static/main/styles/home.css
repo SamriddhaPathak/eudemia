@@ -116,3 +116,43 @@
     margin-bottom: 20px;
     width: 50%;
 }
+
+@media screen and (max-width: 768px) {
+    .content h1 {
+        font-family: 'Roboto-Bold';
+        font-size: 3rem;
+        margin: 20px;
+    }
+
+    .content h2 {
+        font-family: 'Roboto-Bold';
+        font-size: 2rem;
+        margin: 40px;
+    }
+
+    .content h3 {
+        font-family: 'Roboto-Bold';
+        font-size: 1.5rem;
+    }
+
+    .content a {
+        margin: 30px;
+    }
+
+    .content p {
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    .info-card {
+        /* background: linear-gradient(#fff, #fff) padding-box, linear-gradient(to bottom, var(--accent1), var(--accent2)) border-box; */
+        /* border: 6px solid transparent; */
+        border-radius: 15px;
+        background-color: var(--light-blue);
+
+        width: 90%;
+        margin: 25px;
+        overflow: hidden;
+        padding: 2rem;
+    }
+}

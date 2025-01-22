@@ -5,10 +5,11 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static "main/styles/dashboard.css" %}">
-    {% comment %} <script src="{% static "main/js/script.js" %}"></script> {% endcomment %}
+    <script src="{% static "main/js/script.js" %}" defer></script>
 {% endblock links %}
 
 {% block navbar %}
+    <button id="open-sidebar-button" onclick="toggleSidebar()"><img src="{% static "main/images/menu.svg" %}" alt=""></button>
     <div class="navbar">
         {% if usertype == "student" %}
             <a href="{% url "dashboard_category" "shop" %}" class="shop-icon"><img src="{% static "main/images/shop.svg" %}" alt=""></a>
@@ -53,6 +54,7 @@
         </a>
         {% endfor %}
     </nav>
+    <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
 {% endblock sidebar %}
 
 {% block content %}

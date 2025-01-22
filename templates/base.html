@@ -14,7 +14,7 @@
 <body>
     {% block topbar %}
         <div class="topbar shadow">
-            <a href="{% url "index" %}"><img class="logo" src="{% static "images/logo.svg" %}" alt="Home"></a>
+            <a class="logo-container" href="{% url "index" %}"><img class="logo" src="{% static "images/logo.svg" %}" alt="Home"></a>
             {% block navbar %}
             {% endblock %}
         </div>

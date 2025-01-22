@@ -29,6 +29,12 @@
             <h3>Attendance</h3>
             <h2>{{ attendance.days_attended }} / {{ attendance.days_passed }}</h2>
         </div>
+        <div class="health-dashboard">
+            <h3>Health</h3>
+            <p>Height: {{ user_data.height }} ft</p>
+            <p>Weight: {{ user_data.weight }} kg</p>
+            <p>BMI: {{ bmi|floatformat:2 }}</p>
+        </div>
         <div class="challenges-dashboard">
             <h3>Ongoing Challenges</h3>
             {% for challenge_tracker in progress_list %}
@@ -58,12 +64,6 @@
                     <p class="challenge-completed">{{ challenge_tracker.completed_questions.count }}/{{ challenge_tracker.challenge.question_set.count }} completed</p>
                 </a>
             {% endfor %}
-        </div>
-        <div class="health-dashboard">
-            <h3>Health</h3>
-            <p>Height: {{ user_data.height }} ft</p>
-            <p>Weight: {{ user_data.weight }} kg</p>
-            <p>BMI: {{ bmi|floatformat:2 }}</p>
         </div>
         <div class="leaderboard-dashboard">
             <h3>Top 3 right now</h3>
