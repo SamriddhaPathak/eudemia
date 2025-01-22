@@ -29,13 +29,12 @@
                 width: 0%;
                 border-radius: 10px;
                 background: var(--gradient-left);
-                /* background: var(--accent1); */
             }
             .level-progress-bar-{{ forloop.counter }}::after {
                 width: {{ child_data.xp_progress }}% !important;
             }
         </style>
-        <h2 class="child-name">{{ child_data.user_data.user.first_name }}</h2>
+        <h2 class="child-name">{{ child_data.user_data.user.first_name }} - Class {{child_data.user_data.grade }}</h2>
         <div class="dashboard-content">
             <div class="progress-dashboard">
                 {% comment %} <h3>Level</h3> {% endcomment %}

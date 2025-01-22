@@ -10,7 +10,7 @@
 
 {% block content %}
     {{ block.super }}
-    <p>Your Students' Progress</p>
+    <p>Class Teacher - Grade {{ user.teacher.grade }}</p>
     <p>{{ student.grade }}</p>
     {% for student_data in students_data %}
         <div class="student-container">
