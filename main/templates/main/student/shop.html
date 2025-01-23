@@ -7,27 +7,29 @@
 {% endblock links %}
 
 {% block content %}
-    {% if messages %}
+    {% comment %} {% if messages %}
     <div class="alert">
         {% for message in messages %}
             <p>{{ message }}</p>
         {% endfor %}
     </div>
-    {% endif %}
+    {% endif %} {% endcomment %}
     <div class="shop-container">
         <div class="shop-category-container">
             <h2>Avatar Borders</h2>
             <div class="shop-category avatar-borders" href="">
                 {% for item in shop_items_borders %}
-                    {% if item.id not in purchases %}
-                        <a href="{% url "purchase" item.id %}" class="shop-item">
+                        <a {% if item.id not in purchases %}href="{% url "purchase" item.id %}"{% endif %} class="shop-item">
                             <h4>{{ item.name }}</h4>
                             {% if item.image %}
                                 <img src="{{ item.image.url }}" alt="">
                             {% endif %}
-                            <h3 {% if item.cost > user_data.points %}style="color: var(--light-grey);"{% endif %}>{{ item.cost }} points</h3>
+                            {% if item.id not in purchases %}
+                                <h3 {% if item.cost > user_data.points %}style="color: var(--light-grey);"{% endif %}>{{ item.cost }} points</h3>
+                            {% else %}
+                                <h3 style="color: var(--light-grey);">OWNED</h3>
+                            {% endif %}
                         </a>
-                    {% endif %}
                 {% endfor %}
                 </div>
         </div>

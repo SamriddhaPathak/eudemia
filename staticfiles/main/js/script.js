@@ -1,11 +1,13 @@
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('.profile-pic').onclick = function() {
-        const popup = document.querySelector('.profile-popup');
-        if (popup.style.display === 'none' || popup.style.display === '') {
-            popup.style.display = 'flex';
-        }
-        else {
-            popup.style.display = 'none';
-        }
-    };
-});
+const sidebar = document.querySelector('.sidebar');
+
+let sidebar_shown = false;
+function toggleSidebar() {
+    if (sidebar_shown) {
+        sidebar.classList.remove('show');
+        sidebar_shown = false;
+    }
+    else {
+        sidebar.classList.add('show');
+        sidebar_shown = true;
+    }
+}

@@ -33,8 +33,9 @@ def dashboard_view(request, category=None):
         "quote": get_random_quote(),
     }
 
-    if get_context(request, category) != None:
-        context.update(get_context(request, category))
+    additional_context = get_context(request, category)
+    if additional_context:
+        context.update(additional_context)
 
     return render(request, template, context)
 
@@ -43,6 +44,9 @@ def purchase_view(request, id):
     usertype = get_user_type(request)
     shop_item = get_object_or_404(ShopItem, id=id)
 
+    if shop_item.id in Purchase.objects.filter(student_id=request.user.student.id).values_list("shop_item_id", flat=True):
+        messages.error(request, "Item already owned")
+        return redirect("dashboard_category", category="shop")
     if request.user.student.points < shop_item.cost:
         messages.error(request, "Insufficient points")
         return redirect("dashboard_category", category="shop")
