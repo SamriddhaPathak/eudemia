@@ -597,6 +597,10 @@ label img {
     height: 50dvh;
 }
 
+p:has(#id_question) {
+    height: 20em;
+}
+
 .shop-purchase-form {
     display: flex;
     flex-direction: column;

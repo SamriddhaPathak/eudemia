@@ -28,7 +28,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["rasum.com.np", "www.rasum.com.np", "https://rasum.com.np"]
+ALLOWED_HOSTS = ["rasum.com.np", "media.rasum.com.np"]
 
 
 # Application definition
@@ -134,7 +134,7 @@ STATIC_ROOT = "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "https://media.rasum.com.np/"
+MEDIA_ROOT = "/home2/rasumcom/media.rasum.com.np/"
 
 LOGIN_URL = "/users/login"
