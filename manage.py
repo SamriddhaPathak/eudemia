@@ -3,10 +3,11 @@
 import os
 import sys
 
+ENVIRONMENT = os.getenv("DJANGO_ENV", "development")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"eudemia.settings.{ENVIRONMENT}")
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "eudemia.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
