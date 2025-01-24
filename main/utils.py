@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent
-from .models import Attendence, QuizQuestion, Question, Challenge, Subject, Quote, Quiz
+from .models import Attendance, QuizQuestion, Question, Challenge, Subject, Quote, Quiz
 from math import floor
 
 import random

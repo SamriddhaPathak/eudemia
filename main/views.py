@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent, UserProfile
 from django.http import HttpResponse
-from .models import Attendence, Quiz, Challenge, QuizTracker, ChallengeTracker, Quote, ShopItem, Purchase
+from .models import Attendance, Quiz, Challenge, QuizTracker, ChallengeTracker, Quote, ShopItem, Purchase
 from .config import SIDEBAR_ITEMS, BMI_ICONS
 from .utils import *
 from .decorators import teacher_only
@@ -327,16 +327,16 @@ def get_context(request, category):
             context["bmi"] = user_data.weight / (user_data.height * 0.308 * user_data.height * 0.308)
             context["required_xp"] = next_level(user_data.level)
             context["xp_progress"] = (int(user_data.xp) / context["required_xp"]) * 100;
-            context["attendance"] = Attendence.objects.filter(student_id=request.user.student.id).values()[0]
+            context["attendance"] = request.user.student.days_attended()
             context["challenges"] = get_challenges(user_data.grade)
             context["completed_challenges"] = []
             context["challenges_count"] = []
             context["completed_challenges_percentage"] = []
             context["progress_list"] = ChallengeTracker.objects.filter(student=request.user.student)
             for challenge in context["challenges"]:
-                completed_challenges = request.user.student.completed_challenge_questions.filter(challenge=challenge).count()
+                # completed_challenges = request.user.student.completed_challenge_questions.filter(challenge=challenge).count()
                 challenges_count = challenge.question_set.count()
-                context["completed_challenges"].append(completed_challenges)
+                # context["completed_challenges"].append(completed_challenges)
                 context["challenges_count"].append(challenges_count)
                 context["completed_challenges_percentage"].append(ChallengeTracker.objects.get(challenge=challenge, student=request.user.student))
             return context
@@ -364,7 +364,7 @@ def get_context(request, category):
                 child_data["bmi"] = student.weight / (student.height * 0.308 * student.height * 0.308)
                 child_data["required_xp"] = next_level(student.level)
                 child_data["xp_progress"] = (int(student.xp) / child_data["required_xp"]) * 100;
-                child_data["attendance"] = Attendence.objects.filter(student_id=student.id).values()[0]
+                child_data["attendance"] = Attendance.objects.filter(student_id=student.id).values()[0]
                 children_data.append(child_data)
             context = {
                 "children_data": children_data,
@@ -395,14 +395,14 @@ def get_context(request, category):
                 "children_data": children_data,
             }
     elif user_type == "teacher":
-        user_data = request.user.teacher.grade.student_set.all()
+        # user_data = request.user.teacher.grade.student_set.all()
+        user_data = Student.objects.filter(grade=request.user.teacher.grade)
         students_data = []
         for student in user_data:
             student_data = {}
             student_data["user_data"] = student
             student_data["weight_health"] = get_health_from_bmi(student.bmi())
             student_data["bmi_icon"] = BMI_ICONS.get(student_data["weight_health"])
-            student_data["attendance"] = Attendence.objects.get(student_id=student.id)
             student_data["required_xp"] = next_level(student.level)
             student_data["xp_progress"] = (int(student.xp) / student_data["required_xp"]) * 100;
             student_data["progress_list"] = ChallengeTracker.objects.filter(student=student)

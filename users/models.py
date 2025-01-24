@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from main.models import Attendance
 # Create your models here.
 
 choices = (
@@ -31,10 +32,12 @@ class Student(models.Model):
     level = models.PositiveIntegerField(default = 1)
     xp = models.PositiveIntegerField(default = 0)
     blood_group = models.CharField(max_length = 10, blank=True, null=True, choices = choices)
-    completed_challenge_questions = models.ManyToManyField("main.Question", blank=True, related_name="completed_challenge_questions")
-    correct_challenge_questions = models.ManyToManyField("main.Question", blank=True, related_name="correct_challenge_questions")
-    completed_quiz_questions = models.ManyToManyField("main.QuizQuestion", blank=True, related_name="completed_quiz_questions")
-    correct_quiz_questions = models.ManyToManyField("main.QuizQuestion", blank=True, related_name="correct_quiz_questions")
+
+    def days_attended(self):
+        return Attendance.objects.filter(student=self, present=True).count()
+    
+    def days_passed(self):
+        return Attendance.objects.filter(student=self).count()
 
     def bmi(self):
         return self.weight / ((self.height * 0.308) ** 2)

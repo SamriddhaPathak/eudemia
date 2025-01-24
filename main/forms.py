@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib import messages
-from .models import Student
+from users.models import Student
 from .models import Challenge, Question
 
 challenge_type_choices = [
