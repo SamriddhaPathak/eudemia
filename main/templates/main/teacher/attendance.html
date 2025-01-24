@@ -1,0 +1,19 @@
+{% extends "main/dashboard_base.html" %}
+
+{% block content %}
+    {{ block.super }}
+    {% if not attendance_done %}
+        <form class="attendance-form" action="{% url "update_attendance" %}" method="post">
+            {% csrf_token %}
+            {% for student_data in students_data %}
+                <label for="{{ forloop.counter }}">
+                    <input type="checkbox" name="present" value="{{ student_data.user_data.id }}" id="{{ forloop.counter }}">
+                    {{ student_data.user_data.user.first_name }} {{ student_data.user_data.user.last_name }}
+                </label>
+            {% endfor %}
+            <input type="submit" value="Update Attendance" class="save-button">
+        </form>
+    {% else %}
+        <p>Attendance has been updated.</p>
+    {% endif %}
+    {% endblock content %}

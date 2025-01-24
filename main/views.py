@@ -297,6 +297,24 @@ def change_profile_border_view(request):
     }
     return render(request, "main/student/change_profile_border.html", context)
 
+@login_required
+def update_attendance_view(request):
+    usertype = "teacher"
+    students = Student.objects.filter(grade=request.user.teacher.grade)
+
+    if request.method == "POST":
+        present = request.POST.getlist("present")
+        print(present)
+        for student in students:
+            attendance = Attendance.objects.create(student=student)
+            if str(student.id) in present:
+                attendance.present = True
+            else:
+                attendance.present = False
+            attendance.save()
+
+    return redirect("dashboard_category", category="attendance")
+
 def error_view(request):
     context = {
         "code": 404,
@@ -409,6 +427,8 @@ def get_context(request, category):
             students_data.append(student_data)
         context = {
             "students_data": students_data,
+            "attendance_list": Attendance.objects.filter(student_id__in=request.user.teacher.grade.student_set.values_list("id", flat=True)),
+            "attendance_done": attendance_done(request.user.teacher.grade),
         }
 
     if category == "leaderboard" or "dashboard":

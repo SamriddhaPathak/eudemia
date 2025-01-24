@@ -14,5 +14,6 @@ urlpatterns = [
     path("challenges/delete/<int:id>", views.challenge_delete_view, name="challenge_delete"),
     path("shop/purchase/<int:id>", views.purchase_view, name="purchase"),
     path("settings/change-profile-border", views.change_profile_border_view, name="change_profile_border"),
+    path("attendance/update-attendance/", views.update_attendance_view, name="update_attendance"),
     path("error", views.error_view, name="error"),
 ]

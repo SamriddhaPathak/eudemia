@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from users.models import Class, Teacher, Student, Parent
 from .models import Attendance, QuizQuestion, Question, Challenge, Subject, Quote, Quiz
 from math import floor
+from django.utils.timezone import localdate
 
 import random
 
@@ -84,3 +85,12 @@ def get_challenge_questions(challenge_id):
 def get_random_quote():
     quotes = Quote.objects.all()
     return random.choice(quotes)
+
+def attendance_done(grade):
+    students = Student.objects.filter(grade=grade)
+    today = localdate()
+    for student in students:
+        attendance = Attendance.objects.filter(student=student, date__date=today)
+        if not attendance.exists():
+            return False
+    return True

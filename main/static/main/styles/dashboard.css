@@ -565,7 +565,7 @@ label img {
     padding: 0.5em 1em;
     border: none;
     border-radius: 100px;
-    background-color: var(--accent1);
+    background: var(--gradient-bottom-right);
     color: #fff;
     cursor: pointer;
     margin-top: 0.5em;
@@ -575,12 +575,12 @@ label img {
 }
 
 .save-button:hover {
-    background-color: #fff !important;
+    background: #fff !important;
     color: var(--accent1);
 }
 
 .danger-button {
-    background-color: var(--red);
+    background: var(--red);
 }
 
 .danger-button:hover {
@@ -621,6 +621,11 @@ p:has(#id_question) {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 8px;
 }
 
 .border-change-form label:hover {
@@ -637,20 +642,19 @@ p:has(#id_question) {
     flex-direction: column;
 }
 
-label {
-    display: flex;
-    flex-direction: column;
-    margin: 1em;
-    padding: 1em;
-    border-radius: 8px;
-}
-
 .border-change-container input[type="radio"] {
     display: none;
 }
 
 .border-change-container input[type="radio"]:checked + label {
     background-color: var(--light-blue);
+}
+
+.attendance-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 50dvh;
 }
 
 .alert {
