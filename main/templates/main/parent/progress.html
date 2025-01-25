@@ -10,7 +10,8 @@
 {% block content %}
     {{ block.super }}
     {% for child_data in children_data %}
-        <h2 class="child-name">{{ child_data.user_data.user.first_name }}</h2>
+    <div class="student-container">
+        <h2 class="child-name" style="cursor: auto;">{{ child_data.user_data.user.first_name }}</h2>
         {% for challenge_tracker in child_data.progress_list %}
             {% comment %} <a class="challenge" href="{% url "challenge" challenge.id current_question_id %}"> {% endcomment %}
             <a class="challenge">
@@ -36,5 +37,6 @@
                 <div class="challenge-type">{{ challenge_tracker.challenge.challenge_type.capitalize }}</div>
             </a>
         {% endfor %}
+    </div>
     {% endfor %}
 {% endblock content %}

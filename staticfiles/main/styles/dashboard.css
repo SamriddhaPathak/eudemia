@@ -506,6 +506,10 @@ label img {
     margin-top: 0.5em;
 }
 
+.edit-form label {
+    margin-right: 1rem;
+}
+
 /***** QUIZZES *****/
 .quizzes-content {
     display: grid;
@@ -590,6 +594,7 @@ label img {
 
 .challenge-delete-form {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
