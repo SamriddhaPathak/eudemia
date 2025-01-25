@@ -309,9 +309,13 @@ def update_attendance_view(request):
             attendance = Attendance.objects.create(student=student)
             if str(student.id) in present:
                 attendance.present = True
+                student.grant_xp(10)
+                student.grant_points(5)
             else:
                 attendance.present = False
             attendance.save()
+            if student.days_attended() % 10 == 0:
+                student.grant_points(20)
 
     return redirect("dashboard_category", category="attendance")
 

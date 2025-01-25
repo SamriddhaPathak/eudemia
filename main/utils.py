@@ -55,6 +55,20 @@ def next_level(level):
     exponent = 1.5
     return floor(base_xp * (level ** exponent))
 
+def grant_xp(student_id, xp):
+    student = Student.objects.get(id=student_id)
+    required_xp = next_level(student.level)
+    student.xp += xp
+    if student.xp >= required_xp:
+        student.level += 1
+        student.xp -= required_xp
+    student.save()
+
+def grant_points(student_id, points):
+    student = Student.objects.get(id=student_id)
+    student.points += points
+    student.save()
+
 def get_health_from_bmi(bmi):
     if bmi < 18.5:
         return "underweight"

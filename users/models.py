@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from main.models import Attendance
+from math import floor
 # Create your models here.
 
 choices = (
@@ -41,6 +42,18 @@ class Student(models.Model):
 
     def bmi(self):
         return self.weight / ((self.height * 0.308) ** 2)
+
+    def grant_xp(self, xp):
+        required_xp = next_level(self.level)
+        self.xp += xp
+        if self.xp >= required_xp:
+            self.level += 1
+            self.xp -= required_xp
+        self.save()
+
+    def grant_points(self, points):
+        self.points += points
+        self.save()
     
 
     def __str__(self):
@@ -71,3 +84,8 @@ class UserProfile(models.Model):
     profile_border = models.ForeignKey("main.ShopItem", blank=True, null=True, on_delete=models.SET_NULL)
     def __str__(self):
         return f"User_Profile of {self.user.first_name}_{self.user.last_name}"
+
+def next_level(level):
+    base_xp = 20
+    exponent = 1.5
+    return floor(base_xp * (level ** exponent))
