@@ -662,6 +662,11 @@ p:has(#id_question) {
     height: 50dvh;
 }
 
+.attendance-form input {
+    accent-color: var(--accent1);
+    background-color: #000;
+}
+
 .alert {
     width: 100%;
     color: var(--red);

@@ -62,6 +62,14 @@ body::after {
 .form-control {
     margin: 3%;
     flex-shrink: 1;
+    accent-color: #fff;
+    color: #fff;
+    caret-color: #fff;
+}
+
+.form-control::placeholder {
+    color: #fff;
+    opacity: 0.5;
 }
 
 .content {
