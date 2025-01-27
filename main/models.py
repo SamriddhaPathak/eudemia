@@ -75,10 +75,14 @@ class ChallengeTracker(models.Model):
     def grant_rewards(self):
         if self.is_complete() and not self.completed_at:
             points = 50 if self.challenge.challenge_type == "weekly" else 25
-            xp = self.completed_questions().count() * ( 5 if self.challenge.challenge_type == "daily" else 10) # 5 XP per question
             grant_points(self.student.id, points)
-            grant_xp(self.student.id, xp)
             self.completed_at = now()
+            self.save()
+    
+    def grant_xp(self):
+        xp = 5 if self.challenge.challenge_type == "daily" else 10
+        grant_xp(self.student.id, xp)
+
 
     def __str__(self):
         return f"{self.student.user.username} - {self.challenge.name}"
@@ -165,7 +169,7 @@ def next_level(level):
     return floor(base_xp * (level ** exponent))
 
 def grant_xp(student_id, xp):
-    from users import Student
+    from users.models import Student
     student = Student.objects.get(id=student_id)
     required_xp = next_level(student.level)
     student.xp += xp
@@ -175,7 +179,7 @@ def grant_xp(student_id, xp):
     student.save()
 
 def grant_points(student_id, points):
-    from users import Student
+    from users.models import Student
     student = Student.objects.get(id=student_id)
     student.points += points
     student.save()

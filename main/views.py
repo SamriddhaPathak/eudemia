@@ -122,6 +122,7 @@ def challenge_question_view(request, id):
     if request.method == "POST":
         answer = request.POST.get("answer")
         progress.answer = answer
+        progress.grant_xp()
         if answer == question.answer:
             progress.correct_questions.add(question)
         else:
