@@ -48,6 +48,33 @@ body::after {
     width: 30%;
 }
 
+.usertype-selector {
+    display: inline-flex;
+    border-radius: 100px;
+    border: 2px solid #fff;
+    margin: auto;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"] + label {
+    cursor: pointer;
+    padding: 0.25em 0.75em !important;
+    color: #fff;
+    border-radius: 100px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="radio"]:checked + label {
+    background-color: #fff;
+    color: var(--accent1);
+}
+
 /* Username and Password fields */
 .form-input {
     border: 2px solid #fff;

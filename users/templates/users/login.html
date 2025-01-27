@@ -14,6 +14,20 @@
     <a href="{% url "index" %}"><img class="logo" src="{% static "images/logo.svg" %}" alt="Home"></a>
     <form class="login-form" action="" method="POST">
         {% csrf_token %}
+        <div class="usertype-selector shadow-light">
+            <input type="radio" name="usertype" id="student" value="student" checked>
+            <label for="student">
+                Student
+            </label>
+            <input type="radio" name="usertype" id="teacher" value="teacher">
+            <label for="teacher">
+                Teacher
+            </label>
+            <input type="radio" name="usertype" id="parent" value="parent">
+            <label for="parent">
+                Parent
+            </label>
+        </div>
         {% for field in form %}
             {{ field }}
         {% endfor %}

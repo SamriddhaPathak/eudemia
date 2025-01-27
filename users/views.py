@@ -9,6 +9,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import password_validators_help_texts
 from math import floor
+from main.utils import get_user_type
 
 # Create your views here.
 @unauthenticated_user
@@ -19,7 +20,8 @@ def login_view(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
-            if user is not None:
+            usertype = request.POST.get("usertype")
+            if user is not None and hasattr(user, request.POST.get("usertype")):
                 login(request, user)
                 return redirect('dashboard')
             else:
