@@ -58,7 +58,7 @@ class Student(models.Model):
 
     def __str__(self):
         # Use the related User's first and last name
-        return f"{self.user.first_name}_{self.user.last_name}"
+        return f"{self.user.first_name} {self.user.last_name} - Grade {self.grade}"
 
 
 class Teacher(models.Model):
