@@ -1,9 +1,15 @@
 {% extends "main/dashboard_base.html" %}
 
 {% block content %}
-    {% for question in challenge_tracker.completed_questions %}
+    <h1>Answers</h1>
+    {% for question in challenge_tracker.correct_questions.all %}
         <div>
-            <div>{{ question.question }}</div><div>{{ question.answer }} {{ question.unit }}</div>
+            <div>{{ question.question }} - <span class="gradient">{{ question.answer }} {{ question.unit }}</span></div>
+        </div>
+    {% endfor %} 
+    {% for question in challenge_tracker.incorrect_questions.all %}
+        <div>
+            <div class="danger">{{ question.question }} - <span class="gradient">{{ question.answer }} {{ question.unit }}</span></div>
         </div>
     {% endfor %} 
 {% endblock content %}

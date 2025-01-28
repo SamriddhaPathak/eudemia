@@ -673,6 +673,10 @@ p:has(#id_question) {
     z-index: 100;
 }
 
+.danger {
+    color: var(--red) !important;
+}
+
 #sidebar-overlay {
     background: rgba(0, 0, 0, 0.3);
     position: fixed;
